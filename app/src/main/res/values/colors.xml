@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <color name="black">#1B1C1E</color>
+    <color name="white">#FFFEFD</color>
+    
+    <color name="primary_600">#4D4DFF</color>
+    <color name="primary_500">#5F5FFF</color>
+    <color name="primary_400">#7171FF</color>
+    <color name="primary_300">#8282FF</color>
+    <color name="primary_200">#9494FF</color>
+
+    <color name="secondary_600">#FFFF4D</color>
+    <color name="secondary_500">#FFFF5F</color>
+    <color name="secondary_400">#FFFF71</color>
+    <color name="secondary_300">#FFFF82</color>
+    <color name="secondary_200">#FFFF94</color>
+
+    <color name="success_600">#198754</color>
+    <color name="success_500">#309365</color>
+    <color name="success_400">#479F76</color>
+    <color name="success_300">#5EAB87</color>
+    <color name="success_200">#75B798</color>
+
+    <color name="warning_600">#FFC107</color>
+    <color name="warning_500">#FFC720</color>
+    <color name="warning_400">#FFCD39</color>
+    <color name="warning_300">#FFD451</color>
+    <color name="warning_200">#FFDA6A</color>
+
+    <color name="danger_600">#DC3545</color>
+    <color name="danger_500">#E04958</color>
+    <color name="danger_400">#E35D6A</color>
+    <color name="danger_300">#E7727D</color>
+    <color name="danger_200">#EA868F</color>
+</resources>
