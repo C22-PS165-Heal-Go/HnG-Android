@@ -71,6 +71,10 @@ class LoginFragment : Fragment() {
 
         }
 
+        binding.registerBtn.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             activity?.moveTaskToBack(true)
             activity?.finish()
