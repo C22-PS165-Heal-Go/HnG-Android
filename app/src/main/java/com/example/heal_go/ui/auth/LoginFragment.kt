@@ -35,18 +35,6 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         setupView()
 
-//        binding.etEmail.doOnTextChanged { text, start, before, count ->
-//            val validator = Validator(text.toString())
-//                .nonEmpty()
-//                .validEmail()
-//                .check()
-//            if (!validator) {
-//                binding.etEmail.error = "Email is not valid!"
-//            }else {
-//                binding.etEmail.error = null
-//            }
-//        }
-
         binding.loginBtn.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -72,7 +60,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.registerBtn.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+            navController.navigate(R.id.loginFragment_to_registerFragment)
         }
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
