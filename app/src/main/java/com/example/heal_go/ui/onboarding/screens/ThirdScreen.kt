@@ -1,4 +1,4 @@
-package com.example.heal_go.ui.auth
+package com.example.heal_go.ui.onboarding.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.heal_go.R
 import com.example.heal_go.data.repository.OnboardingRepository
-import com.example.heal_go.databinding.FragmentWelcomeBinding
+import com.example.heal_go.databinding.FragmentThirdScreenBinding
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 
-class WelcomeFragment : Fragment() {
+class ThirdScreen : Fragment() {
 
-    private var _binding: FragmentWelcomeBinding? = null
+    private var _binding: FragmentThirdScreenBinding? = null
     private val binding get() = _binding!!
 
     private val onboardingViewModel by viewModels<OnboardingViewModel> {
@@ -31,23 +31,13 @@ class WelcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
-        onboardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) {
-            if (it) {
-                navController.navigate(R.id.welcomeFragment_to_loginFragment)
-            } else {
-                navController.navigate(R.id.welcomeFragment_to_onboardingPagerFragment2)
-            }
+        _binding = FragmentThirdScreenBinding.inflate(inflater, container, false)
+        binding.signupBtn.setOnClickListener {
+            navController.navigate(R.id.onboardingPagerFragment_to_registerFragment)
+            onboardingViewModel.onBoardingFinish()
         }
 
-
-        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

@@ -10,8 +10,11 @@
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
-            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            android:id="@+id/welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/welcomeFragment_to_onboardingPagerFragment2"
+            app:destination="@id/onboardingPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -30,5 +33,14 @@
         <action
             android:id="@+id/registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingPagerFragment"
+        android:name="com.example.heal_go.ui.onboarding.OnboardingPagerFragment"
+        android:label="fragment_onboarding_pager"
+        tools:layout="@layout/fragment_onboarding_pager" >
+        <action
+            android:id="@+id/onboardingPagerFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
 </navigation>
