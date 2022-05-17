@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/conboarding_circle.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/ic_email.xml" value="0.2185" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/onboarding_circle_active.xml" value="0.34" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/font/poppins_bold.xml" value="0.12864583333333332" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_main.xml" value="0.25" />
