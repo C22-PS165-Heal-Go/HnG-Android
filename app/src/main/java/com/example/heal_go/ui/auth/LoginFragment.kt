@@ -53,6 +53,7 @@ class LoginFragment : Fragment() {
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
                 Toast.makeText(activity, "Data received", Toast.LENGTH_SHORT).show()
+                navController.navigate(R.id.loginFragment_to_homeFragment)
             } else {
                 Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT).show()
             }

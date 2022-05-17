@@ -15,4 +15,7 @@
     <string name="date_of_birth">Date of Birth</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque imperdiet ante, ut finibus ex aliquet vel.</string>
     <string name="skip">Skip</string>
+    <string name="feeling_stressed">Feeling Stressed 🤔</string>
+    <string name="find_the_best_place_to_heal">Find the best place to heal</string>
+    <string name="start_now">Start now</string>
 </resources>
