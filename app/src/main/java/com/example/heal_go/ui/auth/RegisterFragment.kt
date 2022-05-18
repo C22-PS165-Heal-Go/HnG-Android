@@ -25,27 +25,12 @@ class RegisterFragment : Fragment() {
         findNavController()
     }
 
-    private lateinit var datePicker: MaterialDatePicker<Long>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        initView()
-
-        datePicker.addOnPositiveButtonClickListener {
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val date = sdf.format(it)
-            binding.etDate.setText(date)
-        }
-
-        binding.etDate.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                fragmentManager?.let { it1 -> datePicker.show(it1, "tag") }
-            }
-        }
 
         binding.registerBtn.setOnClickListener {
             if (validation()) {
@@ -107,31 +92,6 @@ class RegisterFragment : Fragment() {
 
         return validatiorEmail && validatiorFullname && validatorpassword
 
-    }
-
-    private fun initView() {
-        val today = MaterialDatePicker.todayInUtcMilliseconds()
-        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-        calendar.timeInMillis = today
-        calendar[Calendar.YEAR] = 2001
-        calendar[Calendar.MONTH] = 2
-        val openDate = calendar.timeInMillis
-
-        calendar.timeInMillis = today
-        calendar[Calendar.YEAR] = 1960
-        val startDate = calendar.timeInMillis
-
-        val constraints = CalendarConstraints.Builder()
-            .setOpenAt(openDate)
-            .setStart(startDate)
-            .setEnd(today)
-            .build()
-
-        datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
-                .setCalendarConstraints(constraints)
-                .build()
     }
 
     override fun onDestroy() {
