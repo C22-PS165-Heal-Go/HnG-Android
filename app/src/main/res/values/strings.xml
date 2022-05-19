@@ -18,4 +18,7 @@
     <string name="feeling_stressed">Feeling Stressed 🤔</string>
     <string name="find_the_best_place_to_heal">Find the best place to heal</string>
     <string name="start_now">Start now</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_discover">Discover</string>
+    <string name="navigation_profile">Profile</string>
 </resources>
