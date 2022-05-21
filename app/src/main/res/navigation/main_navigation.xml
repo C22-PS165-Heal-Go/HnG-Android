@@ -24,9 +24,6 @@
         <action
             android:id="@+id/loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/loginFragment_to_bottomNavContainerFragment2"
-            app:destination="@id/bottomNavContainerFragment2" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -46,14 +43,4 @@
             android:id="@+id/onboardingPagerFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.heal_go.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/bottomNavContainerFragment2"
-        android:name="com.example.heal_go.ui.dashboard.BottomNavContainerFragment"
-        android:label="fragment_bottom_nav_container"
-        tools:layout="@layout/fragment_bottom_nav_container" />
 </navigation>
