@@ -27,80 +27,48 @@
                 android:elevation="10dp"
                 app:cardCornerRadius="10dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="20dp"
                     android:paddingVertical="28dp">
 
                     <TextView
+                        android:id="@+id/tv_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="@string/select_an_answer"
                         android:textColor="#747474"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_question"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/question_viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque imperdiet ante, ut finibus ex aliquet vel ?"
-                        android:textColor="@color/black" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-
-                        >
-
-                        <RadioButton
-                            style="@style/QuestionnaireCheckbox"
-                            android:background="@drawable/questionnaire_background_selector"
-                            android:buttonTint="@color/questionnaire_text_selector"
-                            android:text="Travels Alone"
-                            android:textColor="@color/questionnaire_text_selector" />
-
-                        <RadioButton
-                            style="@style/QuestionnaireCheckbox"
-                            android:background="@drawable/questionnaire_background_selector"
-                            android:buttonTint="@color/questionnaire_text_selector"
-                            android:text="A Couple"
-                            android:textColor="@color/questionnaire_text_selector" />
-
-                        <RadioButton
-                            style="@style/QuestionnaireCheckbox"
-                            android:background="@drawable/questionnaire_background_selector"
-                            android:buttonTint="@color/questionnaire_text_selector"
-                            android:text="Family With Children"
-                            android:textColor="@color/questionnaire_text_selector" />
-
-                        <RadioButton
-                            style="@style/QuestionnaireCheckbox"
-                            android:background="@drawable/questionnaire_background_selector"
-                            android:buttonTint="@color/questionnaire_text_selector"
-                            android:text="Family Without Children"
-                            android:textColor="@color/questionnaire_text_selector" />
-
-                        <RadioButton
-                            style="@style/QuestionnaireCheckbox"
-                            android:background="@drawable/questionnaire_background_selector"
-                            android:buttonTint="@color/questionnaire_text_selector"
-                            android:text="Group Of Friends"
-                            android:textColor="@color/questionnaire_text_selector" />
-
-                    </RadioGroup>
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_header" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:orientation="horizontal"
-                        android:paddingStart="10dp">
+                        android:paddingStart="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/question_viewpager">
 
                         <Button
                             android:id="@+id/back_btn"
@@ -132,7 +100,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 

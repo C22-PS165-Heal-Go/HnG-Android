@@ -2,10 +2,14 @@ package com.example.heal_go.ui.questionnaire
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
+import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
+import com.example.heal_go.ui.questionnaire.questions.*
 
 class QuestionnaireActivity : AppCompatActivity() {
 
@@ -19,13 +23,36 @@ class QuestionnaireActivity : AppCompatActivity() {
 
         binding.nextBtn.setOnClickListener {
             setProgressBar(true)
+            binding.questionViewpager.currentItem += 1
         }
 
         binding.backBtn.setOnClickListener {
             setProgressBar(false)
+            binding.questionViewpager.currentItem -= 1
+        }
+
+        val fragmentList = arrayListOf(
+            QuestionOne(),
+            QuestionTwo(),
+            QuestionThree(),
+            QuestionFour(),
+            QuestionFive(),
+            QuestionSix()
+        )
+
+        val adapter = OnboardingPagerAdapter(
+            fragmentList,
+            supportFragmentManager,
+            lifecycle
+        )
+
+        binding.apply {
+            questionViewpager.adapter = adapter
         }
 
     }
+
+
 
     private fun setProgressBar(add: Boolean) {
 

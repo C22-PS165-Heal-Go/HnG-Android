@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.questionnaire.questions.QuestionThree">
+
+    <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="🎉 What activity would you like to do ?"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question">
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Visit museum/zoo/historical place"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Go on Adventure tour"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="See the sights"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Take picture or selfie"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Going to festival/amusement park"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Photography"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Leisurely walk"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <CheckBox
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Shopping"
+            android:textColor="@color/questionnaire_text_selector" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

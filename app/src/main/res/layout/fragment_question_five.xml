@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.questionnaire.questions.QuestionFive">
+
+    <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="🎉 How long will you stay ?"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question">
+
+        <RadioButton
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="Less than a day"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <RadioButton
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="1-3 Days"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <RadioButton
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="1 week"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <RadioButton
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="2 weeks"
+            android:textColor="@color/questionnaire_text_selector" />
+
+        <RadioButton
+            style="@style/QuestionnaireCheckbox"
+            android:background="@drawable/questionnaire_background_selector"
+            android:buttonTint="@color/questionnaire_text_selector"
+            android:text="More than 3 weeks"
+            android:textColor="@color/questionnaire_text_selector" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
