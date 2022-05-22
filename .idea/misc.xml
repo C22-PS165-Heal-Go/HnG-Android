@@ -6,9 +6,17 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/conboarding_circle.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/ic_email.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/onboarding_circle_active.xml" value="0.34" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/questionnaire.xml" value="0.2185" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/questionnaire_background_selector.xml" value="0.34" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/questionnaire_choice_checked_bg.xml" value="0.34" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/questionnaire_text_selector.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2185" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/font/poppins_bold.xml" value="0.12864583333333332" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/font/questionnaire_font_selector.xml" value="0.37743589743589745" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/actionbar_layout.xml" value="0.2128623188405797" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_dashboard.xml" value="0.2871376811594203" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_questionnaire.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_bottom_nav_container.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_discover.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_first_screen.xml" value="0.3541666666666667" />
@@ -16,6 +24,7 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_onboarding_pager.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_profile.xml" value="0.3541666666666667" />
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_questionnaire.xml" value="0.2128623188405797" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_register.xml" value="0.2871376811594203" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_second_screen.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_third_screen.xml" value="0.3541666666666667" />
