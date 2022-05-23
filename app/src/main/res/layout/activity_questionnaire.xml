@@ -97,6 +97,20 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <Button
+                            android:id="@+id/finish_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_button"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:paddingHorizontal="40dp"
+                            android:text="Finish"
+                            android:visibility="gone"
+                            android:textAllCaps="false"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
-            android:text="Question 1 / 7"
+            android:text="Question 1 / 6"
             android:textColor="@color/white" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -129,8 +143,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:indeterminate="false"
-            android:max="7"
-            android:min="1"
+            android:max="6"
+            android:min="0"
             android:progress="1"
             app:indicatorColor="@color/warning_500"
             app:trackColor="@color/primary_200"

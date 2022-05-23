@@ -1,8 +1,11 @@
 package com.example.heal_go.ui.questionnaire
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -10,10 +13,13 @@ import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
 import com.example.heal_go.ui.questionnaire.questions.*
+import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 
 class QuestionnaireActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionnaireBinding
+
+    private val questionnaireViewModel by viewModels<QuestionnaireViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +27,27 @@ class QuestionnaireActivity : AppCompatActivity() {
         initView()
         setContentView(binding.root)
 
-        binding.nextBtn.setOnClickListener {
-            setProgressBar(true)
-            binding.questionViewpager.currentItem += 1
-        }
+        val onBoardingPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
 
-        binding.backBtn.setOnClickListener {
-            setProgressBar(false)
-            binding.questionViewpager.currentItem -= 1
+                when (position) {
+                    0 -> {
+                        binding.backBtn.visibility = View.INVISIBLE
+                        binding.finishBtn.visibility = View.GONE
+                        binding.nextBtn.visibility = View.VISIBLE
+                    }
+                    5 -> {
+                        binding.backBtn.visibility = View.VISIBLE
+                        binding.finishBtn.visibility = View.VISIBLE
+                        binding.nextBtn.visibility = View.GONE
+                    }
+                    else -> {
+                        binding.backBtn.visibility = View.VISIBLE
+                        binding.finishBtn.visibility = View.GONE
+                        binding.nextBtn.visibility = View.VISIBLE
+                    }
+                }
+            }
         }
 
         val fragmentList = arrayListOf(
@@ -48,10 +67,28 @@ class QuestionnaireActivity : AppCompatActivity() {
 
         binding.apply {
             questionViewpager.adapter = adapter
+            questionViewpager.registerOnPageChangeCallback(onBoardingPageChangeCallback)
+            questionViewpager.isUserInputEnabled = false
+
+            nextBtn.setOnClickListener {
+                setProgressBar(true)
+                binding.questionViewpager.currentItem += 1
+            }
+
+            backBtn.setOnClickListener {
+                setProgressBar(false)
+                binding.questionViewpager.currentItem -= 1
+            }
+
+            finishBtn.setOnClickListener {
+                Toast.makeText(this@QuestionnaireActivity, "FINISH", Toast.LENGTH_SHORT).show()
+            }
         }
 
+        questionnaireViewModel.quesionnaireAnswer.observe(this) {
+            Log.d("REQBODY", it.toString())
+        }
     }
-
 
 
     private fun setProgressBar(add: Boolean) {
@@ -59,14 +96,10 @@ class QuestionnaireActivity : AppCompatActivity() {
         binding.apply {
             if (add) {
                 progressBar.progress = progressBar.progress + 1
-            }else {
-                if (progressBar.progress == 1) {
-                    progressBar.progress = 1
-                }else {
-                    progressBar.progress = progressBar.progress - 1
-                }
+            } else {
+                progressBar.progress = progressBar.progress - 1
             }
-            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 7"
+            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 6"
         }
     }
 

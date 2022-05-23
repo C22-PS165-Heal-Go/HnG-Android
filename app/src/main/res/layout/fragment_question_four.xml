@@ -31,6 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_question">
 
         <RadioButton
+            android:id="@+id/item1"
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
@@ -38,6 +39,7 @@
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
+            android:id="@+id/item2"
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"

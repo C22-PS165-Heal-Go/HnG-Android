@@ -29,6 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_question">
 
         <CheckBox
+            android:id="@+id/item1"
             style="@style/QuestionnaireCheckbox"
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
@@ -37,6 +38,7 @@
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
+            android:id="@+id/item2"
             style="@style/QuestionnaireCheckbox"
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
@@ -45,6 +47,7 @@
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
+            android:id="@+id/item3"
             style="@style/QuestionnaireCheckbox"
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
@@ -53,6 +56,7 @@
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
+            android:id="@+id/item4"
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
@@ -60,6 +64,7 @@
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
+            android:id="@+id/item5"
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
