@@ -21,4 +21,5 @@
     <string name="navigation_home">Home</string>
     <string name="navigation_discover">Discover</string>
     <string name="navigation_profile">Profile</string>
+    <string name="destination_image">Destination Image</string>
 </resources>
