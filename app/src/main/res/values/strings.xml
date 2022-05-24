@@ -22,4 +22,5 @@
     <string name="navigation_discover">Discover</string>
     <string name="navigation_profile">Profile</string>
     <string name="select_an_answer">Select an answer</string>
+    <string name="destination_image">Destination Image</string>
 </resources>
