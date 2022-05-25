@@ -186,6 +186,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             showWarningDialog()
         } else {
             binding.questionViewpager.currentItem -= 1
+            setProgressBar(false)
         }
     }
 
