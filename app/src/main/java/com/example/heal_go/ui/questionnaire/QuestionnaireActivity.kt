@@ -1,5 +1,6 @@
 package com.example.heal_go.ui.questionnaire
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.example.heal_go.databinding.ActivityQuestionnaireBinding
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
+import com.example.heal_go.ui.recommendation.RecommendationCardActivity
 
 class QuestionnaireActivity : AppCompatActivity() {
 
@@ -155,7 +157,12 @@ class QuestionnaireActivity : AppCompatActivity() {
     }
 
     private fun showWarningDialog() {
-        dialogBuilder.setView(layoutInflater.inflate(R.layout.questionnaire_custom_warning_dialog, null))
+        dialogBuilder.setView(
+            layoutInflater.inflate(
+                R.layout.questionnaire_custom_warning_dialog,
+                null
+            )
+        )
         dialogBuilder()
     }
 
@@ -169,6 +176,10 @@ class QuestionnaireActivity : AppCompatActivity() {
         val btnClose = dialog.findViewById<ImageButton>(R.id.close_btn)
 
         btnProceed?.setOnClickListener {
+            if (btnProceed.text == "Submit") {
+                val intent = Intent(this, RecommendationCardActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         }
 
