@@ -15,4 +15,18 @@
     <string name="date_of_birth">Date of Birth</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque imperdiet ante, ut finibus ex aliquet vel.</string>
     <string name="skip">Skip</string>
+
+    <string name="recommendation">Recommendation</string>
+    <string name="title_detail">This is destination Title</string>
+    <string name="description">Description</string>
+    <string name="description_detail">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et</string>
+    <string name="book">Book Now</string>
+    <string name="location_temp">Jl. Moh. Toha Kec. Coblong, Bandung, Jawa Barat</string>
+    <string name="not_interested">Not Interested</string>
+    <string name="rewind">Rewind</string>
+    <string name="interested">Interested</string>
+    <string name="explanation">Double tap if you like, swipe if you don\'t, and hold if you want to know destination detail.</string>
+    <string name="location_in_card">This place is in Daerah Istimewa Yogyakarta</string>
+    <string name="image_recommendation">Image Recommendation</string>
+    <string name="category_icon">category_icon</string>
 </resources>
