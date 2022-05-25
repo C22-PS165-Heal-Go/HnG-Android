@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_500"
-    tools:context=".ui.recommendation.RecommendationCardFragment">
+    tools:context=".ui.recommendation.RecommendationCardActivity">
 
     <TextView
         android:id="@+id/txtRecommendationBar"

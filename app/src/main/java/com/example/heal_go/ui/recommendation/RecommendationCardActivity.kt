@@ -4,44 +4,38 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.heal_go.R
-import com.example.heal_go.databinding.FragmentRecommendationCardBinding
+import com.example.heal_go.databinding.ActivityRecommendationCardBinding
 import com.example.heal_go.ui.recommendation.adapter.CardAdapter
 import com.yuyakaido.android.cardstackview.*
 
-class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickListener {
+class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActionClickListener {
 
     private lateinit var listAdapter: CardAdapter
     private lateinit var manager: CardStackLayoutManager
-    private var binding: FragmentRecommendationCardBinding? = null
-
-    private val navController by lazy { findNavController() }
+    private var binding: ActivityRecommendationCardBinding? = null
 
     private var countSwipe = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRecommendationCardBinding.inflate(inflater, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityRecommendationCardBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         setupView()
-
-        return binding?.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         setCardStackAdapter()
         actions()
         setAnimationsIn()
+
     }
+
 
     /*to confirm what messages from bottom sheet dialog,
     this function can be overrided to process that
@@ -133,7 +127,7 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
 
             /*when interested button is clicked, current card will be swiped to bottom*/
             this?.interestedBtn?.setOnClickListener {
-                Toast.makeText(activity, "Interested", Toast.LENGTH_SHORT)
+                Toast.makeText(this@RecommendationCardActivity, "Interested", Toast.LENGTH_SHORT)
                     .show()
                 swipeCard(true)
                 recycleView.swipe()
@@ -141,7 +135,11 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
 
             /*when interested button is clicked, current card will be swiped to left*/
             this?.notInterestedBtn?.setOnClickListener {
-                Toast.makeText(activity, "Not Interested", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this@RecommendationCardActivity,
+                    "Not Interested",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 swipeCard(false)
                 recycleView.swipe()
@@ -151,7 +149,11 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
             listAdapter.setOnItemClickCallBack(object : CardAdapter.OnItemClickCallBack {
                 /*when double click action, current card will be marked as interested*/
                 override fun onItemClicked(data: String) {
-                    Toast.makeText(activity, "Interested", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@RecommendationCardActivity,
+                        "Interested",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     swipeCard(true)
                     binding?.recycleView?.swipe()
@@ -160,7 +162,7 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
                 override fun onHoldClicked() {
                     val modal = DetailBottomSheet()
-                    modal.show(childFragmentManager, modal.tag)
+                    modal.show(supportFragmentManager, modal.tag)
                 }
             })
         }
@@ -169,20 +171,25 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
     /*to define card action, this method implement all of those actions*/
     private fun setCardStackAdapter() {
         //LISTENER WHILE CARD IN INTERACTION
-        manager = CardStackLayoutManager(context, object : CardStackListener {
-            override fun onCardDragging(direction: Direction?, ratio: Float) {}
-            override fun onCardSwiped(direction: Direction?) {
-                if (direction != Direction.Bottom) {
-                    Toast.makeText(activity, "Not interested", Toast.LENGTH_SHORT)
-                        .show()
+        manager =
+            CardStackLayoutManager(this@RecommendationCardActivity, object : CardStackListener {
+                override fun onCardDragging(direction: Direction?, ratio: Float) {}
+                override fun onCardSwiped(direction: Direction?) {
+                    if (direction != Direction.Bottom) {
+                        Toast.makeText(
+                            this@RecommendationCardActivity,
+                            "Not interested",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                 }
-            }
 
-            override fun onCardRewound() {}
-            override fun onCardCanceled() {}
-            override fun onCardAppeared(view: View?, position: Int) {}
-            override fun onCardDisappeared(view: View?, position: Int) {}
-        })
+                override fun onCardRewound() {}
+                override fun onCardCanceled() {}
+                override fun onCardAppeared(view: View?, position: Int) {}
+                override fun onCardDisappeared(view: View?, position: Int) {}
+            })
 
         val list = ArrayList<String>()
         for (i in 1..5) {
@@ -201,19 +208,19 @@ class RecommendationCardFragment : Fragment(), DetailBottomSheet.OnActionClickLi
 
     private fun setupView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+            this.window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
-            requireActivity().window.setFlags(
+            this.window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
 
-        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.primary_500)
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         binding = null
     }
 
