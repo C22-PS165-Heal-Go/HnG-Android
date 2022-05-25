@@ -24,6 +24,10 @@
             android:exported="false"
             android:theme="@style/Theme.HealGo" />
         <activity
+            android:name=".ui.recommendation.RecommendationCardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HealGo"/>
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
