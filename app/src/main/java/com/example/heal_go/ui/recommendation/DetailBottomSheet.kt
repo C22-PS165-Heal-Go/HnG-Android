@@ -47,7 +47,7 @@ class DetailBottomSheet : BottomSheetDialogFragment() {
 
         /*initialize action click listener from parent fragment*/
         try {
-            this.onActionClickListener = parentFragment as OnActionClickListener
+            this.onActionClickListener = activity as OnActionClickListener
         } catch (e: ClassCastException) {
             Log.d(TAG, e.message.toString())
         }
