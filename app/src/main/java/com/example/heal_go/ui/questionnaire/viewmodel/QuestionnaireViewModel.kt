@@ -1,0 +1,31 @@
+package com.example.heal_go.ui.questionnaire.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.heal_go.data.QuestionnaireReqBody
+
+class QuestionnaireViewModel : ViewModel() {
+
+    private val _quesionnaireAnswer = MutableLiveData<QuestionnaireReqBody>()
+    val quesionnaireAnswer: LiveData<QuestionnaireReqBody> = _quesionnaireAnswer
+
+    fun saveChoice(
+        questionOne: Int? = null,
+        questionTwo: List<Int>? = null,
+        questionThree: List<Int>? = null,
+        questionFour: Int? = null,
+        questionFive: Int? = null,
+        questionSix: Int? = null
+    ) {
+        _quesionnaireAnswer.value = QuestionnaireReqBody(
+            questionSix ?: _quesionnaireAnswer.value?.question6,
+            questionThree ?: _quesionnaireAnswer.value?.question3,
+            questionTwo ?: _quesionnaireAnswer.value?.question2,
+            questionFive ?: _quesionnaireAnswer.value?.question5,
+            questionFour ?: _quesionnaireAnswer.value?.question4,
+            questionOne ?: _quesionnaireAnswer.value?.question1
+        )
+    }
+
+}
