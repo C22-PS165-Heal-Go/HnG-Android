@@ -1,20 +1,21 @@
 package com.example.heal_go.ui.auth
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentLoginBinding
-import com.example.heal_go.databinding.FragmentWelcomeBinding
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.wajahatkarim3.easyvalidation.core.Validator
+
 
 class LoginFragment : Fragment() {
 
@@ -49,6 +50,10 @@ class LoginFragment : Fragment() {
                 .minLength(8)
                 .atleastOneNumber()
                 .check()
+
+            val intent = Intent(activity, DashboardActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
 
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
