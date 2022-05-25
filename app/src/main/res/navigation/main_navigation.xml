@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/recommendationCardFragment"
-        android:name="com.example.heal_go.ui.recommendation.RecommendationCardFragment"
+        android:name="com.example.heal_go.ui.recommendation.RecommendationCardActivity"
         android:label="fragment_recommendation_card"
-        tools:layout="@layout/fragment_recommendation_card" />
+        tools:layout="@layout/activity_recommendation_card" />
 </navigation>
