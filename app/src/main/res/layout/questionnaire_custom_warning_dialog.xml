@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -10,21 +9,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp"
         android:paddingTop="10dp"
-        >
+        android:paddingBottom="20dp">
 
         <ImageButton
             android:id="@+id/close_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_close"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
             android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/close_button"
+            android:padding="10dp"
+            android:src="@drawable/ic_close"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/close_button" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationView"
@@ -36,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/questionmark" />
+            app:lottie_rawRes="@raw/caution" />
 
         <TextView
             android:id="@+id/textView5"
@@ -44,20 +42,19 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Whoa! Take it easy"
+            android:text="Hey! Stop right there"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:paddingHorizontal="20dp"
-            android:gravity="center"
             android:layout_marginTop="20dp"
-            android:text="If you are sure for your life choices, you can click the submit button below 😊"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="Do you really want to do this? Just a reminder your answer will be lost if you go back!"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -68,39 +65,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal"
             android:paddingStart="10dp"
-            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <Button
-                android:id="@+id/cancel_btn"
+                android:id="@+id/proceed_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Cancel"
+                android:text="Proceed"
                 android:textAllCaps="false"
+                android:textColor="@color/danger_500"
                 android:textSize="12sp"
-                android:textColor="@color/primary_500"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <Button
-                android:id="@+id/proceed_btn"
+                android:id="@+id/cancel_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_button"
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingHorizontal="40dp"
-                android:text="Submit"
-                android:textSize="12sp"
+                android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

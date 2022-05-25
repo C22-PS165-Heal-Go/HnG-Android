@@ -1,11 +1,9 @@
 package com.example.heal_go.ui.questionnaire
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -17,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
-import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
@@ -27,6 +24,8 @@ class QuestionnaireActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuestionnaireBinding
 
     private val questionnaireViewModel by viewModels<QuestionnaireViewModel>()
+
+    lateinit var dialogBuilder: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +71,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             }
 
             finishBtn.setOnClickListener {
-                showDialog()
+                showSubmitDialog()
             }
         }
 
@@ -150,12 +149,18 @@ class QuestionnaireActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDialog() {
-        val builder: AlertDialog.Builder =
-            AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
-        val inflater: LayoutInflater = layoutInflater
-        builder.setView(inflater.inflate(R.layout.questionnaire_custom_dialog, null))
-        val dialog = builder.create()
+    private fun showSubmitDialog() {
+        dialogBuilder.setView(layoutInflater.inflate(R.layout.questionnaire_custom_dialog, null))
+        dialogBuilder()
+    }
+
+    private fun showWarningDialog() {
+        dialogBuilder.setView(layoutInflater.inflate(R.layout.questionnaire_custom_warning_dialog, null))
+        dialogBuilder()
+    }
+
+    private fun dialogBuilder() {
+        val dialog = dialogBuilder.create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
@@ -164,8 +169,6 @@ class QuestionnaireActivity : AppCompatActivity() {
         val btnClose = dialog.findViewById<ImageButton>(R.id.close_btn)
 
         btnProceed?.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
@@ -178,10 +181,20 @@ class QuestionnaireActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (binding.questionViewpager.currentItem - 1 < 0) {
+            showWarningDialog()
+        } else {
+            binding.questionViewpager.currentItem -= 1
+        }
+    }
+
     private fun initView() {
         supportActionBar?.elevation = 0F
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Questionnaire"
         window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        dialogBuilder =
+            AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
     }
 }
