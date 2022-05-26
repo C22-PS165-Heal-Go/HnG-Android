@@ -216,7 +216,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             )
         }
 
-        this.window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        supportActionBar?.hide()
     }
 
     override fun onDestroy() {
