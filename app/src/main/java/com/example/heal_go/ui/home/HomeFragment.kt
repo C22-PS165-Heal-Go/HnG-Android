@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.heal_go.databinding.FragmentHomeBinding
+import com.example.heal_go.ui.ViewModelFactory
+import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.questionnaire.QuestionnaireActivity
 
 import com.google.android.material.chip.Chip
@@ -17,6 +20,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val dashboardViewModel by viewModels<DashboardViewModel> { ViewModelFactory(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,11 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

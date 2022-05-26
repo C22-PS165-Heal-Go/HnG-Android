@@ -20,14 +20,15 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
 
     private lateinit var listAdapter: CardAdapter
     private lateinit var manager: CardStackLayoutManager
-    private var binding: ActivityRecommendationCardBinding? = null
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityRecommendationCardBinding.inflate(layoutInflater)
+    }
 
     private var countSwipe = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRecommendationCardBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         setupView()
 
         setCardStackAdapter()
@@ -217,11 +218,6 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         }
 
         this.window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 
     companion object {

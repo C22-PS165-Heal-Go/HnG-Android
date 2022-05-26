@@ -1,11 +1,13 @@
 package com.example.heal_go.ui.questionnaire.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.heal_go.data.QuestionnaireReqBody
+import com.example.heal_go.data.repository.MainRepository
 
-class QuestionnaireViewModel : ViewModel() {
+class QuestionnaireViewModel(provideMainRepository: MainRepository, context: Context) : ViewModel() {
 
     private val _quesionnaireAnswer = MutableLiveData<QuestionnaireReqBody>()
     val quesionnaireAnswer: LiveData<QuestionnaireReqBody> = _quesionnaireAnswer
