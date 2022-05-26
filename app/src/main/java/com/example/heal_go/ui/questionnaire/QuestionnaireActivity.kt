@@ -12,7 +12,6 @@ import android.widget.ImageButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
@@ -202,10 +201,7 @@ class QuestionnaireActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        supportActionBar?.elevation = 0F
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Questionnaire"
-        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
     }

@@ -38,4 +38,5 @@
     <string name="location_in_card">This place is in Daerah Istimewa Yogyakarta</string>
     <string name="image_recommendation">Image Recommendation</string>
     <string name="category_icon">category_icon</string>
+    <string name="questionnaire">Questionnaire</string>
 </resources>
