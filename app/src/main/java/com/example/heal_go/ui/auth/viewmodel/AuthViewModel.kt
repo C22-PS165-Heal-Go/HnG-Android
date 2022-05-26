@@ -23,6 +23,7 @@ class AuthViewModel(private val repository: MainRepository, context: Context) : 
         try {
             /*throw data to repository below*/
             /*val callback = repository.login(email, password)
+
             _login.value = Status.Success(callback.value)*/
         } catch (e: Exception) {
             _login.value = Status.Error("Server Error")
