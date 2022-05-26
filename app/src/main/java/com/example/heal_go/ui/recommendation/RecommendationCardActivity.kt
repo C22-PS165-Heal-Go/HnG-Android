@@ -29,7 +29,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         binding = ActivityRecommendationCardBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         setupView()
-
+        showTutorialBottomSheet()
         setCardStackAdapter()
         actions()
         setAnimationsIn()
@@ -165,7 +165,17 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     modal.show(supportFragmentManager, modal.tag)
                 }
             })
+
+            this?.tutorialBtn?.setOnClickListener {
+                showTutorialBottomSheet()
+            }
         }
+    }
+
+    private fun showTutorialBottomSheet() {
+        val tutorialBottomSheet = TutorialBottomSheet()
+        tutorialBottomSheet.isCancelable = false
+        tutorialBottomSheet.show(supportFragmentManager, tutorialBottomSheet.tag)
     }
 
     /*to define card action, this method implement all of those actions*/

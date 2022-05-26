@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:orientation="vertical"
-        android:background="@drawable/bottom_sheet_header_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
