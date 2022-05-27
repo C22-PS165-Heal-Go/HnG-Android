@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "adhlad")
     }
 
     buildTypes {
@@ -81,5 +82,8 @@ dependencies {
 
 //    ViewPager 2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+//    lottie file
+    implementation 'com.airbnb.android:lottie:5.0.3'
 
 }

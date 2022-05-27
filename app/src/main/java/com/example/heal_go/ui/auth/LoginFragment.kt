@@ -13,17 +13,18 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentLoginBinding
-import com.example.heal_go.databinding.FragmentWelcomeBinding
+import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
-import com.example.heal_go.ui.recommendation.RecommendationCardActivity
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.wajahatkarim3.easyvalidation.core.Validator
+
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val authViewModel by viewModels<AuthViewModel>()
+    private val authViewModel by viewModels<AuthViewModel>{ ViewModelFactory(requireContext()) }
 
     private val navController: NavController by lazy {
         findNavController()
@@ -52,7 +53,9 @@ class LoginFragment : Fragment() {
                 .atleastOneNumber()
                 .check()
 
-            startActivity(Intent(requireContext(), RecommendationCardActivity::class.java))
+            val intent = Intent(activity, DashboardActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
 
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)

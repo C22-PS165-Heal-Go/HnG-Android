@@ -4,6 +4,7 @@
     package="com.example.heal_go">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.questionnaire.QuestionnaireActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HealGo"/>
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HealGo" />
         <activity
             android:name=".ui.recommendation.RecommendationCardActivity"
             android:exported="false"
