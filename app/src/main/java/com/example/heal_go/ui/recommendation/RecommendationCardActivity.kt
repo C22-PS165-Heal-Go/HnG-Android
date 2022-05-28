@@ -2,6 +2,7 @@ package com.example.heal_go.ui.recommendation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.heal_go.databinding.ActivityRecommendationCardBinding
 import com.example.heal_go.ui.ViewModelFactory
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.recommendation.adapter.CardAdapter
 import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
 import com.yuyakaido.android.cardstackview.*
@@ -88,10 +90,14 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 ObjectAnimator.ofFloat(this.recycleView, View.ALPHA, 0f).setDuration(250)
             val actionTab =
                 ObjectAnimator.ofFloat(this.actionLayout, View.ALPHA, 0f).setDuration(250)
+            val tutorialbtn =
+                ObjectAnimator.ofFloat(this.tutorialBtn, View.ALPHA, 0f).setDuration(250)
+            val actionLayout =
+                ObjectAnimator.ofFloat(this.actionLayout, View.ALPHA, 0f).setDuration(250)
 
             /*fade out all contents in this fragment*/
             AnimatorSet().apply {
-                playTogether(recyclerView, actionTab)
+                playTogether(recyclerView, actionTab, tutorialbtn, actionLayout)
                 start()
             }
 
@@ -104,12 +110,12 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 repeatCount = 0
             }
 
-            /*Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this@RecommendationCardActivity, DashboardActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
-            }, 1000)*/
+            }, 2000)
 
         }
     }
@@ -220,7 +226,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 override fun onCardRewound() {}
                 override fun onCardCanceled() {}
                 override fun onCardAppeared(view: View?, position: Int) {}
-                override fun onCardDisappeared(view: View?, position: Int) {}
+                override fun onCardDisappeared(view: View?, position: Int) {
+                    if (position == 4) setAnimationsOut()
+                }
             })
 
         val list = ArrayList<String>()
