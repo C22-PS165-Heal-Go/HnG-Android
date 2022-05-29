@@ -16,9 +16,13 @@ class QuestionnaireViewModel : ViewModel() {
         questionThree: List<Int>? = null,
         questionFour: Int? = null,
         questionFive: Int? = null,
-        questionSix: Int? = null
+        questionSix: Int? = null,
+        questionSeven: Int? = null,
+        questionEight: Int? = null
     ) {
         _quesionnaireAnswer.value = QuestionnaireReqBody(
+            questionSeven ?: _quesionnaireAnswer.value?.question7,
+            questionEight ?: _quesionnaireAnswer.value?.question8,
             questionSix ?: _quesionnaireAnswer.value?.question6,
             questionThree ?: _quesionnaireAnswer.value?.question3,
             questionTwo ?: _quesionnaireAnswer.value?.question2,

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="🎉 Who will you go with ?"
+        android:text="@string/questionnaire_question_1"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Travels Alone"
+            android:text="@string/questionnaire_option_companion_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -42,7 +42,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="A Couple"
+            android:text="@string/questionnaire_option_companion_2"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -50,7 +50,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Family With Children"
+            android:text="@string/questionnaire_option_companion_3"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -58,7 +58,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Family Without Children"
+            android:text="@string/questionnaire_option_companion_4"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -66,7 +66,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Group Of Friends"
+            android:text="@string/questionnaire_option_companion_5"
             android:textColor="@color/questionnaire_text_selector" />
 
     </RadioGroup>

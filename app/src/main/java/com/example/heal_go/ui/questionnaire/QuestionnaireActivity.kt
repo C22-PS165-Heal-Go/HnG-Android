@@ -47,7 +47,9 @@ class QuestionnaireActivity : AppCompatActivity() {
             QuestionThree(),
             QuestionFour(),
             QuestionFive(),
-            QuestionSix()
+            QuestionSix(),
+            QuestionSeven(),
+            QuestionEight()
         )
 
         val adapter = OnboardingPagerAdapter(
@@ -100,9 +102,14 @@ class QuestionnaireActivity : AppCompatActivity() {
                     binding.nextBtn.isEnabled = it.question5 != null
                 }
                 5 -> {
-                    binding.finishBtn.isEnabled = it.question6 != null
+                    binding.nextBtn.isEnabled = it.question6 != null
                 }
-
+                6 -> {
+                    binding.nextBtn.isEnabled = it.question7 != null
+                }
+                7 -> {
+                    binding.finishBtn.isEnabled = it.question8 != null
+                }
             }
         }
     }
@@ -114,7 +121,7 @@ class QuestionnaireActivity : AppCompatActivity() {
                 binding.finishBtn.visibility = View.GONE
                 binding.nextBtn.visibility = View.VISIBLE
             }
-            5 -> {
+            7 -> {
                 binding.backBtn.visibility = View.VISIBLE
                 binding.finishBtn.visibility = View.VISIBLE
                 binding.nextBtn.visibility = View.GONE
@@ -136,7 +143,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             } else {
                 progressBar.progress = progressBar.progress - 1
             }
-            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 6"
+            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 8"
         }
     }
 

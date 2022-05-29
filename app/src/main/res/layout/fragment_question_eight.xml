@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="20dp"
-    tools:context=".ui.questionnaire.questions.QuestionFive">
+    tools:context=".ui.questionnaire.questions.QuestionSix">
 
     <TextView
         android:id="@+id/tv_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/questionnaire_question_5"
+        android:text="@string/questionnaire_question_8"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -23,7 +23,6 @@
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,7 +34,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="@string/questionnaire_option_stay_time_1"
+            android:text="@string/questionnaire_option_budget_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -43,7 +42,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="@string/questionnaire_option_stay_time_2"
+            android:text="@string/questionnaire_option_budget_2"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -51,7 +50,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="@string/questionnaire_option_stay_time_3"
+            android:text="@string/questionnaire_option_budget_3"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -59,16 +58,9 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="@string/questionnaire_option_stay_time_4"
+            android:text="@string/questionnaire_option_budget_4"
             android:textColor="@color/questionnaire_text_selector" />
 
-        <RadioButton
-            android:id="@+id/item5"
-            style="@style/QuestionnaireCheckbox"
-            android:background="@drawable/questionnaire_background_selector"
-            android:buttonTint="@color/questionnaire_text_selector"
-            android:text="@string/questionnaire_option_stay_time_5"
-            android:textColor="@color/questionnaire_text_selector" />
 
     </RadioGroup>
 
