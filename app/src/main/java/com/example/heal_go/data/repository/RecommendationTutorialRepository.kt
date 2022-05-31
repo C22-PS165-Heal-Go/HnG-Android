@@ -2,20 +2,18 @@ package com.example.heal_go.data.repository
 
 import android.content.Context
 import android.util.Log
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.preferencesDataStore
+import com.example.heal_go.data.repository.OnboardingRepository.Companion.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-class OnboardingRepository(private val context: Context) {
 
-    private val KEY = booleanPreferencesKey("onboarding")
+class RecommendationTutorialRepository(private val context: Context) {
+    private val KEY = booleanPreferencesKey("tutorial")
 
     suspend fun saveToDataStore(isFinished: Boolean) {
         context.dataStore.edit { preference ->
@@ -36,8 +34,4 @@ class OnboardingRepository(private val context: Context) {
             val isFinised = preference[KEY] ?: false
             isFinised
         }
-
-    companion object {
-        val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "onboarding")
-    }
 }

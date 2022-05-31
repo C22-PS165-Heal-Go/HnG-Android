@@ -4,24 +4,34 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityRecommendationCardBinding
+import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.recommendation.adapter.CardAdapter
+import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
 import com.yuyakaido.android.cardstackview.*
 
-class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActionClickListener {
+class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActionClickListener,
+    TutorialBottomSheet.OnActionClickListener {
 
     private lateinit var listAdapter: CardAdapter
     private lateinit var manager: CardStackLayoutManager
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityRecommendationCardBinding.inflate(layoutInflater)
+    }
+
+    private val recommendationViewModel by viewModels<RecommendationViewModel> {
+        ViewModelFactory(
+            this
+        )
     }
 
     private var countSwipe = 0
@@ -30,11 +40,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupView()
-
         setCardStackAdapter()
         actions()
         setAnimationsIn()
-
     }
 
 
@@ -48,7 +56,11 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             1 -> swipeCard(true)
             2 -> swipeCard(false)
         }
-        binding?.recycleView?.swipe()
+        binding.recycleView.swipe()
+    }
+
+    override fun onUnderstandBtnClickListener() {
+        recommendationViewModel.onTutorialFinish()
     }
 
     /* when the card has been processed, swipe that
@@ -73,9 +85,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     private fun setAnimationsOut() {
         with(binding) {
             val recyclerView =
-                ObjectAnimator.ofFloat(this?.recycleView, View.ALPHA, 0f).setDuration(250)
+                ObjectAnimator.ofFloat(this.recycleView, View.ALPHA, 0f).setDuration(250)
             val actionTab =
-                ObjectAnimator.ofFloat(this?.actionLayout, View.ALPHA, 0f).setDuration(250)
+                ObjectAnimator.ofFloat(this.actionLayout, View.ALPHA, 0f).setDuration(250)
 
             /*fade out all contents in this fragment*/
             AnimatorSet().apply {
@@ -84,7 +96,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             }
 
             /*show success animation*/
-            this?.lavSuccess?.apply {
+            this.lavSuccess.apply {
                 alpha = 1.0f
                 progress = 0.0f
                 pauseAnimation()
@@ -105,9 +117,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     /*this function is used when page load all its contents*/
     private fun setAnimationsIn() {
         val recyclerView =
-            ObjectAnimator.ofFloat(binding?.recycleView, View.ALPHA, 1f).setDuration(500)
+            ObjectAnimator.ofFloat(binding.recycleView, View.ALPHA, 1f).setDuration(500)
         val actionTab =
-            ObjectAnimator.ofFloat(binding?.actionLayout, View.ALPHA, 1f).setDuration(500)
+            ObjectAnimator.ofFloat(binding.actionLayout, View.ALPHA, 1f).setDuration(500)
 
         /*fade in all contents*/
         AnimatorSet().apply {
@@ -121,13 +133,13 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     private fun actions() {
         with(binding) {
             /*when rewind is clicked, previous card which has been swiped will be restored*/
-            this?.rewindBtn?.setOnClickListener {
+            this.rewindBtn.setOnClickListener {
                 recycleView.rewind()
                 countSwipe--
             }
 
             /*when interested button is clicked, current card will be swiped to bottom*/
-            this?.interestedBtn?.setOnClickListener {
+            this.interestedBtn.setOnClickListener {
                 Toast.makeText(this@RecommendationCardActivity, "Interested", Toast.LENGTH_SHORT)
                     .show()
                 swipeCard(true)
@@ -135,7 +147,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
-            this?.notInterestedBtn?.setOnClickListener {
+            this.notInterestedBtn.setOnClickListener {
                 Toast.makeText(
                     this@RecommendationCardActivity,
                     "Not Interested",
@@ -157,7 +169,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     )
                         .show()
                     swipeCard(true)
-                    binding?.recycleView?.swipe()
+                    binding.recycleView.swipe()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -166,7 +178,26 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     modal.show(supportFragmentManager, modal.tag)
                 }
             })
+
+            this.tutorialBtn.setOnClickListener {
+                showTutorialBottomSheet()
+            }
+
+            recommendationViewModel.getTutorialDatastore()
+                .observe(this@RecommendationCardActivity) {
+                    if (!it) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            showTutorialBottomSheet()
+                        }, 4000)
+                    }
+                }
         }
+    }
+
+    private fun showTutorialBottomSheet() {
+        val tutorialBottomSheet = TutorialBottomSheet()
+        tutorialBottomSheet.isCancelable = false
+        tutorialBottomSheet.show(supportFragmentManager, tutorialBottomSheet.tag)
     }
 
     /*to define card action, this method implement all of those actions*/
@@ -201,10 +232,10 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         manager.setStackFrom(StackFrom.Bottom)
         manager.setVisibleCount(list.size)
 
-        binding?.recycleView?.layoutManager = manager
+        binding.recycleView.layoutManager = manager
 
         listAdapter = CardAdapter(list)
-        binding?.recycleView?.adapter = listAdapter
+        binding.recycleView.adapter = listAdapter
     }
 
     private fun setupView() {
@@ -217,7 +248,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             )
         }
 
-        this.window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        supportActionBar?.hide()
     }
 
     companion object {

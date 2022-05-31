@@ -20,7 +20,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 QuestionnaireViewModel(Injection.provideMainRepository(), context) as T
             }
             modelClass.isAssignableFrom(RecommendationViewModel::class.java) -> {
-                RecommendationViewModel(Injection.provideMainRepository(), context) as T
+                RecommendationViewModel(Injection.provideMainRepository(), Injection.provideRecommendationTutorialRepository(context), context) as T
             }
             modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
                 DashboardViewModel(Injection.provideMainRepository(), context) as T
