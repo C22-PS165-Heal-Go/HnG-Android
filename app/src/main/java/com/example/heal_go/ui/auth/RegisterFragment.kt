@@ -1,6 +1,7 @@
 package com.example.heal_go.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentRegisterBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
+import com.example.heal_go.util.Status
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.wajahatkarim3.easyvalidation.core.Validator
@@ -37,19 +39,44 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        binding.registerBtn.setOnClickListener {
-            if (validation()) {
-                Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            registerBtn.setOnClickListener {
+                if (validation()) {
+                    authViewModel.register(etFullname.text.toString(), etEmail.text.toString(), etPassword.text.toString())
+                } else {
+                    Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            loginBtn.setOnClickListener {
+                navController.navigate(R.id.registerFragment_to_loginFragment)
+            }
+
+            authViewModel.register.observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Status.Loading -> {}
+                    is Status.Success -> {
+                        if (result.data?.code != null) {
+                            Toast.makeText(activity, "Email already registered!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            if (result.data?.success == true) {
+                                Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
+                                navController.navigate(R.id.registerFragment_to_loginFragment)
+                            }
+                        }
+                    }
+                    is Status.Error -> {
+                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
-
-        binding.loginBtn.setOnClickListener {
-            navController.navigate(R.id.registerFragment_to_loginFragment)
-        }
-
-        return binding.root
     }
 
     private fun validation(): Boolean {
@@ -58,42 +85,42 @@ class RegisterFragment : Fragment() {
         val etFullname = binding.etFullname.text
         val etPassword = binding.etPassword.text
 
-        val validatiorEmail = Validator(etEmail.toString())
-            .nonEmpty()
-            .validEmail()
-            .addErrorCallback {
+        val validatiorEmail = Validator(etEmail.toString()).apply {
+            nonEmpty()
+            validEmail()
+            addErrorCallback {
                 binding.etEmail.error = "Email is not valid!"
             }
-            .addSuccessCallback {
+            addSuccessCallback {
                 binding.etEmail.error = null
             }
-            .check()
+        }.check()
 
 
-        val validatiorFullname = Validator(etFullname.toString())
-            .nonEmpty()
-            .noNumbers()
-            .noSpecialCharacters()
-            .addErrorCallback {
+        val validatiorFullname = Validator(etFullname.toString()).apply {
+            nonEmpty()
+            noNumbers()
+            noSpecialCharacters()
+            addErrorCallback {
                 binding.etFullname.error = "Name is not valid!"
             }
-            .addSuccessCallback {
+            addSuccessCallback {
                 binding.etFullname.error = null
             }
-            .check()
+        }.check()
 
 
-        val validatorpassword = Validator(etPassword.toString())
-            .nonEmpty()
-            .minLength(8)
-            .atleastOneNumber()
-            .addErrorCallback {
+        val validatorpassword = Validator(etPassword.toString()).apply {
+            nonEmpty()
+            minLength(8)
+            atleastOneNumber()
+            addErrorCallback {
                 binding.etPassword.error = "Password is not valid!"
             }
-            .addSuccessCallback {
+            addSuccessCallback {
                 binding.etPassword.error = null
             }
-            .check()
+        }.check()
 
         return validatiorEmail && validatiorFullname && validatorpassword
 
