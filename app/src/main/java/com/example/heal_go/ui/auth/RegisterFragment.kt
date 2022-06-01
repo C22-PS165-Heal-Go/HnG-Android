@@ -1,7 +1,6 @@
 package com.example.heal_go.ui.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +14,7 @@ import com.example.heal_go.databinding.FragmentRegisterBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
 import com.example.heal_go.util.Status
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.wajahatkarim3.easyvalidation.core.Validator
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RegisterFragment : Fragment() {
 
@@ -48,7 +43,11 @@ class RegisterFragment : Fragment() {
         with(binding) {
             registerBtn.setOnClickListener {
                 if (validation()) {
-                    authViewModel.register(etFullname.text.toString(), etEmail.text.toString(), etPassword.text.toString())
+                    authViewModel.register(
+                        etFullname.text.toString(),
+                        etEmail.text.toString(),
+                        etPassword.text.toString()
+                    )
                 } else {
                     Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
                 }
@@ -63,7 +62,11 @@ class RegisterFragment : Fragment() {
                     is Status.Loading -> {}
                     is Status.Success -> {
                         if (result.data?.code != null) {
-                            Toast.makeText(activity, "Email already registered!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                "Email already registered!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             if (result.data?.success == true) {
                                 Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
@@ -97,10 +100,9 @@ class RegisterFragment : Fragment() {
         }.check()
 
 
-        val validatiorFullname = Validator(etFullname.toString()).apply {
+       val validatiorFullname = Validator(etFullname.toString()).apply {
             nonEmpty()
             noNumbers()
-            noSpecialCharacters()
             addErrorCallback {
                 binding.etFullname.error = "Name is not valid!"
             }
