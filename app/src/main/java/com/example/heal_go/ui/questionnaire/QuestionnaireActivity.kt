@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
+import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
@@ -24,7 +25,7 @@ class QuestionnaireActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionnaireBinding
 
-    private val questionnaireViewModel by viewModels<QuestionnaireViewModel>()
+    private val questionnaireViewModel by viewModels<QuestionnaireViewModel>{ ViewModelFactory(applicationContext) }
 
     lateinit var dialogBuilder: AlertDialog.Builder
 

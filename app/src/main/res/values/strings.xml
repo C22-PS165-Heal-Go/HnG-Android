@@ -38,6 +38,7 @@
     <string name="location_in_card">This place is in Daerah Istimewa Yogyakarta</string>
     <string name="image_recommendation">Image Recommendation</string>
     <string name="category_icon">category_icon</string>
+
     <string name="questionnaire">Questionnaire</string>
     <string name="questionnaire_option_budget_1"><![CDATA[< 500rb]]></string>
     <string name="questionnaire_option_budget_2">500rb - 3jt</string>
@@ -86,4 +87,19 @@
     <string name="btn_next">Next</string>
     <string name="btn_finish">Finish</string>
     <string name="questionnaire_question_counter">Question 1 / 8</string>
+
+    <string name="tutorial_dialog_header">Tutorial</string>
+    <string name="helper_icon">Helper icon</string>
+    <string name="tutorial_heading_one">Choose a Destination</string>
+    <string name="tutorial_content_one">If you interested at the destination that present on your screen you can double tap the card.</string>
+    <string name="tutorial_heading_two">Destination not Interested</string>
+    <string name="tutorial_content_two">If you not interested like the destination that present on you screen you can just swipe the card to the left or right.</string>
+    <string name="tutorial_heading_three">Regret on your choices</string>
+    <string name="tutorial_content_three">You can reconsider your destination choices again by tapping on the rewind button.</string>
+    <string name="tutorial_heading_four">Destination Detail</string>
+    <string name="tutorial_content_four">You can see the destination detail by press and hold on the card.</string>
+    <string name="tutorial_button">I Understand</string>
+    <string name="drag_icon">Drag icon</string>
+    <string name="discover_header">Let\'s Go</string>
+
 </resources>
