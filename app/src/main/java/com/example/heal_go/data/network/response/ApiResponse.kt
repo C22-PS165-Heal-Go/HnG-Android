@@ -15,15 +15,21 @@ data class LoginResponse(
     @field:SerializedName("message")
     var message : String? = null,
 
-    @field:SerializedName("token")
-    var token: String? = null,
-
-    @field:SerializedName("user")
-    var user: UserEntity? = null,
+    @field:SerializedName("data")
+    var data: UserData? = null,
 
     var login_date: String,
 
     var state: Boolean
+) : Parcelable
+
+@Parcelize
+data class UserData (
+    @field:SerializedName("user")
+    var user: UserEntity,
+
+    @field:SerializedName("token")
+    var token: String
 ) : Parcelable
 
 @Parcelize
