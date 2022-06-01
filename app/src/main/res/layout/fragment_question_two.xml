@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="🎉 Age of participant ?"
+        android:text="@string/questionnaire_question_2"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Children (0-13)"
+            android:text="@string/questionnaire_option_age_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -43,7 +43,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Adolscent (14-20)"
+            android:text="@string/questionnaire_option_age_2"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -52,7 +52,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Adult (21-45)"
+            android:text="@string/questionnaire_option_age_3"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -60,7 +60,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Middle Age (46-64)"
+            android:text="@string/questionnaire_option_age_4"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -68,7 +68,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Senior Adult (> 64)"
+            android:text="@string/questionnaire_option_age_5"
             android:textColor="@color/questionnaire_text_selector" />
 
     </LinearLayout>

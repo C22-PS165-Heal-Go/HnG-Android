@@ -38,6 +38,56 @@
     <string name="location_in_card">This place is in Daerah Istimewa Yogyakarta</string>
     <string name="image_recommendation">Image Recommendation</string>
     <string name="category_icon">category_icon</string>
+
+    <string name="questionnaire">Questionnaire</string>
+    <string name="questionnaire_option_budget_1"><![CDATA[< 500rb]]></string>
+    <string name="questionnaire_option_budget_2">500rb - 3jt</string>
+    <string name="questionnaire_option_budget_3">4jt - 7.5jt</string>
+    <string name="questionnaire_option_budget_4"><![CDATA[> 7.5jt]]></string>
+    <string name="questionnaire_option_gender_1">Female</string>
+    <string name="questionnaire_option_gender_2">Male</string>
+    <string name="questionnaire_option_age_1">Children (0-13)</string>
+    <string name="questionnaire_option_age_2">Adolscent (14-20)</string>
+    <string name="questionnaire_option_age_3">Adult (21-45)</string>
+    <string name="questionnaire_option_age_4">Middle Age (46-64)</string>
+    <string name="questionnaire_option_age_5"><![CDATA[Senior Adult (> 64)]]></string>
+    <string name="questionnaire_option_activity_1">Visit museum/zoo/historical place</string>
+    <string name="questionnaire_option_activity_2">Go on Adventure tour</string>
+    <string name="questionnaire_option_activity_3">See the sights</string>
+    <string name="questionnaire_option_activity_4">Take picture or selfie</string>
+    <string name="questionnaire_option_activity_5">Going to festival/amusement park</string>
+    <string name="questionnaire_option_activity_6">Photography</string>
+    <string name="questionnaire_option_activity_7">Leisurely walk</string>
+    <string name="questionnaire_option_activity_8">Shopping</string>
+    <string name="questionnaire_option_month_1">March - May</string>
+    <string name="questionnaire_option_month_2">June - August</string>
+    <string name="questionnaire_option_month_3">September - November</string>
+    <string name="questionnaire_option_month_4">Desember - February</string>
+    <string name="questionnaire_option_companion_1">Travels Alone</string>
+    <string name="questionnaire_option_companion_2">A Couple</string>
+    <string name="questionnaire_option_companion_3">Family With Children</string>
+    <string name="questionnaire_option_companion_4">Family Without Children</string>
+    <string name="questionnaire_option_companion_5">Group Of Friends</string>
+    <string name="questionnaire_option_sport_1">No Sports</string>
+    <string name="questionnaire_option_sport_2">Traditional sports (Swimming, Hiking, Golf)</string>
+    <string name="questionnaire_option_stay_time_1">Less than a day</string>
+    <string name="questionnaire_option_stay_time_2">1-3 Days</string>
+    <string name="questionnaire_option_stay_time_3">1 week</string>
+    <string name="questionnaire_option_stay_time_4">2 weeks</string>
+    <string name="questionnaire_option_stay_time_5">More than 3 weeks</string>
+    <string name="questionnaire_question_7">♀️♂️ Which of the following most accurately describe you ?</string>
+    <string name="questionnaire_question_2">👪 what is the age gap between the participants ?</string>
+    <string name="questionnaire_question_3">📸 What kind of activity would you like to do ?</string>
+    <string name="questionnaire_question_6">🗓️ When are you planning to go ?</string>
+    <string name="questionnaire_question_1">🔥 If you want to go get some healing done, who do you want to do it with ?</string>
+    <string name="questionnaire_question_4">🏊 Are you going to do sports too during your healing ?</string>
+    <string name="questionnaire_question_5">⏱️ How much time do you want to spend during your healing ?</string>
+    <string name="questionnaire_question_8">💰 How much budget can you allocate ?</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_finish">Finish</string>
+    <string name="questionnaire_question_counter">Question 1 / 8</string>
+
     <string name="tutorial_dialog_header">Tutorial</string>
     <string name="helper_icon">Helper icon</string>
     <string name="tutorial_heading_one">Choose a Destination</string>
@@ -51,4 +101,5 @@
     <string name="tutorial_button">I Understand</string>
     <string name="drag_icon">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
+
 </resources>

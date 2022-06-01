@@ -12,7 +12,6 @@ import android.widget.ImageButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
@@ -49,7 +48,9 @@ class QuestionnaireActivity : AppCompatActivity() {
             QuestionThree(),
             QuestionFour(),
             QuestionFive(),
-            QuestionSix()
+            QuestionSix(),
+            QuestionSeven(),
+            QuestionEight()
         )
 
         val adapter = OnboardingPagerAdapter(
@@ -102,9 +103,14 @@ class QuestionnaireActivity : AppCompatActivity() {
                     binding.nextBtn.isEnabled = it.question5 != null
                 }
                 5 -> {
-                    binding.finishBtn.isEnabled = it.question6 != null
+                    binding.nextBtn.isEnabled = it.question6 != null
                 }
-
+                6 -> {
+                    binding.nextBtn.isEnabled = it.question7 != null
+                }
+                7 -> {
+                    binding.finishBtn.isEnabled = it.question8 != null
+                }
             }
         }
     }
@@ -116,7 +122,7 @@ class QuestionnaireActivity : AppCompatActivity() {
                 binding.finishBtn.visibility = View.GONE
                 binding.nextBtn.visibility = View.VISIBLE
             }
-            5 -> {
+            7 -> {
                 binding.backBtn.visibility = View.VISIBLE
                 binding.finishBtn.visibility = View.VISIBLE
                 binding.nextBtn.visibility = View.GONE
@@ -138,7 +144,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             } else {
                 progressBar.progress = progressBar.progress - 1
             }
-            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 6"
+            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 8"
         }
     }
 
@@ -203,10 +209,7 @@ class QuestionnaireActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        supportActionBar?.elevation = 0F
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Questionnaire"
-        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
     }
