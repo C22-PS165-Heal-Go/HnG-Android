@@ -50,4 +50,5 @@
     <string name="tutorial_content_four">You can see the destination detail by press and hold on the card.</string>
     <string name="tutorial_button">I Understand</string>
     <string name="drag_icon">Drag icon</string>
+    <string name="discover_header">Let\'s Go</string>
 </resources>

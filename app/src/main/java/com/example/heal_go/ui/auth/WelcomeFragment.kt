@@ -1,5 +1,6 @@
 package com.example.heal_go.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.heal_go.R
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentWelcomeBinding
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 
@@ -33,9 +35,15 @@ class WelcomeFragment : Fragment() {
     ): View {
 
 
-        onboardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) {
-            if (it) {
-                navController.navigate(R.id.welcomeFragment_to_loginFragment)
+        onboardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
+            if (session.first_time_key) {
+                if (session.sessions.state) {
+                    val intent = Intent(activity, DashboardActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    navController.navigate(R.id.welcomeFragment_to_loginFragment)
+                }
             } else {
                 navController.navigate(R.id.welcomeFragment_to_onboardingPagerFragment2)
             }
