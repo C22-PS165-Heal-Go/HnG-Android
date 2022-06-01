@@ -97,11 +97,10 @@ class RegisterFragment : Fragment() {
         }.check()
 
 
-        val validatiorFullname = Validator(etFullname.toString()).apply {
-            nonEmpty()
-            noNumbers()
-            noSpecialCharacters()
-            addErrorCallback {
+        val validatiorFullname = Validator(etFullname.toString())
+            .nonEmpty()
+            .noNumbers()
+            .addErrorCallback {
                 binding.etFullname.error = "Name is not valid!"
             }
             addSuccessCallback {
