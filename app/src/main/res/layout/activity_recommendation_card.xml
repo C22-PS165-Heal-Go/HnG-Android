@@ -45,7 +45,7 @@
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="1127-success.json"
+        app:lottie_rawRes="@raw/check"
         app:lottie_loop="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
