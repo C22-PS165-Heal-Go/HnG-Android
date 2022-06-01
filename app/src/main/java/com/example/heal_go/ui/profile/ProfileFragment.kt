@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.heal_go.R
+import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 
 class ProfileFragment : Fragment() {
 

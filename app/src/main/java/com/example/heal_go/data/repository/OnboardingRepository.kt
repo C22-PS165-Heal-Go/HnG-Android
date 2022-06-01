@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.heal_go.data.network.response.LoginResponse
+import com.example.heal_go.data.network.response.UserData
 import com.example.heal_go.data.network.response.UserEntity
 import com.example.heal_go.data.network.response.UserSession
 import kotlinx.coroutines.flow.Flow
@@ -28,9 +29,9 @@ class OnboardingRepository(private val context: Context) {
 
     suspend fun createLoginSession(session: UserSession) {
         context.dataStore.edit { preference ->
-            preference[USER_NAME] = session.sessions.user?.name ?: ""
-            preference[USER_EMAIL] = session.sessions.user?.email ?: ""
-            preference[TOKEN] = session.sessions.token ?: ""
+            preference[USER_NAME] = session.sessions.data?.user?.name ?: ""
+            preference[USER_EMAIL] = session.sessions.data?.user?.email ?: ""
+            preference[TOKEN] = session.sessions.data?.token ?: ""
             preference[LOGIN_DATE] = session.sessions.login_date
             preference[STATE] = session.sessions.state
         }
@@ -59,15 +60,14 @@ class OnboardingRepository(private val context: Context) {
             val isFinised = preference[KEY] ?: false
             val name = preference[USER_NAME] ?: ""
             val email = preference[USER_EMAIL] ?: ""
-            val token = preference[TOKEN]
+            val token = preference[TOKEN] ?: ""
             val login_date = preference[LOGIN_DATE] ?: ""
             val state = preference[STATE] ?: false
 
             UserSession(
                 isFinised,
                 LoginResponse(
-                    token = token,
-                    user = UserEntity(name, email),
+                    data = UserData(UserEntity(name, email), token = token),
                     login_date = login_date,
                     state = state
                 )

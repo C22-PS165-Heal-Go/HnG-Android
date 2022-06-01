@@ -89,7 +89,7 @@ class LoginFragment : Fragment() {
                         }
                         else {
                             if (result.data?.success == true) {
-                                Toast.makeText(activity, "Data received", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT).show()
 
                                 onBoardingViewModel.createLoginSession(UserSession(true, result.data))
                                 val intent = Intent(activity, DashboardActivity::class.java)
