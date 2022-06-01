@@ -68,7 +68,6 @@ class RegisterFragment : Fragment() {
         val validatiorFullname = Validator(etFullname.toString())
             .nonEmpty()
             .noNumbers()
-            .noSpecialCharacters()
             .addErrorCallback {
                 binding.etFullname.error = "Name is not valid!"
             }
