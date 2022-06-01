@@ -100,7 +100,7 @@ class RegisterFragment : Fragment() {
         }.check()
 
 
-        val validatiorFullname = Validator(etFullname.toString()).apply {
+       val validatiorFullname = Validator(etFullname.toString()).apply {
             nonEmpty()
             noNumbers()
             addErrorCallback {
