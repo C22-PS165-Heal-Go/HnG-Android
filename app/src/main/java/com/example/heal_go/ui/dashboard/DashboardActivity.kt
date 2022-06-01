@@ -48,8 +48,8 @@ class DashboardActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+//        Check if user is logged in or not
         onBoardingViewModel.getOnboardingDatastore().observe(this) {
-            Log.d("NAMA", it.sessions.user?.name!!)
             if (!it.sessions.state) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
