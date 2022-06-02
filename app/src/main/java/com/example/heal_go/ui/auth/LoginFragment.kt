@@ -45,7 +45,7 @@ class LoginFragment : Fragment() {
         findNavController()
     }
 
-    lateinit var dialogBuilder: AlertDialog.Builder
+    lateinit var submitDialogBuilder: AlertDialog.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,12 +94,9 @@ class LoginFragment : Fragment() {
                     is Status.Loading -> {}
                     is Status.Success -> {
                         if (result.data?.code != null) {
-//                            Toast.makeText(activity, result.data?.message, Toast.LENGTH_SHORT).show()
                             showSubmitDialog(false, null)
                         } else {
                             if (result.data?.success == true) {
-//                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT).show()
-
                                 onBoardingViewModel.createLoginSession(
                                     UserSession(
                                         true,
@@ -107,15 +104,10 @@ class LoginFragment : Fragment() {
                                     )
                                 )
                                 showSubmitDialog(true, null)
-
-                                /*val intent = Intent(activity, DashboardActivity::class.java)
-                                startActivity(intent)
-                                requireActivity().finish()*/
                             }
                         }
                     }
                     is Status.Error -> {
-//                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
                         showSubmitDialog(false, result.error)
                     }
                 }
@@ -128,12 +120,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun showSubmitDialog(success: Boolean, message: String?) {
-        dialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
         submitDialogBuilder(success, message)
     }
 
     private fun submitDialogBuilder(success: Boolean, message: String?) {
-        val dialog = dialogBuilder.create()
+        val dialog = submitDialogBuilder.create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
@@ -144,22 +136,19 @@ class LoginFragment : Fragment() {
         val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
 
         if (success) {
-            animationView.setAnimation(R.raw.check)
+            val intent = Intent(activity, DashboardActivity::class.java)
+            animationView.setAnimation(R.raw.success)
             title.text = "Good Job!"
             subtitle.text = "Login Successfully!"
 
             closeBtn.setOnClickListener {
                 dialog.dismiss()
-                val intent = Intent(activity, DashboardActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             }
 
-            okayBtn.background =
-                requireActivity().getDrawable(R.drawable.rounded_success_corner_button)
             okayBtn.setOnClickListener {
                 dialog.dismiss()
-                val intent = Intent(activity, DashboardActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             }
@@ -177,8 +166,6 @@ class LoginFragment : Fragment() {
                 dialog.dismiss()
             }
 
-            okayBtn.background =
-                requireActivity().getDrawable(R.drawable.rounded_danger_corner_button)
             okayBtn.setOnClickListener {
                 dialog.dismiss()
             }
@@ -194,6 +181,8 @@ class LoginFragment : Fragment() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+
+        submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
     }
 
     override fun onDestroy() {

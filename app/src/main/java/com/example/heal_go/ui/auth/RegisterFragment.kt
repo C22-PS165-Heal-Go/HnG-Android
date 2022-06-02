@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
         findNavController()
     }
 
-    lateinit var dialogBuilder: AlertDialog.Builder
+    lateinit var submitDialogBuilder: AlertDialog.Builder
 
     private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
@@ -42,6 +42,7 @@ class RegisterFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
 
         return binding.root
     }
@@ -71,22 +72,14 @@ class RegisterFragment : Fragment() {
                     is Status.Loading -> {}
                     is Status.Success -> {
                         if (result.data?.code != null) {
-                            /*Toast.makeText(
-                                activity,
-                                "Email already registered!",
-                                Toast.LENGTH_SHORT
-                            ).show()*/
                             showSubmitDialog(false, null)
                         } else {
                             if (result.data?.success == true) {
-//                                Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
-//                                navController.navigate(R.id.registerFragment_to_loginFragment)
                                 showSubmitDialog(true, null)
                             }
                         }
                     }
                     is Status.Error -> {
-//                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
                         showSubmitDialog(false, result.error)
                     }
                 }
@@ -95,12 +88,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showSubmitDialog(success: Boolean, message: String?) {
-        dialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
         submitDialogBuilder(success, message)
     }
 
     private fun submitDialogBuilder(success: Boolean, message: String?) {
-        val dialog = dialogBuilder.create()
+        val dialog = submitDialogBuilder.create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
@@ -111,7 +104,7 @@ class RegisterFragment : Fragment() {
         val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
 
         if (success) {
-            animationView.setAnimation(R.raw.check)
+            animationView.setAnimation(R.raw.success)
             title.text = "Good Job!"
             subtitle.text = "Register Successfully!"
 
@@ -120,8 +113,6 @@ class RegisterFragment : Fragment() {
                 navController.navigate(R.id.registerFragment_to_loginFragment)
             }
 
-            okayBtn.background =
-                requireActivity().getDrawable(R.drawable.rounded_success_corner_button)
             okayBtn.setOnClickListener {
                 dialog.dismiss()
                 navController.navigate(R.id.registerFragment_to_loginFragment)
@@ -140,8 +131,6 @@ class RegisterFragment : Fragment() {
                 dialog.dismiss()
             }
 
-            okayBtn.background =
-                requireActivity().getDrawable(R.drawable.rounded_danger_corner_button)
             okayBtn.setOnClickListener {
                 dialog.dismiss()
             }
