@@ -3,6 +3,7 @@ package com.example.heal_go.ui.auth
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -19,6 +20,7 @@ import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
 import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
+import com.example.heal_go.util.LoadingDialog
 import com.example.heal_go.util.Status
 import com.wajahatkarim3.easyvalidation.core.Validator
 
@@ -27,8 +29,9 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private lateinit var loadingDialog: LoadingDialog
 
-    private val authViewModel by viewModels<AuthViewModel>{ ViewModelFactory(requireContext()) }
+    private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
     private val onBoardingViewModel by viewModels<OnboardingViewModel> {
         OnboardingViewModelFactory(OnboardingRepository(requireContext()))
@@ -51,7 +54,6 @@ class LoginFragment : Fragment() {
             activity?.finish()
         }
 
-
         return binding.root
     }
 
@@ -73,24 +75,35 @@ class LoginFragment : Fragment() {
                 atleastOneNumber()
             }.check()
 
+
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
             } else {
-                Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             authViewModel.login.observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is Status.Loading -> {}
+                    is Status.Loading -> {
+                        showLoading(true)
+                    }
                     is Status.Success -> {
+                        showLoading(false)
                         if (result.data?.code != null) {
-                            Toast.makeText(activity, result.data?.message, Toast.LENGTH_SHORT).show()
-                        }
-                        else {
+                            Log.d("ERROR", "error...")
+                            Toast.makeText(activity, result.data.message, Toast.LENGTH_SHORT).show()
+                        } else {
                             if (result.data?.success == true) {
-                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT)
+                                    .show()
 
-                                onBoardingViewModel.createLoginSession(UserSession(true, result.data))
+                                onBoardingViewModel.createLoginSession(
+                                    UserSession(
+                                        true,
+                                        result.data
+                                    )
+                                )
                                 val intent = Intent(activity, DashboardActivity::class.java)
                                 startActivity(intent)
                                 requireActivity().finish()
@@ -98,6 +111,7 @@ class LoginFragment : Fragment() {
                         }
                     }
                     is Status.Error -> {
+                        showLoading(false)
                         Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -110,6 +124,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupView() {
+        loadingDialog = LoadingDialog(myFragment = requireActivity())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -117,6 +132,14 @@ class LoginFragment : Fragment() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            loadingDialog.startLoadingDialog()
+        } else {
+            loadingDialog.dismissDialog()
         }
     }
 
