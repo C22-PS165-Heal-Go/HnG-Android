@@ -24,14 +24,11 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/ic_star.xml" value="0.244" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/image_button_background.xml" value="0.258" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/image_error_state.xml" value="0.231" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/onboarding_circle_active.xml" value="0.34" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/profile_pict_loading.xml" value="0.231" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2185" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_corner_layout.xml" value="0.351" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_corner_profile_button.xml" value="0.351" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/rounded_dialog.xml" value="0.351" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/drawable/tutorial_handicon_background.xml" value="0.258" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/font/poppins_bold.xml" value="0.12864583333333332" />
@@ -39,14 +36,12 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_questionnaire.xml" value="0.2971014492753623" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/activity_recommendation_card.xml" value="0.25" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/card_item.xml" value="0.3541666666666667" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/destination_card_layout.xml" value="0.33" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_discover.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_first_screen.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_onboarding_pager.xml" value="0.3541666666666667" />
-
+        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_eight.xml" value="0.34010416666666665" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_five.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_four.xml" value="0.3541666666666667" />
@@ -55,43 +50,34 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_six.xml" value="0.33" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_three.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_question_two.xml" value="0.33" />
-
-        <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_recommendation_card.xml" value="0.1956521739130435" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_register.xml" value="0.2871376811594203" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_second_screen.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_third_screen.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
-
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/questionnaire_custom_dialog.xml" value="0.1956521739130435" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/questionnaire_custom_warning_dialog.xml" value="0.25" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/recommendation_detail_dialog.xml" value="0.3541666666666667" />
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/recommendation_tutorial_dialog.xml" value="0.33" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/ic_not_interested.xml" value="0.2265" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/image_button_background.xml" value="0.2265" />
-        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/card_item.xml" value="0.22826086956521738" />
-
-        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/ic_not_interested.xml" value="0.2265" />
-        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/image_button_background.xml" value="0.2265" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2465" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_danger_corner_button.xml" value="0.2465" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_success_corner_button.xml" value="0.2465" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/activity_questionnaire.xml" value="0.22780797101449277" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/authentication_submit_dialog.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/card_item.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_discover.xml" value="0.22780797101449277" />
-
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_first_screen.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_item_detail_list_dialog.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_item_detail_list_dialog_item.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_login.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_onboarding_pager.xml" value="0.22826086956521738" />
-
-        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_recommendation_card.xml" value="0.22826086956521738" />
-
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_question_six.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_question_two.xml" value="0.22780797101449277" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_recommendation_card.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/questionnaire_custom_dialog.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/questionnaire_custom_warning_dialog.xml" value="0.2644927536231884" />
-
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/recommendation_detail_dialog.xml" value="0.22826086956521738" />
       </map>
     </option>

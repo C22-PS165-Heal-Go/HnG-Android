@@ -1,15 +1,22 @@
 package com.example.heal_go.ui.auth
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.UserSession
 import com.example.heal_go.data.repository.OnboardingRepository
@@ -28,7 +35,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val authViewModel by viewModels<AuthViewModel>{ ViewModelFactory(requireContext()) }
+    private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
     private val onBoardingViewModel by viewModels<OnboardingViewModel> {
         OnboardingViewModelFactory(OnboardingRepository(requireContext()))
@@ -37,6 +44,8 @@ class LoginFragment : Fragment() {
     private val navController: NavController by lazy {
         findNavController()
     }
+
+    lateinit var dialogBuilder: AlertDialog.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +85,8 @@ class LoginFragment : Fragment() {
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
             } else {
-                Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             authViewModel.login.observe(viewLifecycleOwner) { result ->
@@ -84,21 +94,29 @@ class LoginFragment : Fragment() {
                     is Status.Loading -> {}
                     is Status.Success -> {
                         if (result.data?.code != null) {
-                            Toast.makeText(activity, result.data?.message, Toast.LENGTH_SHORT).show()
-                        }
-                        else {
+//                            Toast.makeText(activity, result.data?.message, Toast.LENGTH_SHORT).show()
+                            showSubmitDialog(false, null)
+                        } else {
                             if (result.data?.success == true) {
-                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT).show()
+//                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT).show()
 
-                                onBoardingViewModel.createLoginSession(UserSession(true, result.data))
-                                val intent = Intent(activity, DashboardActivity::class.java)
+                                onBoardingViewModel.createLoginSession(
+                                    UserSession(
+                                        true,
+                                        result.data
+                                    )
+                                )
+                                showSubmitDialog(true, null)
+
+                                /*val intent = Intent(activity, DashboardActivity::class.java)
                                 startActivity(intent)
-                                requireActivity().finish()
+                                requireActivity().finish()*/
                             }
                         }
                     }
                     is Status.Error -> {
-                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
+                        showSubmitDialog(false, result.error)
                     }
                 }
             }
@@ -106,6 +124,64 @@ class LoginFragment : Fragment() {
 
         binding.registerBtn.setOnClickListener {
             navController.navigate(R.id.loginFragment_to_registerFragment)
+        }
+    }
+
+    private fun showSubmitDialog(success: Boolean, message: String?) {
+        dialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder(success, message)
+    }
+
+    private fun submitDialogBuilder(success: Boolean, message: String?) {
+        val dialog = dialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
+        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+        val title = dialog.findViewById<TextView>(R.id.textTitle)
+        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle)
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn)
+        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
+
+        if (success) {
+            animationView.setAnimation(R.raw.check)
+            title.text = "Good Job!"
+            subtitle.text = "Login Successfully!"
+
+            closeBtn.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(activity, DashboardActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+
+            okayBtn.background =
+                requireActivity().getDrawable(R.drawable.rounded_success_corner_button)
+            okayBtn.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(activity, DashboardActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        } else {
+            animationView.setAnimation(R.raw.incorrect)
+            title.text = "Oops!"
+
+            if (message != null) {
+                subtitle.text = "Sorry, your login is failed. $message!"
+            } else {
+                subtitle.text = "Sorry, your login is failed. Check your email or password again!"
+            }
+
+            closeBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            okayBtn.background =
+                requireActivity().getDrawable(R.drawable.rounded_danger_corner_button)
+            okayBtn.setOnClickListener {
+                dialog.dismiss()
+            }
         }
     }
 
