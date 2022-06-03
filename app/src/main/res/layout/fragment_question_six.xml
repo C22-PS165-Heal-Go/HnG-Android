@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="🎉 When are you planning to go ?"
+        android:text="@string/questionnaire_question_6"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="March - May"
+            android:text="@string/questionnaire_option_month_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -42,7 +42,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="June - August"
+            android:text="@string/questionnaire_option_month_2"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -50,7 +50,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="September - November"
+            android:text="@string/questionnaire_option_month_3"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -58,7 +58,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Desember - February"
+            android:text="@string/questionnaire_option_month_4"
             android:textColor="@color/questionnaire_text_selector" />
 
 

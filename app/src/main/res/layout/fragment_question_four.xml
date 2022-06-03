@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="🎉 What sport activity would you like to do ?"
+        android:text="@string/questionnaire_question_4"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,7 +35,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="No Sports"
+            android:text="@string/questionnaire_option_sport_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <RadioButton
@@ -43,7 +43,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Traditional sports (Swimming, Hiking, Golf)"
+            android:text="@string/questionnaire_option_sport_2"
             android:textColor="@color/questionnaire_text_selector" />
 
 

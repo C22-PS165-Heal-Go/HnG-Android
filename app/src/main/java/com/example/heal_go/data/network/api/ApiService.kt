@@ -1,26 +1,36 @@
 package com.example.heal_go.data.network.api
 
 import com.example.heal_go.data.network.response.LoginResponse
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.POST
+import com.example.heal_go.data.network.response.RecommendationResponse
+import com.example.heal_go.data.network.response.RegisterResponse
+import okhttp3.RequestBody
+import retrofit2.Response
+import retrofit2.http.*
 
 interface ApiService {
 
     /*code below will be updated after server ready*/
-    @POST("/login")
+    @FormUrlEncoded
+    @POST("auth/login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
     ) : LoginResponse
 
-    @POST("/register")
+    @FormUrlEncoded
+    @POST("auth/register")
     suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ) : LoginResponse
+    ) : RegisterResponse
 
-    @GET("/destination")
+    @GET("destination")
     suspend fun getAllDestinations() : LoginResponse
+
+    @POST("recommendation")
+    suspend fun recommendation(
+        @Header("Authorization") token: String,
+        @Body requestBody: RequestBody
+    ) : RecommendationResponse
 }

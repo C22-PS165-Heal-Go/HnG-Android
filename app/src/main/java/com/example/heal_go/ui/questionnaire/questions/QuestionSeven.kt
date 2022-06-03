@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.heal_go.databinding.FragmentQuestionFiveBinding
+import com.example.heal_go.R
+import com.example.heal_go.databinding.FragmentQuestionSevenBinding
+import com.example.heal_go.databinding.FragmentQuestionSixBinding
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 
-class QuestionFive : Fragment() {
+class QuestionSeven : Fragment() {
 
-    private var _binding: FragmentQuestionFiveBinding? = null
+    private var _binding: FragmentQuestionSevenBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var questionnaireViewModel: QuestionnaireViewModel
@@ -19,8 +21,8 @@ class QuestionFive : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentQuestionFiveBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentQuestionSevenBinding.inflate(inflater, container, false)
 
         questionnaireViewModel =
             ViewModelProvider(requireActivity())[QuestionnaireViewModel::class.java]
@@ -37,19 +39,10 @@ class QuestionFive : Fragment() {
         binding.apply {
             when (radioGroup.checkedRadioButtonId) {
                 item1.id -> {
-                    questionnaireViewModel.saveChoice(questionFive = 0)
+                    questionnaireViewModel.saveChoice(questionSeven = 0)
                 }
                 item2.id -> {
-                    questionnaireViewModel.saveChoice(questionFive = 1)
-                }
-                item3.id -> {
-                    questionnaireViewModel.saveChoice(questionFive = 2)
-                }
-                item4.id -> {
-                    questionnaireViewModel.saveChoice(questionFive = 3)
-                }
-                item5.id -> {
-                    questionnaireViewModel.saveChoice(questionFive = 4)
+                    questionnaireViewModel.saveChoice(questionSeven = 1)
                 }
             }
         }
@@ -59,4 +52,5 @@ class QuestionFive : Fragment() {
         super.onResume()
         binding.root.requestLayout()
     }
+
 }

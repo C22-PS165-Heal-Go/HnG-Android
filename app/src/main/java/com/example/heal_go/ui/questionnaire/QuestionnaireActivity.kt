@@ -9,24 +9,35 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
+import com.example.heal_go.data.network.response.UserSession
+import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
 import com.example.heal_go.ui.ViewModelFactory
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 import com.example.heal_go.ui.recommendation.RecommendationCardActivity
+import com.example.heal_go.util.Status
 
 class QuestionnaireActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionnaireBinding
 
     private val questionnaireViewModel by viewModels<QuestionnaireViewModel>{ ViewModelFactory(applicationContext) }
+
+    private val onBoardingViewModel by viewModels<OnboardingViewModel> {
+        OnboardingViewModelFactory(OnboardingRepository(this))
+    }
 
     lateinit var dialogBuilder: AlertDialog.Builder
 
@@ -49,7 +60,9 @@ class QuestionnaireActivity : AppCompatActivity() {
             QuestionThree(),
             QuestionFour(),
             QuestionFive(),
-            QuestionSix()
+            QuestionSix(),
+            QuestionSeven(),
+            QuestionEight()
         )
 
         val adapter = OnboardingPagerAdapter(
@@ -78,9 +91,27 @@ class QuestionnaireActivity : AppCompatActivity() {
             }
         }
 
-        questionnaireViewModel.quesionnaireAnswer.observe(this) {
-            Log.d("REQBODY", it.toString())
+
+        questionnaireViewModel.response.observe(this) { result ->
+            when(result) {
+                is Status.Loading -> {}
+                is Status.Success -> {
+                    if (result.data?.code != null) {
+                        Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (result.data?.success == true) {
+                            val intent = Intent(this, RecommendationCardActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
+                is Status.Error -> {
+                    Log.d("RECOMMENDATION", result.error)
+                }
+            }
         }
+
     }
 
     private fun setEnabledButton(position: Int) {
@@ -102,9 +133,14 @@ class QuestionnaireActivity : AppCompatActivity() {
                     binding.nextBtn.isEnabled = it.question5 != null
                 }
                 5 -> {
-                    binding.finishBtn.isEnabled = it.question6 != null
+                    binding.nextBtn.isEnabled = it.question6 != null
                 }
-
+                6 -> {
+                    binding.nextBtn.isEnabled = it.question7 != null
+                }
+                7 -> {
+                    binding.finishBtn.isEnabled = it.question8 != null
+                }
             }
         }
     }
@@ -116,7 +152,7 @@ class QuestionnaireActivity : AppCompatActivity() {
                 binding.finishBtn.visibility = View.GONE
                 binding.nextBtn.visibility = View.VISIBLE
             }
-            5 -> {
+            7 -> {
                 binding.backBtn.visibility = View.VISIBLE
                 binding.finishBtn.visibility = View.VISIBLE
                 binding.nextBtn.visibility = View.GONE
@@ -138,7 +174,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             } else {
                 progressBar.progress = progressBar.progress - 1
             }
-            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 6"
+            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 8"
         }
     }
 
@@ -178,10 +214,8 @@ class QuestionnaireActivity : AppCompatActivity() {
 
         btnProceed?.setOnClickListener {
             if (btnProceed.text == "Submit") {
-                val intent = Intent(this, RecommendationCardActivity::class.java)
-                startActivity(intent)
+                sendQuestionnaire()
             }
-            finish()
         }
 
         btnClose?.setOnClickListener {
@@ -191,6 +225,15 @@ class QuestionnaireActivity : AppCompatActivity() {
         btnCancel?.setOnClickListener {
             dialog.dismiss()
         }
+    }
+
+    private fun sendQuestionnaire() {
+
+        onBoardingViewModel.getOnboardingDatastore().observe(this) {
+            it.sessions.data?.token?.let { it1 -> questionnaireViewModel.sendQuestionnaire(it1) }
+        }
+
+
     }
 
     override fun onBackPressed() {
@@ -203,10 +246,7 @@ class QuestionnaireActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        supportActionBar?.elevation = 0F
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Questionnaire"
-        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_500)
+        supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
     }

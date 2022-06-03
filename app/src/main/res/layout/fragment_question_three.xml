@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="🎉 What activity would you like to do ?"
+        android:text="@string/questionnaire_question_3"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Visit museum/zoo/historical place"
+            android:text="@string/questionnaire_option_activity_1"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -43,7 +43,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Go on Adventure tour"
+            android:text="@string/questionnaire_option_activity_2"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -52,7 +52,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="See the sights"
+            android:text="@string/questionnaire_option_activity_3"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -60,7 +60,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Take picture or selfie"
+            android:text="@string/questionnaire_option_activity_4"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -68,7 +68,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Going to festival/amusement park"
+            android:text="@string/questionnaire_option_activity_5"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -76,7 +76,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Photography"
+            android:text="@string/questionnaire_option_activity_6"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -84,7 +84,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Leisurely walk"
+            android:text="@string/questionnaire_option_activity_7"
             android:textColor="@color/questionnaire_text_selector" />
 
         <CheckBox
@@ -92,7 +92,7 @@
             style="@style/QuestionnaireCheckbox"
             android:background="@drawable/questionnaire_background_selector"
             android:buttonTint="@color/questionnaire_text_selector"
-            android:text="Shopping"
+            android:text="@string/questionnaire_option_activity_8"
             android:textColor="@color/questionnaire_text_selector" />
 
     </LinearLayout>
