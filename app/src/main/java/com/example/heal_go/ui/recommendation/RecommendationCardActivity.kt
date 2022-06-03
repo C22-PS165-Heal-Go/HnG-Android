@@ -14,9 +14,13 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.heal_go.data.network.response.DestinationDetail
+import com.example.heal_go.data.network.response.RecommendationDataItem
+import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.databinding.ActivityRecommendationCardBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.dashboard.DashboardActivity
+import com.example.heal_go.ui.questionnaire.QuestionnaireActivity
 import com.example.heal_go.ui.recommendation.adapter.CardAdapter
 import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
 import com.yuyakaido.android.cardstackview.*
@@ -29,6 +33,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityRecommendationCardBinding.inflate(layoutInflater)
     }
+
+    private var destinationData: RecommendationResponse? = null
 
     private val recommendationViewModel by viewModels<RecommendationViewModel> {
         ViewModelFactory(
@@ -195,14 +201,20 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
 //        CARD ONCLICK LISTENER
             listAdapter.setOnItemClickCallBack(object : CardAdapter.OnItemClickCallBack {
                 /*when double click action, current card will be marked as interested*/
-                override fun onItemClicked(data: String) {
+                override fun onItemClicked(data: RecommendationDataItem) {
+                    Toast.makeText(
+                        this@RecommendationCardActivity,
+                        "Interested",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                     swipeCard(true)
                     binding.recycleView.swipe()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
-                override fun onHoldClicked() {
-                    val modal = DetailBottomSheet()
+                override fun onHoldClicked(data: DestinationDetail) {
+                    val modal = DetailBottomSheet(data)
                     modal.show(supportFragmentManager, modal.tag)
                 }
             })
@@ -247,9 +259,10 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 override fun onCardDisappeared(view: View?, position: Int) {}
             })
 
-        val list = ArrayList<String>()
-        for (i in 1..5) {
-            list.add(i.toString())
+        val list = ArrayList<RecommendationDataItem>()
+
+        for (i in destinationData?.data?.indices!!) {
+            destinationData!!.data?.get(i)?.let { list.add(it) }
         }
 
         /*load card as stack from bottom and load that into adapter*/
@@ -273,6 +286,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         }
 
         supportActionBar?.hide()
+        destinationData = intent.getParcelableExtra(QuestionnaireActivity.DESTINATION_DATA)
     }
 
     companion object {

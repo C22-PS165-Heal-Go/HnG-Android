@@ -2,7 +2,10 @@ package com.example.heal_go.data.network.api
 
 import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.LoginResponse
+import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.data.network.response.RegisterResponse
+import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
@@ -27,4 +30,10 @@ interface ApiService {
     suspend fun getAllDestinations(
         @Header("Authorization") auth: String
     ) : DestinationResponse
+    
+    @POST("recommendation")
+    suspend fun recommendation(
+        @Header("Authorization") token: String,
+        @Body requestBody: RequestBody
+    ) : RecommendationResponse
 }

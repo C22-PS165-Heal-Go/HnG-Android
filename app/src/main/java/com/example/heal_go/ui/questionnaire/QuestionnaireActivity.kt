@@ -5,27 +5,52 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
+import com.example.heal_go.data.network.response.UserSession
+import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
 import com.example.heal_go.ui.ViewModelFactory
+import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 import com.example.heal_go.ui.recommendation.RecommendationCardActivity
+import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
+import com.example.heal_go.util.LoadingDialog
+import com.example.heal_go.util.Status
 
 class QuestionnaireActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionnaireBinding
 
     private val questionnaireViewModel by viewModels<QuestionnaireViewModel>{ ViewModelFactory(applicationContext) }
+
+    private val onBoardingViewModel by viewModels<OnboardingViewModel> {
+        OnboardingViewModelFactory(OnboardingRepository(this))
+    }
+
+    private val recommendationViewModel by viewModels<RecommendationViewModel> {
+        ViewModelFactory(
+            this
+        )
+    }
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     lateinit var dialogBuilder: AlertDialog.Builder
 
@@ -79,8 +104,30 @@ class QuestionnaireActivity : AppCompatActivity() {
             }
         }
 
-        questionnaireViewModel.quesionnaireAnswer.observe(this) {
-            Log.d("REQBODY", it.toString())
+
+        questionnaireViewModel.response.observe(this) { result ->
+            when(result) {
+                is Status.Loading -> {
+                    loadingDialog.show()
+                }
+                is Status.Success -> {
+                    loadingDialog.dismiss()
+                    if (result.data?.code != null) {
+                        Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (result.data?.success == true) {
+                            val intent = Intent(this, RecommendationCardActivity::class.java)
+                            intent.putExtra(DESTINATION_DATA, result.data)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
+                is Status.Error -> {
+                    loadingDialog.dismiss()
+                    Log.d("RECOMMENDATION", result.error)
+                }
+            }
         }
     }
 
@@ -184,10 +231,11 @@ class QuestionnaireActivity : AppCompatActivity() {
 
         btnProceed?.setOnClickListener {
             if (btnProceed.text == "Submit") {
-                val intent = Intent(this, RecommendationCardActivity::class.java)
-                startActivity(intent)
+                sendQuestionnaire()
+                dialog.dismiss()
+            }else {
+                finish()
             }
-            finish()
         }
 
         btnClose?.setOnClickListener {
@@ -199,6 +247,15 @@ class QuestionnaireActivity : AppCompatActivity() {
         }
     }
 
+    private fun sendQuestionnaire() {
+
+        onBoardingViewModel.getOnboardingDatastore().observe(this) {
+            it.sessions.data?.token?.let { it1 -> questionnaireViewModel.sendQuestionnaire(it1) }
+        }
+
+
+    }
+
     override fun onBackPressed() {
         if (binding.questionViewpager.currentItem - 1 < 0) {
             showWarningDialog()
@@ -208,9 +265,19 @@ class QuestionnaireActivity : AppCompatActivity() {
         }
     }
 
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(this)
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
+    }
+
     private fun initView() {
         supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
+        buildLoadingDialog()
+    }
+
+    companion object {
+        const val DESTINATION_DATA = "destination_data"
     }
 }

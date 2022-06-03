@@ -8,12 +8,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -28,6 +30,7 @@ import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
 import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
+import com.example.heal_go.util.LoadingDialog
 import com.example.heal_go.util.Status
 import com.wajahatkarim3.easyvalidation.core.Validator
 
@@ -36,6 +39,10 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
@@ -62,7 +69,6 @@ class LoginFragment : Fragment() {
             activity?.finish()
         }
 
-
         return binding.root
     }
 
@@ -84,6 +90,7 @@ class LoginFragment : Fragment() {
                 atleastOneNumber()
             }.check()
 
+
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
             } else {
@@ -93,8 +100,11 @@ class LoginFragment : Fragment() {
 
             authViewModel.login.observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is Status.Loading -> {}
+                    is Status.Loading -> {
+                        loadingDialog.show()
+                    }
                     is Status.Success -> {
+                        loadingDialog.dismiss()
                         if (result.data?.code != null) {
                             showSubmitDialog(false, null)
                         } else {
@@ -110,6 +120,7 @@ class LoginFragment : Fragment() {
                         }
                     }
                     is Status.Error -> {
+                        loadingDialog.dismiss()
                         showSubmitDialog(false, result.error)
                     }
                 }
@@ -174,6 +185,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupView() {
+        buildLoadingDialog()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -184,6 +196,11 @@ class LoginFragment : Fragment() {
         }
 
         submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
+    }
+
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(requireActivity())
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 
     override fun onDestroy() {

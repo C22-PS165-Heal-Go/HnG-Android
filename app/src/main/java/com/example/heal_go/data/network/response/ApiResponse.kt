@@ -71,8 +71,7 @@ data class DestinationResponse(
 
 @Parcelize
 data class DestinationItem(
-
-    @field:SerializedName("image")
+  @field:SerializedName("image")
     val image: String? = null,
 
     @field:SerializedName("name")
@@ -86,9 +85,51 @@ data class DestinationItem(
 ) : Parcelable
 
 @Parcelize
+data class RecommendationResponse(
+    @field:SerializedName("code")
+    var code : Int? = null,
+
+    @field:SerializedName("data")
+    val data: List<RecommendationDataItem?>? = null,
+
+    @field:SerializedName("success")
+    val success: Boolean? = null,
+
+    @field:SerializedName("message")
+    val message: String? = null
+): Parcelable
+
+@Parcelize
+data class RecommendationDataItem(
+    @field:SerializedName("image")
+    val image: String? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("description")
+    val description: String? = null,
+
+    @field:SerializedName("location")
+    val location: String? = null,
+
+    @field:SerializedName("id")
+    val id: String? = null
+): Parcelable
+
+@Parcelize
 data class DateDiff(
     val seconds: Long,
     val minutes: Long,
     val hours: Long,
     val days: Long
 ) : Parcelable
+
+@Parcelize
+data class DestinationDetail(
+    val id: String,
+    val imageUrl: String,
+    val name: String,
+    val location: String,
+    val description: String
+): Parcelable

@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -22,6 +23,7 @@ import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentRegisterBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
+import com.example.heal_go.util.LoadingDialog
 import com.example.heal_go.util.Status
 import com.wajahatkarim3.easyvalidation.core.Validator
 
@@ -29,6 +31,10 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     private val navController: NavController by lazy {
         findNavController()
@@ -46,7 +52,13 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
 
+        setupView()
+
         return binding.root
+    }
+
+    private fun setupView() {
+        buildLoadingDialog()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,16 +75,15 @@ class RegisterFragment : Fragment() {
                 } else {
                     Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            loginBtn.setOnClickListener {
-                navController.navigate(R.id.registerFragment_to_loginFragment)
-            }
 
             authViewModel.register.observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is Status.Loading -> {}
+                    is Status.Loading -> {
+                        loadingDialog.show()
+                    }
                     is Status.Success -> {
+                        loadingDialog.dismiss()
                         if (result.data?.code != null) {
                             showSubmitDialog(false, null)
                         } else {
@@ -82,9 +93,14 @@ class RegisterFragment : Fragment() {
                         }
                     }
                     is Status.Error -> {
+                        loadingDialog.dismiss()
                         showSubmitDialog(false, result.error)
                     }
                 }
+            }
+
+            loginBtn.setOnClickListener {
+                navController.navigate(R.id.registerFragment_to_loginFragment)
             }
         }
     }
@@ -193,6 +209,11 @@ class RegisterFragment : Fragment() {
 
         return validatiorEmail && validatiorFullname && validatorpassword
 
+    }
+
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(requireActivity())
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 
     override fun onDestroy() {
