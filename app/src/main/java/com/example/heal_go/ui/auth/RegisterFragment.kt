@@ -1,6 +1,5 @@
 package com.example.heal_go.ui.auth
 
-import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -75,7 +74,7 @@ class RegisterFragment : Fragment() {
                 } else {
                     Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
                 }
-
+            }
 
             authViewModel.register.observe(viewLifecycleOwner) { result ->
                 when (result) {
@@ -115,26 +114,16 @@ class RegisterFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
-        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
-        val title = dialog.findViewById<TextView>(R.id.textTitle)
-        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle)
-        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn)
-        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
+        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
+        val title = dialog.findViewById<TextView>(R.id.textTitle) as TextView
+        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle) as TextView
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn) as ImageButton
+        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn) as Button
 
         if (success) {
             animationView.setAnimation(R.raw.success)
             title.text = "Good Job!"
             subtitle.text = "Register Successfully!"
-
-            /*closeBtn.setOnClickListener {
-                dialog.dismiss()
-                navController.navigate(R.id.registerFragment_to_loginFragment)
-            }
-
-            okayBtn.setOnClickListener {
-                dialog.dismiss()
-                navController.navigate(R.id.registerFragment_to_loginFragment)
-            }*/
 
             closeBtn.visibility = View.GONE
             okayBtn.visibility = View.GONE

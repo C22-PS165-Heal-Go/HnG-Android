@@ -1,6 +1,5 @@
 package com.example.heal_go.ui.auth
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -142,11 +141,11 @@ class LoginFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
-        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
-        val title = dialog.findViewById<TextView>(R.id.textTitle)
-        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle)
-        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn)
-        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
+        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
+        val title = dialog.findViewById<TextView>(R.id.textTitle) as TextView
+        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle) as TextView
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn) as ImageButton
+        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn) as Button
 
         if (success) {
             val intent = Intent(activity, DashboardActivity::class.java)

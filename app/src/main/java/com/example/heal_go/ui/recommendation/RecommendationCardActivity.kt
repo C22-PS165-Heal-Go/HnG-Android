@@ -61,11 +61,12 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     - actions 2 for not-interested recommendation
     */
     override fun onActionClicked(actions: Int) {
-        isClicked = true
-
         when (actions) {
             1 -> swipeCard(true)
-            2 -> swipeCard(false)
+            2 -> {
+                isClicked = true
+                swipeCard(false)
+            }
         }
         binding.recycleView.swipe()
     }
@@ -179,20 +180,12 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
 
             /*when interested button is clicked, current card will be swiped to bottom*/
             this.interestedBtn.setOnClickListener {
-                /*Toast.makeText(this@RecommendationCardActivity, "Interested", Toast.LENGTH_SHORT)
-                    .show()*/
                 swipeCard(true)
                 recycleView.swipe()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
             this.notInterestedBtn.setOnClickListener {
-                /*Toast.makeText(
-                    this@RecommendationCardActivity,
-                    "Not Interested",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()*/
                 isClicked = true
                 swipeCard(false)
                 recycleView.swipe()
@@ -202,12 +195,6 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             listAdapter.setOnItemClickCallBack(object : CardAdapter.OnItemClickCallBack {
                 /*when double click action, current card will be marked as interested*/
                 override fun onItemClicked(data: RecommendationDataItem) {
-                    Toast.makeText(
-                        this@RecommendationCardActivity,
-                        "Interested",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                     swipeCard(true)
                     binding.recycleView.swipe()
                 }
