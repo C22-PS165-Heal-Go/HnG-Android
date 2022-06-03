@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -29,7 +30,10 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private lateinit var loadingDialog: LoadingDialog
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
@@ -86,10 +90,10 @@ class LoginFragment : Fragment() {
             authViewModel.login.observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Status.Loading -> {
-                        showLoading(true)
+                        loadingDialog.show()
                     }
                     is Status.Success -> {
-                        showLoading(false)
+                        loadingDialog.dismiss()
                         if (result.data?.code != null) {
                             Log.d("ERROR", "error...")
                             Toast.makeText(activity, result.data.message, Toast.LENGTH_SHORT).show()
@@ -111,7 +115,7 @@ class LoginFragment : Fragment() {
                         }
                     }
                     is Status.Error -> {
-                        showLoading(false)
+                        loadingDialog.dismiss()
                         Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -124,7 +128,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupView() {
-        loadingDialog = LoadingDialog(myFragment = requireActivity())
+        buildLoadingDialog()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -135,12 +139,9 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            loadingDialog.startLoadingDialog()
-        } else {
-            loadingDialog.dismissDialog()
-        }
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(requireActivity())
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 
     override fun onDestroy() {

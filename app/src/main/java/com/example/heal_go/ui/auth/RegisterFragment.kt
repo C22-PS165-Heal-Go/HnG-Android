@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -21,9 +22,10 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private lateinit var loadingDialog: LoadingDialog
 
-    var i = 0
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     private val navController: NavController by lazy {
         findNavController()
@@ -44,7 +46,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setupView() {
-        loadingDialog = LoadingDialog(myFragment = requireActivity())
+        buildLoadingDialog()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,10 +68,10 @@ class RegisterFragment : Fragment() {
                 authViewModel.register.observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is Status.Loading -> {
-                            showLoading(true)
+                            loadingDialog.show()
                         }
                         is Status.Success -> {
-                            showLoading(false)
+                            loadingDialog.dismiss()
                             if (result.data?.code != null) {
                                 Toast.makeText(
                                     activity,
@@ -84,7 +86,7 @@ class RegisterFragment : Fragment() {
                             }
                         }
                         is Status.Error -> {
-                            showLoading(false)
+                            loadingDialog.dismiss()
                             Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -143,12 +145,9 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            loadingDialog.startLoadingDialog()
-        } else {
-            loadingDialog.dismissDialog()
-        }
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(requireActivity())
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 
     override fun onDestroy() {
