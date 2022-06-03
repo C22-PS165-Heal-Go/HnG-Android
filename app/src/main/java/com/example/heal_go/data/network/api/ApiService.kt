@@ -1,11 +1,11 @@
 package com.example.heal_go.data.network.api
 
 import com.example.heal_go.data.network.response.LoginResponse
+import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.data.network.response.RegisterResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.RequestBody
+import retrofit2.Response
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -25,6 +25,12 @@ interface ApiService {
         @Field("password") password: String
     ) : RegisterResponse
 
-    @GET("/destination")
+    @GET("destination")
     suspend fun getAllDestinations() : LoginResponse
+
+    @POST("recommendation")
+    suspend fun recommendation(
+        @Header("Authorization") token: String,
+        @Body requestBody: RequestBody
+    ) : RecommendationResponse
 }
