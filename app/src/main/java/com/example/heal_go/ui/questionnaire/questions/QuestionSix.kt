@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentQuestionFiveBinding
 import com.example.heal_go.databinding.FragmentQuestionSixBinding
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
