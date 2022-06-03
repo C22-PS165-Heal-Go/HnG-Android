@@ -27,6 +27,7 @@ import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 import com.example.heal_go.ui.recommendation.RecommendationCardActivity
+import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
 import com.example.heal_go.util.Status
 
 class QuestionnaireActivity : AppCompatActivity() {
@@ -37,6 +38,12 @@ class QuestionnaireActivity : AppCompatActivity() {
 
     private val onBoardingViewModel by viewModels<OnboardingViewModel> {
         OnboardingViewModelFactory(OnboardingRepository(this))
+    }
+
+    private val recommendationViewModel by viewModels<RecommendationViewModel> {
+        ViewModelFactory(
+            this
+        )
     }
 
     lateinit var dialogBuilder: AlertDialog.Builder
@@ -101,6 +108,7 @@ class QuestionnaireActivity : AppCompatActivity() {
                     } else {
                         if (result.data?.success == true) {
                             val intent = Intent(this, RecommendationCardActivity::class.java)
+                            intent.putExtra(DESTINATION_DATA, result.data)
                             startActivity(intent)
                             finish()
                         }
@@ -111,7 +119,6 @@ class QuestionnaireActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun setEnabledButton(position: Int) {
@@ -215,6 +222,9 @@ class QuestionnaireActivity : AppCompatActivity() {
         btnProceed?.setOnClickListener {
             if (btnProceed.text == "Submit") {
                 sendQuestionnaire()
+                dialog.dismiss()
+            }else {
+                finish()
             }
         }
 
@@ -249,5 +259,9 @@ class QuestionnaireActivity : AppCompatActivity() {
         supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
+    }
+
+    companion object {
+        const val DESTINATION_DATA = "destination_data"
     }
 }

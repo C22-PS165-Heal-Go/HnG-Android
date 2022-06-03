@@ -59,7 +59,7 @@ data class RecommendationResponse(
     var code : Int? = null,
 
     @field:SerializedName("data")
-    val data: List<DataItem?>? = null,
+    val data: List<RecommendationDataItem?>? = null,
 
     @field:SerializedName("success")
     val success: Boolean? = null,
@@ -69,7 +69,7 @@ data class RecommendationResponse(
 ): Parcelable
 
 @Parcelize
-data class DataItem(
+data class RecommendationDataItem(
 
     @field:SerializedName("image")
     val image: String? = null,
@@ -94,3 +94,12 @@ data class DateDiff(
     val hours: Long,
     val days: Long
 ) : Parcelable
+
+@Parcelize
+data class DestinationDetail(
+    val id: String,
+    val imageUrl: String,
+    val name: String,
+    val location: String,
+    val description: String
+): Parcelable
