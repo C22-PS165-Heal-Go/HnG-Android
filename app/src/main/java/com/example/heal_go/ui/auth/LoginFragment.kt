@@ -1,10 +1,18 @@
 package com.example.heal_go.ui.auth
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
@@ -12,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.UserSession
 import com.example.heal_go.data.repository.OnboardingRepository
@@ -44,6 +53,8 @@ class LoginFragment : Fragment() {
     private val navController: NavController by lazy {
         findNavController()
     }
+
+    lateinit var submitDialogBuilder: AlertDialog.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,28 +106,22 @@ class LoginFragment : Fragment() {
                     is Status.Success -> {
                         loadingDialog.dismiss()
                         if (result.data?.code != null) {
-                            Log.d("ERROR", "error...")
-                            Toast.makeText(activity, result.data.message, Toast.LENGTH_SHORT).show()
+                            showSubmitDialog(false, null)
                         } else {
                             if (result.data?.success == true) {
-                                Toast.makeText(activity, "Login Successful!", Toast.LENGTH_SHORT)
-                                    .show()
-
                                 onBoardingViewModel.createLoginSession(
                                     UserSession(
                                         true,
                                         result.data
                                     )
                                 )
-                                val intent = Intent(activity, DashboardActivity::class.java)
-                                startActivity(intent)
-                                requireActivity().finish()
+                                showSubmitDialog(true, null)
                             }
                         }
                     }
                     is Status.Error -> {
                         loadingDialog.dismiss()
-                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
+                        showSubmitDialog(false, result.error)
                     }
                 }
             }
@@ -124,6 +129,58 @@ class LoginFragment : Fragment() {
 
         binding.registerBtn.setOnClickListener {
             navController.navigate(R.id.loginFragment_to_registerFragment)
+        }
+    }
+
+    private fun showSubmitDialog(success: Boolean, message: String?) {
+        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder(success, message)
+    }
+
+    private fun submitDialogBuilder(success: Boolean, message: String?) {
+        val dialog = submitDialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
+        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+        val title = dialog.findViewById<TextView>(R.id.textTitle)
+        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle)
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn)
+        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
+
+        if (success) {
+            val intent = Intent(activity, DashboardActivity::class.java)
+            animationView.setAnimation(R.raw.success)
+            title.text = "Good Job!"
+            subtitle.text = "Login Successfully!"
+
+            closeBtn.visibility = View.GONE
+            okayBtn.visibility = View.GONE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                dialog.dismiss()
+                startActivity(intent)
+                requireActivity().finish()
+            }, 1500)
+        } else {
+            animationView.setAnimation(R.raw.incorrect)
+            title.text = "Oops!"
+
+            if (message != null) {
+                subtitle.text = "Sorry, your login is failed. $message!"
+            } else {
+                subtitle.text = "Sorry, your login is failed. Check your email or password again!"
+            }
+
+            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
+
+            closeBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            okayBtn.setOnClickListener {
+                dialog.dismiss()
+            }
         }
     }
 
@@ -137,6 +194,8 @@ class LoginFragment : Fragment() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+
+        submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
     }
 
     private fun buildLoadingDialog() {

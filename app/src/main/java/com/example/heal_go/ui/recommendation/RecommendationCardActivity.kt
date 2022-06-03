@@ -42,7 +42,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         )
     }
 
-    private var countSwipe = 0
+    private var swipeHistory = ArrayList<Boolean>()
+    private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +61,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     - actions 2 for not-interested recommendation
     */
     override fun onActionClicked(actions: Int) {
+        isClicked = true
+
         when (actions) {
             1 -> swipeCard(true)
             2 -> swipeCard(false)
@@ -84,9 +87,18 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         manager.setSwipeAnimationSetting(setting)
 
         /*temporary, will be replaced with reinforcement learning*/
-        countSwipe++
+        swipeHistory.add(interested)
+        Toast.makeText(
+            this@RecommendationCardActivity,
+            swipeHistory.toString(),
+            Toast.LENGTH_SHORT
+        )
+            .show()
 
-        if (countSwipe >= 5) setAnimationsOut()
+        if (swipeHistory.size >= 5) {
+            recommendationViewModel.sendSwipeRecommendation(swipeHistory)
+            setAnimationsOut()
+        }
     }
 
     /*this function is used when the recommendation is up*/
@@ -146,26 +158,42 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         with(binding) {
             /*when rewind is clicked, previous card which has been swiped will be restored*/
             this.rewindBtn.setOnClickListener {
-                recycleView.rewind()
-                countSwipe--
+                if (swipeHistory.size > 0) {
+                    recycleView.rewind()
+                    swipeHistory.removeLast()
+                    Toast.makeText(
+                        this@RecommendationCardActivity,
+                        swipeHistory.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                } else {
+                    Toast.makeText(
+                        this@RecommendationCardActivity,
+                        "All contents has been rewinded!",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
 
             /*when interested button is clicked, current card will be swiped to bottom*/
             this.interestedBtn.setOnClickListener {
-                Toast.makeText(this@RecommendationCardActivity, "Interested", Toast.LENGTH_SHORT)
-                    .show()
+                /*Toast.makeText(this@RecommendationCardActivity, "Interested", Toast.LENGTH_SHORT)
+                    .show()*/
                 swipeCard(true)
                 recycleView.swipe()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
             this.notInterestedBtn.setOnClickListener {
-                Toast.makeText(
+                /*Toast.makeText(
                     this@RecommendationCardActivity,
                     "Not Interested",
                     Toast.LENGTH_SHORT
                 )
-                    .show()
+                    .show()*/
+                isClicked = true
                 swipeCard(false)
                 recycleView.swipe()
             }
@@ -220,21 +248,15 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 override fun onCardDragging(direction: Direction?, ratio: Float) {}
                 override fun onCardSwiped(direction: Direction?) {
                     if (direction != Direction.Bottom) {
-                        Toast.makeText(
-                            this@RecommendationCardActivity,
-                            "Not interested",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        if (!isClicked) swipeCard(false)
+                        else isClicked = false
                     }
                 }
 
                 override fun onCardRewound() {}
                 override fun onCardCanceled() {}
                 override fun onCardAppeared(view: View?, position: Int) {}
-                override fun onCardDisappeared(view: View?, position: Int) {
-                    if (position == 4) setAnimationsOut()
-                }
+                override fun onCardDisappeared(view: View?, position: Int) {}
             })
 
         val list = ArrayList<RecommendationDataItem>()

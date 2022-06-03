@@ -101,5 +101,6 @@
     <string name="tutorial_button">I Understand</string>
     <string name="drag_icon">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
+    <string name="auth_dialog_title">Title</string>
 
 </resources>

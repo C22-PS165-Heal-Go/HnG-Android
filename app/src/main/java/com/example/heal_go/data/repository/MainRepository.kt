@@ -3,6 +3,7 @@ package com.example.heal_go.data.repository
 import android.util.ArrayMap
 import android.util.Log
 import com.example.heal_go.data.network.api.ApiService
+import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.LoginResponse
 import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.data.network.response.RegisterResponse
@@ -32,6 +33,15 @@ class MainRepository(private val apiService: ApiService) {
             response
         } catch (e: Exception) {
             RegisterResponse(code = e.hashCode())
+        }
+    }
+
+    suspend fun getAllDestinations(auth: String) : DestinationResponse {
+        return try {
+            val response = apiService.getAllDestinations(auth)
+            response
+          } catch (e: Exception) {
+            DestinationResponse(code = e.hashCode())
         }
     }
 
@@ -72,14 +82,4 @@ class MainRepository(private val apiService: ApiService) {
         }
 
     }
-
-
-    /*fun getAllDestinations() : LiveData<LoginResponse> = liveData {
-        try {
-            val response = apiService.getAllDestinations()
-            emit(response)
-        } catch (e: Exception) {
-            emit(LoginResponse())
-        }
-    }*/
 }

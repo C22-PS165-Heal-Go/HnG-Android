@@ -1,5 +1,6 @@
 package com.example.heal_go.data.network.api
 
+import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.LoginResponse
 import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.data.network.response.RegisterResponse
@@ -25,9 +26,11 @@ interface ApiService {
         @Field("password") password: String
     ) : RegisterResponse
 
-    @GET("destination")
-    suspend fun getAllDestinations() : LoginResponse
-
+    @GET("home")
+    suspend fun getAllDestinations(
+        @Header("Authorization") auth: String
+    ) : DestinationResponse
+    
     @POST("recommendation")
     suspend fun recommendation(
         @Header("Authorization") token: String,

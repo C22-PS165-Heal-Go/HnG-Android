@@ -1,15 +1,24 @@
 package com.example.heal_go.ui.auth
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentRegisterBinding
 import com.example.heal_go.ui.ViewModelFactory
@@ -31,6 +40,8 @@ class RegisterFragment : Fragment() {
         findNavController()
     }
 
+    lateinit var submitDialogBuilder: AlertDialog.Builder
+
     private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
     override fun onCreateView(
@@ -39,6 +50,7 @@ class RegisterFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        submitDialogBuilder = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
 
         setupView()
 
@@ -65,36 +77,90 @@ class RegisterFragment : Fragment() {
                 }
 
 
-                authViewModel.register.observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is Status.Loading -> {
-                            loadingDialog.show()
-                        }
-                        is Status.Success -> {
-                            loadingDialog.dismiss()
-                            if (result.data?.code != null) {
-                                Toast.makeText(
-                                    activity,
-                                    "Email already registered!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                if (result.data?.success == true) {
-                                    Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
-                                    navController.navigate(R.id.registerFragment_to_loginFragment)
-                                }
+            authViewModel.register.observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Status.Loading -> {
+                        loadingDialog.show()
+                    }
+                    is Status.Success -> {
+                        loadingDialog.dismiss()
+                        if (result.data?.code != null) {
+                            showSubmitDialog(false, null)
+                        } else {
+                            if (result.data?.success == true) {
+                                showSubmitDialog(true, null)
                             }
                         }
-                        is Status.Error -> {
-                            loadingDialog.dismiss()
-                            Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
-                        }
+                    }
+                    is Status.Error -> {
+                        loadingDialog.dismiss()
+                        showSubmitDialog(false, result.error)
                     }
                 }
             }
 
             loginBtn.setOnClickListener {
                 navController.navigate(R.id.registerFragment_to_loginFragment)
+            }
+        }
+    }
+
+    private fun showSubmitDialog(success: Boolean, message: String?) {
+        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder(success, message)
+    }
+
+    private fun submitDialogBuilder(success: Boolean, message: String?) {
+        val dialog = submitDialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
+        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+        val title = dialog.findViewById<TextView>(R.id.textTitle)
+        val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle)
+        val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn)
+        val okayBtn = dialog.findViewById<Button>(R.id.okay_btn)
+
+        if (success) {
+            animationView.setAnimation(R.raw.success)
+            title.text = "Good Job!"
+            subtitle.text = "Register Successfully!"
+
+            /*closeBtn.setOnClickListener {
+                dialog.dismiss()
+                navController.navigate(R.id.registerFragment_to_loginFragment)
+            }
+
+            okayBtn.setOnClickListener {
+                dialog.dismiss()
+                navController.navigate(R.id.registerFragment_to_loginFragment)
+            }*/
+
+            closeBtn.visibility = View.GONE
+            okayBtn.visibility = View.GONE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                dialog.dismiss()
+                navController.navigate(R.id.registerFragment_to_loginFragment)
+            }, 1500)
+        } else {
+            animationView.setAnimation(R.raw.incorrect)
+            title.text = "Oops!"
+            if (message != null) {
+                subtitle.text =
+                    "Sorry, your register is failed. $message!"
+            } else {
+                subtitle.text = "Sorry, your register is failed. This email already registered to this application!"
+            }
+
+            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
+
+            closeBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            okayBtn.setOnClickListener {
+                dialog.dismiss()
             }
         }
     }

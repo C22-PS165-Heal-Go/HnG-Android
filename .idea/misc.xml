@@ -64,10 +64,16 @@
         <entry key="..\:/Code/Android/HealGo/app/src/main/res/layout/recommendation_tutorial_dialog.xml" value="0.33" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/ic_not_interested.xml" value="0.2265" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/image_button_background.xml" value="0.2265" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2465" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_danger_corner_button.xml" value="0.2465" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/drawable/rounded_success_corner_button.xml" value="0.2465" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/activity_questionnaire.xml" value="0.22780797101449277" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/authentication_submit_dialog.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/card_item.xml" value="0.22826086956521738" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/destination_card_layout.xml" value="0.1265625" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_discover.xml" value="0.22780797101449277" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_first_screen.xml" value="0.22826086956521738" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_home.xml" value="0.1265625" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_item_detail_list_dialog.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_item_detail_list_dialog_item.xml" value="0.22826086956521738" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/fragment_login.xml" value="0.22826086956521738" />
@@ -78,6 +84,7 @@
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/questionnaire_custom_dialog.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/questionnaire_custom_warning_dialog.xml" value="0.2644927536231884" />
         <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/recommendation_detail_dialog.xml" value="0.22826086956521738" />
+        <entry key="..\:/KULIAH/Bangkit/Capstone/HealAndGo/app/src/main/res/layout/recommendation_tutorial_dialog.xml" value="0.1265625" />
       </map>
     </option>
   </component>
