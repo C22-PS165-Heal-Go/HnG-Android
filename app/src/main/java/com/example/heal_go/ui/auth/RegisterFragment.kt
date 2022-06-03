@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -13,6 +14,7 @@ import com.example.heal_go.R
 import com.example.heal_go.databinding.FragmentRegisterBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.auth.viewmodel.AuthViewModel
+import com.example.heal_go.util.LoadingDialog
 import com.example.heal_go.util.Status
 import com.wajahatkarim3.easyvalidation.core.Validator
 
@@ -20,6 +22,10 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     private val navController: NavController by lazy {
         findNavController()
@@ -34,7 +40,13 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
+        setupView()
+
         return binding.root
+    }
+
+    private fun setupView() {
+        buildLoadingDialog()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,33 +63,38 @@ class RegisterFragment : Fragment() {
                 } else {
                     Toast.makeText(activity, "Fail", Toast.LENGTH_SHORT).show()
                 }
+
+
+                authViewModel.register.observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Status.Loading -> {
+                            loadingDialog.show()
+                        }
+                        is Status.Success -> {
+                            loadingDialog.dismiss()
+                            if (result.data?.code != null) {
+                                Toast.makeText(
+                                    activity,
+                                    "Email already registered!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                if (result.data?.success == true) {
+                                    Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
+                                    navController.navigate(R.id.registerFragment_to_loginFragment)
+                                }
+                            }
+                        }
+                        is Status.Error -> {
+                            loadingDialog.dismiss()
+                            Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
 
             loginBtn.setOnClickListener {
                 navController.navigate(R.id.registerFragment_to_loginFragment)
-            }
-
-            authViewModel.register.observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Status.Loading -> {}
-                    is Status.Success -> {
-                        if (result.data?.code != null) {
-                            Toast.makeText(
-                                activity,
-                                "Email already registered!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            if (result.data?.success == true) {
-                                Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
-                                navController.navigate(R.id.registerFragment_to_loginFragment)
-                            }
-                        }
-                    }
-                    is Status.Error -> {
-                        Toast.makeText(activity, result.error, Toast.LENGTH_SHORT).show()
-                    }
-                }
             }
         }
     }
@@ -100,7 +117,7 @@ class RegisterFragment : Fragment() {
         }.check()
 
 
-       val validatiorFullname = Validator(etFullname.toString()).apply {
+        val validatiorFullname = Validator(etFullname.toString()).apply {
             nonEmpty()
             noNumbers()
             addErrorCallback {
@@ -126,6 +143,11 @@ class RegisterFragment : Fragment() {
 
         return validatiorEmail && validatiorFullname && validatorpassword
 
+    }
+
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(requireActivity())
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 
     override fun onDestroy() {

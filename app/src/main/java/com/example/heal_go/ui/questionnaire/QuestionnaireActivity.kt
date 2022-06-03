@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -28,6 +29,7 @@ import com.example.heal_go.ui.questionnaire.questions.*
 import com.example.heal_go.ui.questionnaire.viewmodel.QuestionnaireViewModel
 import com.example.heal_go.ui.recommendation.RecommendationCardActivity
 import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
+import com.example.heal_go.util.LoadingDialog
 import com.example.heal_go.util.Status
 
 class QuestionnaireActivity : AppCompatActivity() {
@@ -45,6 +47,10 @@ class QuestionnaireActivity : AppCompatActivity() {
             this
         )
     }
+
+    /* build loading dialog */
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var  loadingDialog: AlertDialog
 
     lateinit var dialogBuilder: AlertDialog.Builder
 
@@ -101,8 +107,11 @@ class QuestionnaireActivity : AppCompatActivity() {
 
         questionnaireViewModel.response.observe(this) { result ->
             when(result) {
-                is Status.Loading -> {}
+                is Status.Loading -> {
+                    loadingDialog.show()
+                }
                 is Status.Success -> {
+                    loadingDialog.dismiss()
                     if (result.data?.code != null) {
                         Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                     } else {
@@ -115,6 +124,7 @@ class QuestionnaireActivity : AppCompatActivity() {
                     }
                 }
                 is Status.Error -> {
+                    loadingDialog.dismiss()
                     Log.d("RECOMMENDATION", result.error)
                 }
             }
@@ -255,10 +265,16 @@ class QuestionnaireActivity : AppCompatActivity() {
         }
     }
 
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(this)
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
+    }
+
     private fun initView() {
         supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
+        buildLoadingDialog()
     }
 
     companion object {
