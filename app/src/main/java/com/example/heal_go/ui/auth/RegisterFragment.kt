@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -108,7 +110,7 @@ class RegisterFragment : Fragment() {
             title.text = "Good Job!"
             subtitle.text = "Register Successfully!"
 
-            closeBtn.setOnClickListener {
+            /*closeBtn.setOnClickListener {
                 dialog.dismiss()
                 navController.navigate(R.id.registerFragment_to_loginFragment)
             }
@@ -116,7 +118,15 @@ class RegisterFragment : Fragment() {
             okayBtn.setOnClickListener {
                 dialog.dismiss()
                 navController.navigate(R.id.registerFragment_to_loginFragment)
-            }
+            }*/
+
+            closeBtn.visibility = View.GONE
+            okayBtn.visibility = View.GONE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                dialog.dismiss()
+                navController.navigate(R.id.registerFragment_to_loginFragment)
+            }, 1500)
         } else {
             animationView.setAnimation(R.raw.incorrect)
             title.text = "Oops!"
@@ -126,6 +136,8 @@ class RegisterFragment : Fragment() {
             } else {
                 subtitle.text = "Sorry, your register is failed. This email already registered to this application!"
             }
+
+            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
 
             closeBtn.setOnClickListener {
                 dialog.dismiss()

@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
@@ -141,17 +143,14 @@ class LoginFragment : Fragment() {
             title.text = "Good Job!"
             subtitle.text = "Login Successfully!"
 
-            closeBtn.setOnClickListener {
-                dialog.dismiss()
-                startActivity(intent)
-                requireActivity().finish()
-            }
+            closeBtn.visibility = View.GONE
+            okayBtn.visibility = View.GONE
 
-            okayBtn.setOnClickListener {
+            Handler(Looper.getMainLooper()).postDelayed({
                 dialog.dismiss()
                 startActivity(intent)
                 requireActivity().finish()
-            }
+            }, 1500)
         } else {
             animationView.setAnimation(R.raw.incorrect)
             title.text = "Oops!"
@@ -161,6 +160,8 @@ class LoginFragment : Fragment() {
             } else {
                 subtitle.text = "Sorry, your login is failed. Check your email or password again!"
             }
+
+            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
 
             closeBtn.setOnClickListener {
                 dialog.dismiss()

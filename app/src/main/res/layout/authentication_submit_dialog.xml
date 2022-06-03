@@ -66,12 +66,11 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textSubtitle">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/okay_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

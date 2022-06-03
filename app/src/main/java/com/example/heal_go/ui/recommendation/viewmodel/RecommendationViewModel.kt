@@ -26,4 +26,8 @@ class RecommendationViewModel(
     fun getTutorialDatastore(): LiveData<Boolean> {
         return tutorialRepository.readFromDataStore.asLiveData()
     }
+
+    fun sendSwipeRecommendation(recommendations: ArrayList<Boolean>) {
+
+    }
 }
