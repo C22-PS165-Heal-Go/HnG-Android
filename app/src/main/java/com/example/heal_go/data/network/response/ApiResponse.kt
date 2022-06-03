@@ -54,6 +54,40 @@ data class RegisterResponse(
 ) : Parcelable
 
 @Parcelize
+data class RecommendationResponse(
+    @field:SerializedName("code")
+    var code : Int? = null,
+
+    @field:SerializedName("data")
+    val data: List<DataItem?>? = null,
+
+    @field:SerializedName("success")
+    val success: Boolean? = null,
+
+    @field:SerializedName("message")
+    val message: String? = null
+): Parcelable
+
+@Parcelize
+data class DataItem(
+
+    @field:SerializedName("image")
+    val image: String? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("description")
+    val description: String? = null,
+
+    @field:SerializedName("location")
+    val location: String? = null,
+
+    @field:SerializedName("id")
+    val id: String? = null
+): Parcelable
+
+@Parcelize
 data class DateDiff(
     val seconds: Long,
     val minutes: Long,
