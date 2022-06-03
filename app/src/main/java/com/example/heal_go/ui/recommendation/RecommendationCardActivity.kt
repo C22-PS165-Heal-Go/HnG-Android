@@ -37,6 +37,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     }
 
     private var swipeHistory = ArrayList<Boolean>()
+    private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     - actions 2 for not-interested recommendation
     */
     override fun onActionClicked(actions: Int) {
+        isClicked = true
+
         when (actions) {
             1 -> swipeCard(true)
             2 -> swipeCard(false)
@@ -86,7 +89,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         )
             .show()
 
-        if (swipeHistory.size == listAdapter.itemCount) {
+        if (swipeHistory.size >= 5) {
             recommendationViewModel.sendSwipeRecommendation(swipeHistory)
             setAnimationsOut()
         }
@@ -184,6 +187,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     Toast.LENGTH_SHORT
                 )
                     .show()*/
+                isClicked = true
                 swipeCard(false)
                 recycleView.swipe()
             }
@@ -192,12 +196,6 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             listAdapter.setOnItemClickCallBack(object : CardAdapter.OnItemClickCallBack {
                 /*when double click action, current card will be marked as interested*/
                 override fun onItemClicked(data: String) {
-                    Toast.makeText(
-                        this@RecommendationCardActivity,
-                        "Interested",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                     swipeCard(true)
                     binding.recycleView.swipe()
                 }
@@ -238,7 +236,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 override fun onCardDragging(direction: Direction?, ratio: Float) {}
                 override fun onCardSwiped(direction: Direction?) {
                     if (direction != Direction.Bottom) {
-                        if (!binding.notInterestedBtn.isClickable) swipeCard(false)
+                        if (!isClicked) swipeCard(false)
+                        else isClicked = false
                     }
                 }
 

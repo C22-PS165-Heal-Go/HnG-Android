@@ -3,6 +3,7 @@ package com.example.heal_go.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.heal_go.data.network.api.ApiService
+import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.LoginResponse
 import com.example.heal_go.data.network.response.RegisterResponse
 import com.example.heal_go.util.timeStamp
@@ -29,12 +30,12 @@ class MainRepository(private val apiService: ApiService) {
         }
     }
 
-    /*fun getAllDestinations() : LiveData<LoginResponse> = liveData {
-        try {
-            val response = apiService.getAllDestinations()
-            emit(response)
+    suspend fun getAllDestinations(auth: String) : DestinationResponse {
+        return try {
+            val response = apiService.getAllDestinations(auth)
+            response
         } catch (e: Exception) {
-            emit(LoginResponse())
+            DestinationResponse(code = e.hashCode())
         }
-    }*/
+    }
 }

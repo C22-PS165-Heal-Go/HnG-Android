@@ -1,11 +1,9 @@
 package com.example.heal_go.data.network.api
 
+import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.LoginResponse
 import com.example.heal_go.data.network.response.RegisterResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -25,6 +23,8 @@ interface ApiService {
         @Field("password") password: String
     ) : RegisterResponse
 
-    @GET("/destination")
-    suspend fun getAllDestinations() : LoginResponse
+    @GET("home")
+    suspend fun getAllDestinations(
+        @Header("Authorization") auth: String
+    ) : DestinationResponse
 }

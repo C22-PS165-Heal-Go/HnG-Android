@@ -20,10 +20,11 @@
             android:layout_height="300dp">
 
             <ImageView
+                android:id="@+id/imgDestination"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/destination_image"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/destination" />
 
             <androidx.cardview.widget.CardView
@@ -66,6 +67,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtDestinationName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
@@ -74,6 +76,7 @@
                             android:textSize="9sp" />
 
                         <TextView
+                            android:id="@+id/txtLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins"
