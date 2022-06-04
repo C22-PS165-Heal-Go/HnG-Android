@@ -14,11 +14,13 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DiscoverItem
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.dashboard.adapter.DiscoverAdapter
+import com.example.heal_go.ui.dashboard.adapter.LoadingStateAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
@@ -38,9 +40,9 @@ class DiscoverFragment : Fragment() {
     private var _binding: FragmentDiscoverBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var searchDestination: String
-    private lateinit var category: String
-    private var discoverItem = ArrayList<DiscoverItem>()
+    private var searchDestination = ""
+    private var category : String? = null
+
     private lateinit var adapter: DiscoverAdapter
 
     override fun onCreateView(
@@ -51,7 +53,7 @@ class DiscoverFragment : Fragment() {
 
         binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
+                changeDiscoverRequest()
                 view?.let { requireActivity().hideKeyboard(it) }
                 return true
             }
@@ -62,20 +64,8 @@ class DiscoverFragment : Fragment() {
 
         })
 
-        binding.chipgroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            val count = group.childCount
-            var i = 0
-
-            while (i < count) {
-                if ((group.getChildAt(i) as Chip).isChecked) {
-                    category = (group.getChildAt(i) as Chip).text.toString()
-                }
-                i += 1
-            }
-        }
-
-        /*dibawa ke sini error*/
-        Toast.makeText(requireContext(), category, Toast.LENGTH_LONG).show()
+        setAdapter()
+        changeDiscoverRequest()
 
         return binding.root
     }
@@ -83,26 +73,58 @@ class DiscoverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onBoardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
-            if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
-                session.sessions.data?.token?.let {
-                    setAdapter(it)
+        with(binding) {
+            chipAll.setOnClickListener { changeDiscoverRequest() }
+            chipPantai.setOnClickListener { changeDiscoverRequest() }
+            chipGunung.setOnClickListener { changeDiscoverRequest() }
+            chipTaman.setOnClickListener { changeDiscoverRequest() }
+            chipCandi.setOnClickListener { changeDiscoverRequest() }
+            chipAir.setOnClickListener { changeDiscoverRequest() }
+            chipMuseum.setOnClickListener { changeDiscoverRequest() }
+            chipPasar.setOnClickListener { changeDiscoverRequest() }
+        }
+    }
+
+    private fun changeDiscoverRequest() {
+        with(binding) {
+            category = when {
+                chipPantai.isChecked -> "Pantai"
+                chipGunung.isChecked -> "Gunung"
+                chipTaman.isChecked -> "Taman"
+                chipCandi.isChecked -> "Candi"
+                chipAir.isChecked -> "Air Terjun"
+                chipMuseum.isChecked -> "Museum"
+                chipPasar.isChecked -> "Pasar"
+                else -> ""
+            }
+
+            searchDestination = svSearch.query.toString()
+
+            onBoardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
+                if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
+                    session.sessions.data?.token?.let { token ->
+                        if (category.isNullOrEmpty()) category = null
+
+                        dashboardViewModel.getDataDiscover(token, searchDestination, category)
+                            .observe(viewLifecycleOwner) {
+                                adapter.submitData(lifecycle, it)
+                            }
+                    }
                 }
             }
         }
     }
 
-    private fun setAdapter(token: String) {
+    private fun setAdapter() {
         val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.rvDestination.layoutManager = linearLayoutManager
 
         adapter = DiscoverAdapter()
-        binding.rvDestination.adapter = adapter
-
-        dashboardViewModel.getDataDiscover(token, searchDestination, category)
-            .observe(viewLifecycleOwner) {
-                adapter.submitData(lifecycle, it)
+        binding.rvDestination.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
             }
+        )
     }
 
     private fun Context.hideKeyboard(view: View) {

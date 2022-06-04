@@ -44,9 +44,6 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.chipgroup.children.toList().filter { (it as Chip).isChecked }
-            .forEach { Log.d("COBA", it.toString()) }
-
         binding.startBtn.setOnClickListener {
             val intent = Intent(activity, QuestionnaireActivity::class.java)
             startActivity(intent)

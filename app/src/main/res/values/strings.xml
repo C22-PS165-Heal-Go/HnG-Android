@@ -102,5 +102,25 @@
     <string name="drag_icon">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
     <string name="auth_dialog_title">Title</string>
+    <string name="like_this">Maybe You Like This</string>
+    <string name="submit_subtitle">This is subtitle</string>
+    <string name="auth_dialog_text_button">Okay</string>
+    <string name="destination_name">Diamond Beach</string>
+    <string name="destination_place">Bali, Indonesia</string>
+    <string name="profile">Profile</string>
+    <string name="profile_name">I Wayan Pande Putra Yudha</string>
+    <string name="profile_info_title">Information</string>
+    <string name="faq">FAQ</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="profile_preference">Preference</string>
+    <string name="profile_language">English</string>
+    <string name="logout">Logout</string>
+    <string name="questionnaire_dialog_warning_title_submit">Whoa! Take it easy</string>
+    <string name="questionnaire_submit_info_dialog">If you are sure for your life choices, you can click the submit button below 😊</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="questionnaire_title_warning_dialog_back">Hey! Stop right there</string>
+    <string name="questionnaire_info_warning_dialog_back">Do you really want to do this? Just a reminder your answer will be lost if you go back!</string>
+    <string name="proceed">Proceed</string>
 
 </resources>

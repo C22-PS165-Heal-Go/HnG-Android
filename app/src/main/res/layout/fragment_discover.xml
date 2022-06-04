@@ -52,50 +52,64 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
+                android:id="@+id/chip_all"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:checked="true"
                 android:elevation="3dp"
-                android:text="Popular" />
+                android:text="All" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_pantai"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Beach" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_gunung"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mountain" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_taman"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="City" />
+                android:text="Park" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_candi"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desert" />
+                android:text="Temple" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_air"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desert" />
+                android:text="Waterfall" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chip_museum"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desert" />
+                android:text="Museum" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_pasar"
+                style="@style/CustomChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="Market" />
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>
