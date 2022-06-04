@@ -2,12 +2,16 @@ package com.example.heal_go.data.repository
 
 import android.util.ArrayMap
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.heal_go.data.network.api.ApiService
-import com.example.heal_go.data.network.response.DestinationResponse
-import com.example.heal_go.data.network.response.LoginResponse
-import com.example.heal_go.data.network.response.RecommendationResponse
-import com.example.heal_go.data.network.response.RegisterResponse
+import com.example.heal_go.data.network.paging.DiscoverPagingSource
+import com.example.heal_go.data.network.response.*
 import com.example.heal_go.util.timeStamp
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
@@ -81,5 +85,16 @@ class MainRepository(private val apiService: ApiService) {
             RecommendationResponse(code = e.hashCode())
         }
 
+    }
+
+    fun getDataDiscover(token: String, destination: String?, category: String?) : LiveData<PagingData<DiscoverItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10
+            ),
+            pagingSourceFactory = {
+                DiscoverPagingSource(apiService, token, destination, category)
+            }
+        ).liveData
     }
 }

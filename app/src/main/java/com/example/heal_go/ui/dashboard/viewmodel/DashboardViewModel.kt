@@ -1,11 +1,11 @@
 package com.example.heal_go.ui.dashboard.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.heal_go.data.network.response.DestinationResponse
+import com.example.heal_go.data.network.response.DiscoverItem
 import com.example.heal_go.data.repository.MainRepository
 import com.example.heal_go.util.Status
 import kotlinx.coroutines.launch
@@ -30,4 +30,11 @@ class DashboardViewModel(private val mainRepository: MainRepository, context: Co
             _destinations.value = Status.Loading(false)
         }
     }
+
+    fun getDataDiscover(
+        token: String,
+        destination: String?,
+        category: String?
+    ): LiveData<PagingData<DiscoverItem>> =
+        mainRepository.getDataDiscover("Bearer $token", destination, category).cachedIn(viewModelScope)
 }

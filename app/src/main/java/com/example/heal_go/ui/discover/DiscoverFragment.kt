@@ -3,24 +3,27 @@ package com.example.heal_go.ui.discover
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.heal_go.data.network.response.DestinationItem
+import com.example.heal_go.data.network.response.DiscoverItem
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
 import com.example.heal_go.ui.ViewModelFactory
-import com.example.heal_go.ui.dashboard.adapter.DestinationAdapter
+import com.example.heal_go.ui.dashboard.adapter.DiscoverAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
-import com.example.heal_go.util.Status
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class DiscoverFragment : Fragment() {
 
@@ -35,8 +38,10 @@ class DiscoverFragment : Fragment() {
     private var _binding: FragmentDiscoverBinding? = null
     private val binding get() = _binding!!
 
-    private var destinationItem = ArrayList<DestinationItem>()
-    private lateinit var adapter: DestinationAdapter
+    private lateinit var searchDestination: String
+    private lateinit var category: String
+    private var discoverItem = ArrayList<DiscoverItem>()
+    private lateinit var adapter: DiscoverAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +62,21 @@ class DiscoverFragment : Fragment() {
 
         })
 
+        binding.chipgroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            val count = group.childCount
+            var i = 0
+
+            while (i < count) {
+                if ((group.getChildAt(i) as Chip).isChecked) {
+                    category = (group.getChildAt(i) as Chip).text.toString()
+                }
+                i += 1
+            }
+        }
+
+        /*dibawa ke sini error*/
+        Toast.makeText(requireContext(), category, Toast.LENGTH_LONG).show()
+
         return binding.root
     }
 
@@ -65,39 +85,24 @@ class DiscoverFragment : Fragment() {
 
         onBoardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
             if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
-                session.sessions.data?.token?.let { dashboardViewModel.getAllDestinations(it) }
-            }
-        }
-
-        dashboardViewModel.destinations.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Status.Loading -> {}
-                is Status.Success -> {
-                    if (result.data?.code != null) {
-                        Toast.makeText(requireContext(), "Request Failed!", Toast.LENGTH_LONG).show()
-                    } else {
-                        if (result.data?.success == true) {
-                            for (i in 0 until result.data.data?.size!!) {
-                                destinationItem.add(result.data?.data[i])
-                            }
-                        }
-                    }
-                }
-                is Status.Error -> {
-                    Toast.makeText(requireContext(), "Sorry, ${result.error}", Toast.LENGTH_SHORT).show()
+                session.sessions.data?.token?.let {
+                    setAdapter(it)
                 }
             }
         }
-
-        setAdapter(destinationItem)
     }
 
-    private fun setAdapter(destinationItem: ArrayList<DestinationItem>) {
+    private fun setAdapter(token: String) {
         val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.rvDestination.layoutManager = linearLayoutManager
 
-        adapter = DestinationAdapter(destinationItem, false)
+        adapter = DiscoverAdapter()
         binding.rvDestination.adapter = adapter
+
+        dashboardViewModel.getDataDiscover(token, searchDestination, category)
+            .observe(viewLifecycleOwner) {
+                adapter.submitData(lifecycle, it)
+            }
     }
 
     private fun Context.hideKeyboard(view: View) {

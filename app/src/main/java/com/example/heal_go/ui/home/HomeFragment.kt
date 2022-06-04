@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvDestination.layoutManager = linearLayoutManager
 
-        adapter = DestinationAdapter(destinationItem, true)
+        adapter = DestinationAdapter(destinationItem)
         binding.rvDestination.adapter = adapter
     }
 

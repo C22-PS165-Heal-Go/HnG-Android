@@ -117,6 +117,50 @@ data class RecommendationDataItem(
     val id: String? = null
 ): Parcelable
 
+@kotlinx.android.parcel.Parcelize
+data class DiscoverResponse(
+
+    @field:SerializedName("data")
+    val data: ArrayList<DiscoverItem>,
+
+    @field:SerializedName("success")
+    val success: Boolean? = null,
+
+    @field:SerializedName("message")
+    val message: String? = null
+) : Parcelable
+
+@kotlinx.android.parcel.Parcelize
+data class DiscoverItem(
+
+    @field:SerializedName("image")
+    val image: String? = null,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String? = null,
+
+    @field:SerializedName("code")
+    val code: String? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("description")
+    val description: String? = null,
+
+    @field:SerializedName("location")
+    val location: String? = null,
+
+    @field:SerializedName("id")
+    val id: String? = null,
+
+    @field:SerializedName("category")
+    val category: String? = null,
+
+    @field:SerializedName("updatedAt")
+    val updatedAt: String? = null
+) : Parcelable
+
 @Parcelize
 data class DateDiff(
     val seconds: Long,
