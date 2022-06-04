@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DestinationDetailActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:layout_gravity="bottom"
+        app:cardCornerRadius="24dp"
+        android:elevation="30dp"
+        android:layout_marginBottom="-28dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Finns Beach Club"
+                android:textSize="24sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/location_temp"
+                android:textColor="@color/primary_400"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/ic_location" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_destination"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/description_detail"
+                    android:textColor="#747474" />
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="32dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp">
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_corner_button"
+                android:text="@string/detail_screen_button"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="100dp"
+                app:cardCornerRadius="16dp"
+                android:layout_margin="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageButton
+                    android:id="@+id/button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_near_me"
+                    android:elevation="5dp"
+                    android:background="@drawable/rounded_corner_button_outlined"
+                    android:contentDescription="@string/maps_button" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/iv_destination"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:transitionName="destination_image"
+        tools:src="@drawable/destination"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/destination_image" />
+
+    <View android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/image_inner_shadow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detail_screen_header"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_gravity="top|center"/>
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/rounded_danger_corner_button"
+        android:backgroundTint="@color/placeholder"
+        android:layout_gravity="top"
+        android:padding="4dp"
+        android:contentDescription="@string/btn_back" />
+
+</FrameLayout>

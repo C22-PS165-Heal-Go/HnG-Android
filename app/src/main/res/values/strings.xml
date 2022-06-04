@@ -102,5 +102,9 @@
     <string name="drag_icon">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
     <string name="auth_dialog_title">Title</string>
+    <string name="detail_screen_button">Book now</string>
+    <string name="detail_screen_header">Detail</string>
+    <string name="about_destination">About Destination</string>
+    <string name="maps_button">maps button</string>
 
 </resources>
