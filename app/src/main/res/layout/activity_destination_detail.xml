@@ -119,7 +119,7 @@
     <ImageView
         android:id="@+id/iv_destination"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="600dp"
         android:transitionName="destination_image"
         tools:src="@drawable/destination"
         android:scaleType="centerCrop"

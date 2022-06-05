@@ -40,8 +40,8 @@ class DiscoverAdapter :
                 params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
                 itemView.layoutParams = params
 
-                circularProgressDrawable.strokeWidth = 8f
-                circularProgressDrawable.centerRadius = 40f
+                circularProgressDrawable.strokeWidth = 6f
+                circularProgressDrawable.centerRadius = 20f
                 circularProgressDrawable.setColorSchemeColors(R.color.primary_500)
                 circularProgressDrawable.start()
 
