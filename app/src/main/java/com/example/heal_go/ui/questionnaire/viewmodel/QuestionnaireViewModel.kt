@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.heal_go.R
 import com.example.heal_go.data.QuestionnaireReqBody
 import com.example.heal_go.data.network.response.RecommendationResponse
 import com.example.heal_go.data.repository.MainRepository
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 
-class QuestionnaireViewModel(provideMainRepository: MainRepository, context: Context) :
+class QuestionnaireViewModel(provideMainRepository: MainRepository, private val context: Context) :
     ViewModel() {
 
     private val repository = provideMainRepository
@@ -77,7 +78,7 @@ class QuestionnaireViewModel(provideMainRepository: MainRepository, context: Con
                 _response.value = Status.Success(response)
             }
         }catch (e: Exception) {
-            _response.value = Status.Error("Server Error")
+            _response.value = Status.Error(context.getString(R.string.server_error))
         } finally {
             _response.value = Status.Loading(false)
         }

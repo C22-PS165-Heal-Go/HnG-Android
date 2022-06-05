@@ -11,15 +11,19 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.detail.DestinationDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HealGo" />
         <activity
             android:name=".ui.questionnaire.QuestionnaireActivity"
             android:exported="false"
-            android:theme="@style/Theme.HealGo"/>
+            android:theme="@style/Theme.HealGo" />
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="false"
@@ -27,7 +31,7 @@
         <activity
             android:name=".ui.recommendation.RecommendationCardActivity"
             android:exported="false"
-            android:theme="@style/Theme.HealGo"/>
+            android:theme="@style/Theme.HealGo" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

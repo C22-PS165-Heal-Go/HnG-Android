@@ -191,7 +191,7 @@ class QuestionnaireActivity : AppCompatActivity() {
             } else {
                 progressBar.progress = progressBar.progress - 1
             }
-            tvRemainingquestion.text = "Question ${binding.progressBar.progress} / 8"
+            tvRemainingquestion.text = getString(R.string.number_of_questions, binding.progressBar.progress)
         }
     }
 

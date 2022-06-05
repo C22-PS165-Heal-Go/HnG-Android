@@ -16,6 +16,4 @@ object Injection {
 
     fun provideRecommendationTutorialRepository(context: Context) : RecommendationTutorialRepository =
         RecommendationTutorialRepository(context)
-
-    /*fun provideOnBoardingRepository(context: Context) = OnboardingRepository(context)*/
 }

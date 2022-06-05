@@ -61,77 +61,53 @@
         android:layout_margin="32dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Categories"
+        android:text="@string/destination_for_you"
         android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loading_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:scrollbars="none"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/loading_dialog_background"
+        android:elevation="10dp"
+        android:padding="6dp"
+        android:visibility="gone"
+        app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipgroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleSelection="true">
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="6dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_icon" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:checked="true"
-                android:elevation="3dp"
-                android:text="Popular" />
+    </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beach" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mountain" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="City" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Desert" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Desert" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Desert" />
-        </com.google.android.material.chip.ChipGroup>
-
-    </HorizontalScrollView>
+    <TextView
+        android:id="@+id/loading_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading_subtitle"
+        android:fontFamily="@font/poppins"
+        android:textSize="11sp"
+        android:visibility="gone"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loading_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_destination"
@@ -142,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:layout_centerVertical="true"
         tools:listitem="@layout/destination_card_layout"

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.heal_go.R
 import com.example.heal_go.data.network.response.LoginResponse
 import com.example.heal_go.data.network.response.RegisterResponse
 import com.example.heal_go.data.repository.MainRepository
@@ -13,7 +14,7 @@ import com.example.heal_go.util.timeStamp
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class AuthViewModel(private val repository: MainRepository, context: Context) : ViewModel() {
+class AuthViewModel(private val repository: MainRepository, private val context: Context) : ViewModel() {
 
     private val _login = MutableLiveData<Status<LoginResponse?>>()
     val login: LiveData<Status<LoginResponse?>> get() = _login
@@ -33,7 +34,7 @@ class AuthViewModel(private val repository: MainRepository, context: Context) : 
                 _login.value = Status.Success(callback)
             }
         } catch (e: Exception) {
-            _login.value = Status.Error("Server Error")
+            _login.value = Status.Error(context.getString(R.string.server_error))
         } finally {
             _login.value = Status.Loading(false)
         }
@@ -49,7 +50,7 @@ class AuthViewModel(private val repository: MainRepository, context: Context) : 
                 _register.value = Status.Success(callback)
             }
         } catch (e: Exception) {
-            _register.value = Status.Error("Server Error")
+            _register.value = Status.Error(context.getString(R.string.server_error))
         } finally {
             _register.value = Status.Loading(false)
         }
