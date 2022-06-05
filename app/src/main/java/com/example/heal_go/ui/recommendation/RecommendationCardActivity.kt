@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationDetail
 import com.example.heal_go.data.network.response.RecommendationDataItem
 import com.example.heal_go.data.network.response.RecommendationResponse
@@ -87,14 +88,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         }.build()
         manager.setSwipeAnimationSetting(setting)
 
-        /*temporary, will be replaced with reinforcement learning*/
+        /*add swipe result into array*/
         swipeHistory.add(interested)
-        Toast.makeText(
-            this@RecommendationCardActivity,
-            swipeHistory.toString(),
-            Toast.LENGTH_SHORT
-        )
-            .show()
 
         if (swipeHistory.size >= 5) {
             recommendationViewModel.sendSwipeRecommendation(swipeHistory)
@@ -162,16 +157,10 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 if (swipeHistory.size > 0) {
                     recycleView.rewind()
                     swipeHistory.removeLast()
-                    Toast.makeText(
-                        this@RecommendationCardActivity,
-                        swipeHistory.toString(),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                 } else {
                     Toast.makeText(
                         this@RecommendationCardActivity,
-                        "All contents has been rewinded!",
+                        getString(R.string.all_contents_rewinded),
                         Toast.LENGTH_SHORT
                     )
                         .show()

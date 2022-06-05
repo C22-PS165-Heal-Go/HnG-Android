@@ -78,7 +78,8 @@ class ProfileFragment : Fragment() {
     private fun showWarningToast() {
         Toast.makeText(
             requireContext(),
-            "Sorry but this feature currently not available yet \uD83D\uDE14",
+            requireContext().getString(R.string.unavailable_feature),
+//            "Sorry but this feature currently not available yet \uD83D\uDE14",
             Toast.LENGTH_SHORT
         ).show()
     }
