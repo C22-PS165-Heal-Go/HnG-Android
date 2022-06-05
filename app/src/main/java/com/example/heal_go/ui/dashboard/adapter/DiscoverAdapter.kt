@@ -1,5 +1,6 @@
 package com.example.heal_go.ui.dashboard.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DiscoverItem
+import com.example.heal_go.data.network.response.HomeOrDiscoverDestinationData
 import com.example.heal_go.databinding.DestinationCardLayoutDiscoverBinding
+import com.example.heal_go.ui.detail.DestinationDetailActivity
 
 class DiscoverAdapter :
     PagingDataAdapter<DiscoverItem, DiscoverAdapter.CardViewHolder>(DIFF_CALLBACK) {
@@ -52,6 +55,15 @@ class DiscoverAdapter :
 
                 txtDestinationName.text = data.name
                 txtLocation.text = data.location
+
+                itemView.setOnClickListener {
+
+                    val intent = Intent(itemView.context, DestinationDetailActivity::class.java)
+                    intent.putExtra(DestinationAdapter.DESTINATION_DETAIL, HomeOrDiscoverDestinationData(data, null))
+
+                    itemView.context.startActivity(intent)
+
+                }
             }
         }
     }

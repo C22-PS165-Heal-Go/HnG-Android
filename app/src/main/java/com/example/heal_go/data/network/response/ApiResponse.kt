@@ -177,3 +177,9 @@ data class DestinationDetail(
     val location: String,
     val description: String
 ): Parcelable
+
+@Parcelize
+data class HomeOrDiscoverDestinationData(
+    val home: DiscoverItem?,
+    val discover: DestinationItem?
+): Parcelable

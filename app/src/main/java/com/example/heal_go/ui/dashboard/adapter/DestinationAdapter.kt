@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationItem
+import com.example.heal_go.data.network.response.HomeOrDiscoverDestinationData
 import com.example.heal_go.databinding.DestinationCardLayoutBinding
 import com.example.heal_go.ui.detail.DestinationDetailActivity
 
@@ -46,7 +47,7 @@ class DestinationAdapter(
                 itemView.setOnClickListener {
 
                     val intent = Intent(itemView.context, DestinationDetailActivity::class.java)
-                    intent.putExtra(DESTINATION_DETAIL, data)
+                    intent.putExtra(DESTINATION_DETAIL, HomeOrDiscoverDestinationData(null, data))
 
                     itemView.context.startActivity(intent)
 

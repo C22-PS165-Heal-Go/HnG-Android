@@ -9,7 +9,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.heal_go.R
-import com.example.heal_go.data.network.response.DestinationItem
+import com.example.heal_go.data.network.response.HomeOrDiscoverDestinationData
 import com.example.heal_go.databinding.ActivityDestinationDetailBinding
 import com.example.heal_go.ui.dashboard.adapter.DestinationAdapter
 
@@ -21,7 +21,7 @@ class DestinationDetailActivity : AppCompatActivity() {
 
     private lateinit var circularProgressDrawable: CircularProgressDrawable
 
-    private var destinationData: DestinationItem? = null
+    private var destinationData: HomeOrDiscoverDestinationData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +54,24 @@ class DestinationDetailActivity : AppCompatActivity() {
         circularProgressDrawable.setColorSchemeColors(R.color.primary_500)
         circularProgressDrawable.start()
 
+        val destinationName: String =
+            (destinationData?.home?.name ?: destinationData?.discover?.name) as String
+        val destinationDescription: String =
+            (destinationData?.home?.description ?: destinationData?.discover?.description) as String
+        val destinationLocation: String =
+            (destinationData?.home?.location ?: destinationData?.discover?.location) as String
+        val destinationImage: String =
+            (destinationData?.home?.image ?: destinationData?.discover?.image) as String
+
+
         binding.apply {
-            tvTitle.text = destinationData?.name
-            tvDescription.text = destinationData?.description
-            tvLocation.text = destinationData?.location
+
+            tvTitle.text = destinationName
+            tvDescription.text = destinationDescription
+            tvLocation.text = destinationLocation
 
             Glide.with(this@DestinationDetailActivity)
-                .load(destinationData?.image)
+                .load(destinationImage)
                 .apply(
                     RequestOptions.placeholderOf(circularProgressDrawable)
                         .error(R.drawable.image_error_state)
