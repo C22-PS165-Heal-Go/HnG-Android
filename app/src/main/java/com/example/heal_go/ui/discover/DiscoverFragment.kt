@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
@@ -19,6 +21,8 @@ import com.example.heal_go.ui.dashboard.adapter.LoadingStateAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DiscoverFragment : Fragment() {
 
@@ -118,6 +122,29 @@ class DiscoverFragment : Fragment() {
                 adapter.retry()
             }
         )
+
+//        Loading state
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest { loadState ->
+                when(loadState.refresh) {
+                    is LoadState.Loading -> {
+                        binding.apply {
+                            loadingBar.visibility = View.VISIBLE
+                            rvDestination.visibility = View.INVISIBLE
+                            loadingSubtitle.visibility = View.VISIBLE
+                        }
+                    }
+                    else -> {
+                        binding.apply {
+                            loadingBar.visibility = View.GONE
+                            rvDestination.visibility = View.VISIBLE
+                            loadingSubtitle.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     private fun Context.hideKeyboard(view: View) {
