@@ -113,15 +113,30 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        val linearLayoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvDestination.layoutManager = linearLayoutManager
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvDestination.layoutManager = gridLayoutManager
 
         adapter = DiscoverAdapter()
-        binding.rvDestination.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
-            }
+
+        val footerAdapter = LoadingStateAdapter {
+            adapter.retry()
+        }
+
+        val concatAdapter = adapter.withLoadStateFooter(
+            footer = footerAdapter
         )
+
+        binding.rvDestination.adapter = concatAdapter
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return  if (position == concatAdapter.itemCount - 1 && footerAdapter.itemCount > 0){
+                    2
+                } else {
+                    1
+                }
+            }
+
+        }
 
 //        Loading state
         lifecycleScope.launch {
