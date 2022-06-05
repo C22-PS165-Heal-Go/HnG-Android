@@ -3,19 +3,14 @@ package com.example.heal_go.ui.discover
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.heal_go.R
-import com.example.heal_go.data.network.response.DiscoverItem
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
 import com.example.heal_go.ui.ViewModelFactory
@@ -24,8 +19,6 @@ import com.example.heal_go.ui.dashboard.adapter.LoadingStateAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 class DiscoverFragment : Fragment() {
 
@@ -41,7 +34,7 @@ class DiscoverFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var searchDestination = ""
-    private var category : String? = null
+    private var category: String? = null
 
     private lateinit var adapter: DiscoverAdapter
 
@@ -116,7 +109,7 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        val linearLayoutManager = LinearLayoutManager(requireContext())
+        val linearLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvDestination.layoutManager = linearLayoutManager
 
         adapter = DiscoverAdapter()
