@@ -1,9 +1,6 @@
 package com.example.heal_go.data.network.api
 
-import com.example.heal_go.data.network.response.DestinationResponse
-import com.example.heal_go.data.network.response.LoginResponse
-import com.example.heal_go.data.network.response.RecommendationResponse
-import com.example.heal_go.data.network.response.RegisterResponse
+import com.example.heal_go.data.network.response.*
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -36,4 +33,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body requestBody: RequestBody
     ) : RecommendationResponse
+
+    @FormUrlEncoded
+    @POST("discover")
+    suspend fun getDataDiscover(
+        @Header("Authorization") token: String,
+        @Field("page") page: Int?,
+        @Field("destination") destination: String?,
+        @Field("category") category: String?
+    ) : DiscoverResponse
 }

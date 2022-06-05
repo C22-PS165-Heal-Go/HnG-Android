@@ -8,19 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.heal_go.data.network.response.DestinationItem
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
 import com.example.heal_go.ui.ViewModelFactory
-import com.example.heal_go.ui.dashboard.adapter.DestinationAdapter
+import com.example.heal_go.ui.dashboard.adapter.DiscoverAdapter
+import com.example.heal_go.ui.dashboard.adapter.LoadingStateAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
-import com.example.heal_go.util.Status
 
 class DiscoverFragment : Fragment() {
 
@@ -35,8 +33,10 @@ class DiscoverFragment : Fragment() {
     private var _binding: FragmentDiscoverBinding? = null
     private val binding get() = _binding!!
 
-    private var destinationItem = ArrayList<DestinationItem>()
-    private lateinit var adapter: DestinationAdapter
+    private var searchDestination = ""
+    private var category: String? = null
+
+    private lateinit var adapter: DiscoverAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class DiscoverFragment : Fragment() {
 
         binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
+                changeDiscoverRequest()
                 view?.let { requireActivity().hideKeyboard(it) }
                 return true
             }
@@ -57,47 +57,67 @@ class DiscoverFragment : Fragment() {
 
         })
 
+        setAdapter()
+        changeDiscoverRequest()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onBoardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
-            if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
-                session.sessions.data?.token?.let { dashboardViewModel.getAllDestinations(it) }
-            }
+        with(binding) {
+            chipAll.setOnClickListener { changeDiscoverRequest() }
+            chipPantai.setOnClickListener { changeDiscoverRequest() }
+            chipGunung.setOnClickListener { changeDiscoverRequest() }
+            chipTaman.setOnClickListener { changeDiscoverRequest() }
+            chipCandi.setOnClickListener { changeDiscoverRequest() }
+            chipAir.setOnClickListener { changeDiscoverRequest() }
+            chipMuseum.setOnClickListener { changeDiscoverRequest() }
+            chipPasar.setOnClickListener { changeDiscoverRequest() }
         }
-
-        dashboardViewModel.destinations.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Status.Loading -> {}
-                is Status.Success -> {
-                    if (result.data?.code != null) {
-                        Toast.makeText(requireContext(), "Request Failed!", Toast.LENGTH_LONG).show()
-                    } else {
-                        if (result.data?.success == true) {
-                            for (i in 0 until result.data.data?.size!!) {
-                                destinationItem.add(result.data?.data[i])
-                            }
-                        }
-                    }
-                }
-                is Status.Error -> {
-                    Toast.makeText(requireContext(), "Sorry, ${result.error}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        setAdapter(destinationItem)
     }
 
-    private fun setAdapter(destinationItem: ArrayList<DestinationItem>) {
-        val linearLayoutManager = LinearLayoutManager(requireContext())
+    private fun changeDiscoverRequest() {
+        with(binding) {
+            category = when {
+                chipPantai.isChecked -> "Pantai"
+                chipGunung.isChecked -> "Gunung"
+                chipTaman.isChecked -> "Taman"
+                chipCandi.isChecked -> "Candi"
+                chipAir.isChecked -> "Air Terjun"
+                chipMuseum.isChecked -> "Museum"
+                chipPasar.isChecked -> "Pasar"
+                else -> ""
+            }
+
+            searchDestination = svSearch.query.toString()
+
+            onBoardingViewModel.getOnboardingDatastore().observe(viewLifecycleOwner) { session ->
+                if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
+                    session.sessions.data?.token?.let { token ->
+                        if (category.isNullOrEmpty()) category = null
+
+                        dashboardViewModel.getDataDiscover(token, searchDestination, category)
+                            .observe(viewLifecycleOwner) {
+                                adapter.submitData(lifecycle, it)
+                            }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setAdapter() {
+        val linearLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvDestination.layoutManager = linearLayoutManager
 
-        adapter = DestinationAdapter(destinationItem, false)
-        binding.rvDestination.adapter = adapter
+        adapter = DiscoverAdapter()
+        binding.rvDestination.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
     }
 
     private fun Context.hideKeyboard(view: View) {
