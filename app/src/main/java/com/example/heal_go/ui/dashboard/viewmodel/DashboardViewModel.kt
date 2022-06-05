@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationResponse
 import com.example.heal_go.data.network.response.DiscoverItem
 import com.example.heal_go.data.repository.MainRepository
@@ -11,7 +12,7 @@ import com.example.heal_go.util.Status
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class DashboardViewModel(private val mainRepository: MainRepository, context: Context) :
+class DashboardViewModel(private val mainRepository: MainRepository, private val context: Context) :
     ViewModel() {
     private val _destinations = MutableLiveData<Status<DestinationResponse?>>()
     val destinations: LiveData<Status<DestinationResponse?>> get() = _destinations
@@ -25,7 +26,7 @@ class DashboardViewModel(private val mainRepository: MainRepository, context: Co
                 _destinations.value = Status.Success(response)
             }
         } catch (e: Exception) {
-            _destinations.value = Status.Error("Server Error")
+            _destinations.value = Status.Error(context.getString(R.string.server_error))
         } finally {
             _destinations.value = Status.Loading(false)
         }

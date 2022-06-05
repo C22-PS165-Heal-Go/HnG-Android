@@ -33,7 +33,7 @@ class RegisterFragment : Fragment() {
 
     /* build loading dialog */
     private lateinit var loadingDialogBuilder: LoadingDialog
-    private lateinit var  loadingDialog: AlertDialog
+    private lateinit var loadingDialog: AlertDialog
 
     private val navController: NavController by lazy {
         findNavController()
@@ -105,7 +105,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showSubmitDialog(success: Boolean, message: String?) {
-        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder.setView(
+            layoutInflater.inflate(
+                R.layout.authentication_submit_dialog,
+                null
+            )
+        )
         submitDialogBuilder(success, message)
     }
 
@@ -114,7 +119,8 @@ class RegisterFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
-        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
+        val animationView =
+            dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
         val title = dialog.findViewById<TextView>(R.id.textTitle) as TextView
         val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle) as TextView
         val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn) as ImageButton
@@ -122,9 +128,9 @@ class RegisterFragment : Fragment() {
 
         if (success) {
             animationView.setAnimation(R.raw.success)
-            title.text = "Good Job!"
-            subtitle.text = "Register Successfully!"
+            title.text = requireContext().getString(R.string.auth_success_info, "Register")
 
+            subtitle.visibility = View.GONE
             closeBtn.visibility = View.GONE
             okayBtn.visibility = View.GONE
 
@@ -134,15 +140,20 @@ class RegisterFragment : Fragment() {
             }, 1500)
         } else {
             animationView.setAnimation(R.raw.incorrect)
-            title.text = "Oops!"
+            title.text = requireContext().getString(R.string.auth_failed_title)
             if (message != null) {
                 subtitle.text =
-                    "Sorry, your register is failed. $message!"
+                    requireContext().getString(R.string.auth_failed_info, "register", message)
             } else {
-                subtitle.text = "Sorry, your register is failed. This email already registered to this application!"
+                subtitle.text = requireContext().getString(
+                    R.string.auth_failed_info,
+                    "register",
+                    "This email already registered to this application!"
+                )
             }
 
-            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
+            okayBtn.background =
+                requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
 
             closeBtn.setOnClickListener {
                 dialog.dismiss()

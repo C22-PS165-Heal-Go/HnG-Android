@@ -102,7 +102,7 @@
     <string name="drag_icon">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
     <string name="auth_dialog_title">Title</string>
-    <string name="like_this">Maybe You Like This</string>
+    <string name="destination_for_you">Top Pick Destination For You</string>
     <string name="submit_subtitle">This is subtitle</string>
     <string name="auth_dialog_text_button">Okay</string>
     <string name="destination_name">Diamond Beach</string>
@@ -122,5 +122,19 @@
     <string name="questionnaire_title_warning_dialog_back">Hey! Stop right there</string>
     <string name="questionnaire_info_warning_dialog_back">Do you really want to do this? Just a reminder your answer will be lost if you go back!</string>
     <string name="proceed">Proceed</string>
+
+    <string name="request_failed">Request Failed!</string>
+    <string name="request_error">Sorry, %s</string>
+    <string name="server_error">Server Error</string>
+    <string name="credential_error">Please check on your credentials</string>
+    <string name="auth_success_info"><b>%s Successfully!</b></string>
+    <string name="auth_failed_title">Oops!</string>
+    <string name="auth_failed_info">Sorry, your %1s is failed. %2s</string>
+    <string name="register_success_title">Thank You!</string>
+    <string name="login_success_title">Success!</string>
+
+    <string name="unavailable_feature">Sorry but this feature currently not available yet 😔</string>
+    <string name="number_of_questions">Question %d / 8</string>
+    <string name="all_contents_rewinded">All contents has been rewinded!</string>
 
 </resources>

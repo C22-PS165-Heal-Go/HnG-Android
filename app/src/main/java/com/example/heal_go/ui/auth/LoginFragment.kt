@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
 
     /* build loading dialog */
     private lateinit var loadingDialogBuilder: LoadingDialog
-    private lateinit var  loadingDialog: AlertDialog
+    private lateinit var loadingDialog: AlertDialog
 
     private val authViewModel by viewModels<AuthViewModel> { ViewModelFactory(requireContext()) }
 
@@ -93,7 +93,11 @@ class LoginFragment : Fragment() {
             if (emailValidator && passwordValidator) {
                 authViewModel.userLoginHandler(email, password)
             } else {
-                Toast.makeText(activity, "Please check on your credentials", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    activity,
+                    requireContext().getString(R.string.credential_error),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
 
@@ -132,7 +136,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun showSubmitDialog(success: Boolean, message: String?) {
-        submitDialogBuilder.setView(layoutInflater.inflate(R.layout.authentication_submit_dialog, null))
+        submitDialogBuilder.setView(
+            layoutInflater.inflate(
+                R.layout.authentication_submit_dialog,
+                null
+            )
+        )
         submitDialogBuilder(success, message)
     }
 
@@ -141,7 +150,8 @@ class LoginFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
-        val animationView = dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
+        val animationView =
+            dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView) as LottieAnimationView
         val title = dialog.findViewById<TextView>(R.id.textTitle) as TextView
         val subtitle = dialog.findViewById<TextView>(R.id.textSubtitle) as TextView
         val closeBtn = dialog.findViewById<ImageButton>(R.id.close_btn) as ImageButton
@@ -150,9 +160,9 @@ class LoginFragment : Fragment() {
         if (success) {
             val intent = Intent(activity, DashboardActivity::class.java)
             animationView.setAnimation(R.raw.success)
-            title.text = "Good Job!"
-            subtitle.text = "Login Successfully!"
+            title.text = requireContext().getString(R.string.auth_success_info, "Login")
 
+            subtitle.visibility = View.GONE
             closeBtn.visibility = View.GONE
             okayBtn.visibility = View.GONE
 
@@ -163,15 +173,20 @@ class LoginFragment : Fragment() {
             }, 1500)
         } else {
             animationView.setAnimation(R.raw.incorrect)
-            title.text = "Oops!"
+            title.text = requireContext().getString(R.string.auth_failed_title)
 
             if (message != null) {
-                subtitle.text = "Sorry, your login is failed. $message!"
+                subtitle.text = requireContext().getString(R.string.auth_failed_info, "login", message)
             } else {
-                subtitle.text = "Sorry, your login is failed. Check your email or password again!"
+                subtitle.text = requireContext().getString(
+                    R.string.auth_failed_info,
+                    "login",
+                    "Check your email or password again!"
+                )
             }
 
-            okayBtn.background = requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
+            okayBtn.background =
+                requireContext().getDrawable(R.drawable.rounded_danger_corner_button)
 
             closeBtn.setOnClickListener {
                 dialog.dismiss()
