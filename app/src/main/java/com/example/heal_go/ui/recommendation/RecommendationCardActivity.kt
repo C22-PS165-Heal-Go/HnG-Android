@@ -182,13 +182,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     )
                         .show()
                     swipeCard(true)
-                    loveLottie.visibility = View.VISIBLE
-                    loveLottie.addAnimatorUpdateListener {
-                        if (it.animatedValue == 1.0f) {
-                            loveLottie.visibility = View.GONE
-                            if (loveLottie.visibility == View.GONE) binding.recycleView.swipe()
-                        }
-                    }
+//                    showLoveIcon()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -212,6 +206,16 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 }
         }
     }
+//
+//    private fun ActivityRecommendationCardBinding.showLoveIcon() {
+//        loveLottie.visibility = View.VISIBLE
+//        loveLottie.addAnimatorUpdateListener {
+//            if (it.animatedValue == 1.0f) {
+//                loveLottie.visibility = View.GONE
+//                if (loveLottie.visibility == View.GONE) binding.recycleView.swipe()
+//            }
+//        }
+//    }
 
     private fun showTutorialBottomSheet() {
         val tutorialBottomSheet = TutorialBottomSheet()
