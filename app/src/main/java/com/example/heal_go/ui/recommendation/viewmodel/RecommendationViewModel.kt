@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.heal_go.data.network.response.SwipeRequest
 import com.example.heal_go.data.repository.MainRepository
 import com.example.heal_go.data.repository.RecommendationTutorialRepository
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class RecommendationViewModel(
         return tutorialRepository.readFromDataStore.asLiveData()
     }
 
-    fun sendSwipeRecommendation(recommendations: ArrayList<Boolean>) {
+    fun sendSwipeRecommendation(recommendations: ArrayList<SwipeRequest>) {
 
     }
 }

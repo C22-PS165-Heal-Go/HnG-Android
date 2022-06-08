@@ -177,3 +177,9 @@ data class DestinationDetail(
     val location: String,
     val description: String
 ): Parcelable
+
+@Parcelize
+data class SwipeRequest(
+    val id: String,
+    val interested: Boolean
+) : Parcelable
