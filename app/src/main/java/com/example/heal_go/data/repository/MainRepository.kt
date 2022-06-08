@@ -97,4 +97,19 @@ class MainRepository(private val apiService: ApiService) {
             }
         ).liveData
     }
+
+    suspend fun sendSwipeRecommendation(token: String, data: ArrayList<JSONObject>) : SwipeResponse {
+        val jsonObject = JSONObject()
+        jsonObject.put("data", JSONArray(data))
+
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+
+        return try {
+            val response = apiService.sendSwipeRecommendation(token, requestBody)
+            response
+        } catch (e: Exception) {
+            SwipeResponse(code = e.hashCode())
+        }
+    }
 }
