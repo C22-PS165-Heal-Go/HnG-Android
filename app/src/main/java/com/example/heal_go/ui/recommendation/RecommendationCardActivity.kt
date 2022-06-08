@@ -279,8 +279,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                         this@RecommendationCardActivity,
                         getString(R.string.interested),
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                     swipeCard(true)
 //                    showLoveIcon()
                 }
