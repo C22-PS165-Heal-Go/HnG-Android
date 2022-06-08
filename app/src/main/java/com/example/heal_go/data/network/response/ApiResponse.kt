@@ -179,6 +179,12 @@ data class DestinationDetail(
 ): Parcelable
 
 @Parcelize
+data class SwipeRequest(
+    val id: String,
+    val interested: Boolean
+) : Parcelable
+
+@Parcelize
 data class HomeOrDiscoverDestinationData(
     val home: DiscoverItem?,
     val discover: DestinationItem?

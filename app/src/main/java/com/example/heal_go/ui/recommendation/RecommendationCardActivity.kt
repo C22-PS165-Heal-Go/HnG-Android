@@ -19,6 +19,7 @@ import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationDetail
 import com.example.heal_go.data.network.response.RecommendationDataItem
 import com.example.heal_go.data.network.response.RecommendationResponse
+import com.example.heal_go.data.network.response.SwipeRequest
 import com.example.heal_go.databinding.ActivityRecommendationCardBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.dashboard.DashboardActivity
@@ -44,7 +45,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         )
     }
 
-    private var swipeHistory = ArrayList<Boolean>()
+    private var swipeHistory = ArrayList<SwipeRequest>()
     private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +65,22 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     */
     override fun onActionClicked(actions: Int) {
         when (actions) {
-            1 -> swipeCard(true)
+            1 -> {
+                Toast.makeText(
+                    this@RecommendationCardActivity,
+                    getString(R.string.interested),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                swipeCard(true)
+            }
             2 -> {
+                Toast.makeText(
+                    this@RecommendationCardActivity,
+                    getString(R.string.not_interested),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
                 isClicked = true
                 swipeCard(false)
             }
@@ -90,9 +105,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         manager.setSwipeAnimationSetting(setting)
 
         /*add swipe result into array*/
-        swipeHistory.add(interested)
+        swipeHistory.add(SwipeRequest(destinationData?.data?.get(swipeHistory.size)?.id!!, interested))
 
-        if (swipeHistory.size >= 5) {
+        if (swipeHistory.size >= destinationData?.data?.size!!) {
             recommendationViewModel.sendSwipeRecommendation(swipeHistory)
             setAnimationsOut()
         }
@@ -170,12 +185,24 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
 
             /*when interested button is clicked, current card will be swiped to bottom*/
             this.interestedBtn.setOnClickListener {
+                Toast.makeText(
+                    this@RecommendationCardActivity,
+                    getString(R.string.interested),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
                 swipeCard(true)
                 recycleView.swipe()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
             this.notInterestedBtn.setOnClickListener {
+                Toast.makeText(
+                    this@RecommendationCardActivity,
+                    getString(R.string.not_interested),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
                 isClicked = true
                 swipeCard(false)
                 recycleView.swipe()
@@ -185,6 +212,12 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             listAdapter.setOnItemClickCallBack(object : CardAdapter.OnItemClickCallBack {
                 /*when double click action, current card will be marked as interested*/
                 override fun onItemClicked(data: RecommendationDataItem) {
+                    Toast.makeText(
+                        this@RecommendationCardActivity,
+                        getString(R.string.interested),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                     swipeCard(true)
 //                    showLoveIcon()
                 }
@@ -236,7 +269,15 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 override fun onCardSwiped(direction: Direction?) {
                     binding.loveLottie.visibility = View.GONE
                     if (direction != Direction.Bottom) {
-                        if (!isClicked) swipeCard(false)
+                        if (!isClicked) {
+                            Toast.makeText(
+                                this@RecommendationCardActivity,
+                                getString(R.string.not_interested),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            swipeCard(false)
+                        }
                         else isClicked = false
                     }
                 }
