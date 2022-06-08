@@ -39,89 +39,89 @@
     <string name="image_recommendation">Image Recommendation</string>
     <string name="category_icon">category_icon</string>
 
-    <string name="questionnaire">Questionnaire</string>
-    <string name="questionnaire_option_budget_1"><![CDATA[< 500rb]]></string>
-    <string name="questionnaire_option_budget_2">500rb - 3jt</string>
-    <string name="questionnaire_option_budget_3">4jt - 7.5jt</string>
-    <string name="questionnaire_option_budget_4"><![CDATA[> 7.5jt]]></string>
-    <string name="questionnaire_option_gender_1">Female</string>
-    <string name="questionnaire_option_gender_2">Male</string>
-    <string name="questionnaire_option_age_1">Children (0-13)</string>
-    <string name="questionnaire_option_age_2">Adolscent (14-20)</string>
-    <string name="questionnaire_option_age_3">Adult (21-45)</string>
-    <string name="questionnaire_option_age_4">Middle Age (46-64)</string>
-    <string name="questionnaire_option_age_5"><![CDATA[Senior Adult (> 64)]]></string>
-    <string name="questionnaire_option_activity_1">Visit museum/zoo/historical place</string>
-    <string name="questionnaire_option_activity_2">Go on Adventure tour</string>
-    <string name="questionnaire_option_activity_3">See the sights</string>
-    <string name="questionnaire_option_activity_4">Take picture or selfie</string>
-    <string name="questionnaire_option_activity_5">Going to festival/amusement park</string>
-    <string name="questionnaire_option_activity_6">Photography</string>
-    <string name="questionnaire_option_activity_7">Leisurely walk</string>
-    <string name="questionnaire_option_activity_8">Shopping</string>
-    <string name="questionnaire_option_month_1">March - May</string>
-    <string name="questionnaire_option_month_2">June - August</string>
-    <string name="questionnaire_option_month_3">September - November</string>
-    <string name="questionnaire_option_month_4">Desember - February</string>
-    <string name="questionnaire_option_companion_1">Travels Alone</string>
-    <string name="questionnaire_option_companion_2">A Couple</string>
-    <string name="questionnaire_option_companion_3">Family With Children</string>
-    <string name="questionnaire_option_companion_4">Family Without Children</string>
-    <string name="questionnaire_option_companion_5">Group Of Friends</string>
-    <string name="questionnaire_option_sport_1">No Sports</string>
-    <string name="questionnaire_option_sport_2">Traditional sports (Swimming, Hiking, Golf)</string>
-    <string name="questionnaire_option_stay_time_1">Less than a day</string>
-    <string name="questionnaire_option_stay_time_2">1-3 Days</string>
-    <string name="questionnaire_option_stay_time_3">1 week</string>
-    <string name="questionnaire_option_stay_time_4">2 weeks</string>
-    <string name="questionnaire_option_stay_time_5">More than 3 weeks</string>
-    <string name="questionnaire_question_7">♀️♂️ Which of the following most accurately describe you ?</string>
-    <string name="questionnaire_question_2">👪 what is the age gap between the participants ?</string>
-    <string name="questionnaire_question_3">📸 What kind of activity would you like to do ?</string>
-    <string name="questionnaire_question_6">🗓️ When are you planning to go ?</string>
-    <string name="questionnaire_question_1">🔥 If you want to go get some healing done, who do you want to do it with ?</string>
-    <string name="questionnaire_question_4">🏊 Are you going to do sports too during your healing ?</string>
-    <string name="questionnaire_question_5">⏱️ How much time do you want to spend during your healing ?</string>
-    <string name="questionnaire_question_8">💰 How much budget can you allocate ?</string>
-    <string name="btn_back">Back</string>
-    <string name="btn_next">Next</string>
-    <string name="btn_finish">Finish</string>
-    <string name="questionnaire_question_counter">Question 1 / 8</string>
+    <string name="questionnaire" translatable="false">Questionnaire</string>
+    <string name="questionnaire_option_budget_1" translatable="false"><![CDATA[< 500rb]]></string>
+    <string name="questionnaire_option_budget_2" translatable="false">500rb - 3jt</string>
+    <string name="questionnaire_option_budget_3" translatable="false">4jt - 7.5jt</string>
+    <string name="questionnaire_option_budget_4" translatable="false"><![CDATA[> 7.5jt]]></string>
+    <string name="questionnaire_option_gender_1" translatable="false">Female</string>
+    <string name="questionnaire_option_gender_2" translatable="false">Male</string>
+    <string name="questionnaire_option_age_1" translatable="false">Children (0-13)</string>
+    <string name="questionnaire_option_age_2" translatable="false">Adolscent (14-20)</string>
+    <string name="questionnaire_option_age_3" translatable="false">Adult (21-45)</string>
+    <string name="questionnaire_option_age_4" translatable="false">Middle Age (46-64)</string>
+    <string name="questionnaire_option_age_5" translatable="false"><![CDATA[Senior Adult (> 64)]]></string>
+    <string name="questionnaire_option_activity_1" translatable="false">Visit museum/zoo/historical place</string>
+    <string name="questionnaire_option_activity_2" translatable="false">Go on Adventure tour</string>
+    <string name="questionnaire_option_activity_3" translatable="false">See the sights</string>
+    <string name="questionnaire_option_activity_4" translatable="false">Take picture or selfie</string>
+    <string name="questionnaire_option_activity_5" translatable="false">Going to festival/amusement park</string>
+    <string name="questionnaire_option_activity_6" translatable="false">Photography</string>
+    <string name="questionnaire_option_activity_7" translatable="false">Leisurely walk</string>
+    <string name="questionnaire_option_activity_8" translatable="false">Shopping</string>
+    <string name="questionnaire_option_month_1" translatable="false">March - May</string>
+    <string name="questionnaire_option_month_2" translatable="false">June - August</string>
+    <string name="questionnaire_option_month_3" translatable="false">September - November</string>
+    <string name="questionnaire_option_month_4" translatable="false">Desember - February</string>
+    <string name="questionnaire_option_companion_1" translatable="false">Travels Alone</string>
+    <string name="questionnaire_option_companion_2" translatable="false">A Couple</string>
+    <string name="questionnaire_option_companion_3" translatable="false">Family With Children</string>
+    <string name="questionnaire_option_companion_4" translatable="false">Family Without Children</string>
+    <string name="questionnaire_option_companion_5" translatable="false">Group Of Friends</string>
+    <string name="questionnaire_option_sport_1" translatable="false">No Sports</string>
+    <string name="questionnaire_option_sport_2" translatable="false">Traditional sports (Swimming, Hiking, Golf)</string>
+    <string name="questionnaire_option_stay_time_1" translatable="false">Less than a day</string>
+    <string name="questionnaire_option_stay_time_2" translatable="false">1-3 Days</string>
+    <string name="questionnaire_option_stay_time_3" translatable="false">1 week</string>
+    <string name="questionnaire_option_stay_time_4" translatable="false">2 weeks</string>
+    <string name="questionnaire_option_stay_time_5" translatable="false">More than 3 weeks</string>
+    <string name="questionnaire_question_7" translatable="false">♀️♂️ Which of the following most accurately describe you ?</string>
+    <string name="questionnaire_question_2" translatable="false">👪 what is the age gap between the participants ?</string>
+    <string name="questionnaire_question_3" translatable="false">📸 What kind of activity would you like to do ?</string>
+    <string name="questionnaire_question_6" translatable="false">🗓️ When are you planning to go ?</string>
+    <string name="questionnaire_question_1" translatable="false">🔥 If you want to go get some healing done, who do you want to do it with ?</string>
+    <string name="questionnaire_question_4" translatable="false">🏊 Are you going to do sports too during your healing ?</string>
+    <string name="questionnaire_question_5" translatable="false">⏱️ How much time do you want to spend during your healing ?</string>
+    <string name="questionnaire_question_8" translatable="false">💰 How much budget can you allocate ?</string>
+    <string name="btn_back" translatable="false">Back</string>
+    <string name="btn_next" translatable="false">Next</string>
+    <string name="btn_finish" translatable="false">Finish</string>
+    <string name="questionnaire_question_counter" translatable="false">Question 1 / 8</string>
 
-    <string name="tutorial_dialog_header">Tutorial</string>
-    <string name="helper_icon">Helper icon</string>
-    <string name="tutorial_heading_one">Choose a Destination</string>
-    <string name="tutorial_content_one">If you interested at the destination that present on your screen you can double tap the card.</string>
-    <string name="tutorial_heading_two">Destination not Interested</string>
-    <string name="tutorial_content_two">If you not interested like the destination that present on you screen you can just swipe the card to the left or right.</string>
-    <string name="tutorial_heading_three">Regret on your choices</string>
-    <string name="tutorial_content_three">You can reconsider your destination choices again by tapping on the rewind button.</string>
-    <string name="tutorial_heading_four">Destination Detail</string>
-    <string name="tutorial_content_four">You can see the destination detail by press and hold on the card.</string>
-    <string name="tutorial_button">I Understand</string>
-    <string name="drag_icon">Drag icon</string>
-    <string name="discover_header">Let\'s Go</string>
-    <string name="auth_dialog_title">Title</string>
-    <string name="destination_for_you">Top Pick Destination For You</string>
-    <string name="submit_subtitle">This is subtitle</string>
-    <string name="auth_dialog_text_button">Okay</string>
-    <string name="destination_name">Diamond Beach</string>
-    <string name="destination_place">Bali, Indonesia</string>
-    <string name="profile">Profile</string>
-    <string name="profile_name">I Wayan Pande Putra Yudha</string>
-    <string name="profile_info_title">Information</string>
-    <string name="faq">FAQ</string>
-    <string name="rate_us">Rate Us</string>
-    <string name="profile_preference">Preference</string>
-    <string name="profile_language">English</string>
-    <string name="logout">Logout</string>
-    <string name="questionnaire_dialog_warning_title_submit">Whoa! Take it easy</string>
-    <string name="questionnaire_submit_info_dialog">If you are sure for your life choices, you can click the submit button below 😊</string>
-    <string name="cancel">Cancel</string>
-    <string name="submit">Submit</string>
-    <string name="questionnaire_title_warning_dialog_back">Hey! Stop right there</string>
-    <string name="questionnaire_info_warning_dialog_back">Do you really want to do this? Just a reminder your answer will be lost if you go back!</string>
-    <string name="proceed">Proceed</string>
+    <string name="tutorial_dialog_header" translatable="false">Tutorial</string>
+    <string name="helper_icon" translatable="false">Helper icon</string>
+    <string name="tutorial_heading_one" translatable="false">Choose a Destination</string>
+    <string name="tutorial_content_one" translatable="false">If you interested at the destination that present on your screen you can double tap the card.</string>
+    <string name="tutorial_heading_two" translatable="false">Destination not Interested</string>
+    <string name="tutorial_content_two" translatable="false">If you not interested like the destination that present on you screen you can just swipe the card to the left or right.</string>
+    <string name="tutorial_heading_three" translatable="false">Regret on your choices</string>
+    <string name="tutorial_content_three" translatable="false">You can reconsider your destination choices again by tapping on the rewind button.</string>
+    <string name="tutorial_heading_four" translatable="false">Destination Detail</string>
+    <string name="tutorial_content_four" translatable="false">You can see the destination detail by press and hold on the card.</string>
+    <string name="tutorial_button" translatable="false">I Understand</string>
+    <string name="drag_icon" translatable="false">Drag icon</string>
+    <string name="discover_header" translatable="false">Let\'s Go</string>
+    <string name="auth_dialog_title" translatable="false">Title</string>
+    <string name="destination_for_you" translatable="false">Top Pick Destination For You</string>
+    <string name="submit_subtitle" translatable="false">This is subtitle</string>
+    <string name="auth_dialog_text_button" translatable="false">Okay</string>
+    <string name="destination_name" translatable="false">Diamond Beach</string>
+    <string name="destination_place" translatable="false">Bali, Indonesia</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="profile_name" translatable="false">I Wayan Pande Putra Yudha</string>
+    <string name="profile_info_title" translatable="false">Information</string>
+    <string name="faq" translatable="false">FAQ</string>
+    <string name="rate_us" translatable="false">Rate Us</string>
+    <string name="profile_preference" translatable="false">Preference</string>
+    <string name="profile_language" translatable="false">English</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="questionnaire_dialog_warning_title_submit" translatable="false">Whoa! Take it easy</string>
+    <string name="questionnaire_submit_info_dialog" translatable="false">If you are sure for your life choices, you can click the submit button below 😊</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="submit" translatable="false">Submit</string>
+    <string name="questionnaire_title_warning_dialog_back" translatable="false">Hey! Stop right there</string>
+    <string name="questionnaire_info_warning_dialog_back" translatable="false">Do you really want to do this? Just a reminder your answer will be lost if you go back!</string>
+    <string name="proceed" translatable="false">Proceed</string>
 
     <string name="request_failed">Request Failed!</string>
     <string name="request_error">Sorry, %s</string>
@@ -136,5 +136,7 @@
     <string name="unavailable_feature">Sorry but this feature currently not available yet 😔</string>
     <string name="number_of_questions">Question %d / 8</string>
     <string name="all_contents_rewinded">All contents has been rewinded!</string>
+    <string name="email_already_used">This email already registered to this application!</string>
+    <string name="check_account_again">Check your email or password again!</string>
 
 </resources>
