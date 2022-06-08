@@ -198,3 +198,9 @@ data class SwipeResponseItem(
     @field:SerializedName("status")
     var status : String,
 ) : Parcelable
+
+@Parcelize
+data class HomeOrDiscoverDestinationData(
+    val home: DiscoverItem?,
+    val discover: DestinationItem?
+): Parcelable

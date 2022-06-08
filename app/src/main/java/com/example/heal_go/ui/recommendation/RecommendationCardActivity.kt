@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -281,7 +282,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     )
                         .show()
                     swipeCard(true)
-                    binding.recycleView.swipe()
+//                    showLoveIcon()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -305,6 +306,16 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 }
         }
     }
+//
+//    private fun ActivityRecommendationCardBinding.showLoveIcon() {
+//        loveLottie.visibility = View.VISIBLE
+//        loveLottie.addAnimatorUpdateListener {
+//            if (it.animatedValue == 1.0f) {
+//                loveLottie.visibility = View.GONE
+//                if (loveLottie.visibility == View.GONE) binding.recycleView.swipe()
+//            }
+//        }
+//    }
 
     private fun showTutorialBottomSheet() {
         val tutorialBottomSheet = TutorialBottomSheet()
@@ -319,6 +330,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             CardStackLayoutManager(this@RecommendationCardActivity, object : CardStackListener {
                 override fun onCardDragging(direction: Direction?, ratio: Float) {}
                 override fun onCardSwiped(direction: Direction?) {
+                    binding.loveLottie.visibility = View.GONE
                     if (direction != Direction.Bottom) {
                         if (!isClicked) {
                             Toast.makeText(
