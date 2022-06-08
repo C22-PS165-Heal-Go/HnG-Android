@@ -136,5 +136,10 @@
     <string name="unavailable_feature">Sorry but this feature currently not available yet 😔</string>
     <string name="number_of_questions">Question %d / 8</string>
     <string name="all_contents_rewinded">All contents has been rewinded!</string>
+    <string name="detail_screen_button">Book now</string>
+    <string name="detail_screen_header">Detail</string>
+    <string name="about_destination">About Destination</string>
+    <string name="maps_button">maps button</string>
+    <string name="loading_subtitle">Looking for destination...</string>
 
 </resources>

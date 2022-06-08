@@ -60,8 +60,11 @@ class HomeFragment : Fragment() {
 
         dashboardViewModel.destinations.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Status.Loading -> {}
+                is Status.Loading -> {
+                    showLoading(true)
+                }
                 is Status.Success -> {
+                    showLoading(false)
                     if (result.data?.code != null) {
                         Toast.makeText(
                             requireContext(),
@@ -75,6 +78,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 is Status.Error -> {
+                    showLoading(false)
                     Toast.makeText(
                         requireContext(),
                         requireContext().getString(R.string.request_error, result.error),
@@ -94,6 +98,22 @@ class HomeFragment : Fragment() {
 
         adapter = DestinationAdapter(destinationItem)
         binding.rvDestination.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                loadingBar.visibility = View.VISIBLE
+                rvDestination.visibility = View.INVISIBLE
+                loadingSubtitle.visibility = View.VISIBLE
+            }
+        }else {
+            binding.apply {
+                loadingBar.visibility = View.GONE
+                rvDestination.visibility = View.VISIBLE
+                loadingSubtitle.visibility = View.GONE
+            }
+        }
     }
 
     override fun onDestroy() {
