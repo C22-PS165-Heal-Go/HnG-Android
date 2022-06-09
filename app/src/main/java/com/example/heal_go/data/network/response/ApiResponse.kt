@@ -179,6 +179,27 @@ data class DestinationDetail(
 ): Parcelable
 
 @Parcelize
+data class SwipeResponse(
+    @field:SerializedName("code")
+    var code : Int? = null,
+
+    @field:SerializedName("success")
+    var success : Boolean? = false,
+
+    @field:SerializedName("message")
+    var message : String? = null,
+
+    @field:SerializedName("data")
+    var data: SwipeResponseItem? = null,
+) : Parcelable
+
+@Parcelize
+data class SwipeResponseItem(
+    @field:SerializedName("status")
+    var status : String,
+) : Parcelable
+
+@Parcelize
 data class HomeOrDiscoverDestinationData(
     val home: DiscoverItem?,
     val discover: DestinationItem?
