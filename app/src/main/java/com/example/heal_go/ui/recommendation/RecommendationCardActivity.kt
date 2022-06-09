@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -130,17 +129,6 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
                     session.sessions.data?.token?.let { token ->
                         recommendationViewModel.sendSwipeRecommendation(token, swipeHistory)
-                    }
-                }
-            }
-
-            binding.apply {
-                loveLottie.addAnimatorUpdateListener {
-                    if (it.animatedValue == 1.0f) {
-                        loveLottie.visibility = View.GONE
-                        if (loveLottie.visibility == View.GONE) {
-                            setAnimationsOut()
-                        }
                     }
                 }
             }
