@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -79,13 +78,14 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     override fun onActionClicked(actions: Int) {
         when (actions) {
             1 -> {
+                swipeCard(true)
+                showLoveIcon()
                 Toast.makeText(
                     this@RecommendationCardActivity,
                     getString(R.string.interested),
                     Toast.LENGTH_SHORT
                 )
                     .show()
-                swipeCard(true)
             }
             2 -> {
                 Toast.makeText(
@@ -96,9 +96,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     .show()
                 isClicked = true
                 swipeCard(false)
+                binding.recycleView.swipe()
             }
         }
-        binding.recycleView.swipe()
     }
 
     override fun onUnderstandBtnClickListener() {
@@ -255,7 +255,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 )
                     .show()
                 swipeCard(true)
-                recycleView.swipe()
+                showLoveIcon()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
@@ -281,7 +281,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                         Toast.LENGTH_SHORT
                     ).show()
                     swipeCard(true)
-//                    showLoveIcon()
+                    showLoveIcon()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -305,16 +305,20 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 }
         }
     }
-//
-//    private fun ActivityRecommendationCardBinding.showLoveIcon() {
-//        loveLottie.visibility = View.VISIBLE
-//        loveLottie.addAnimatorUpdateListener {
-//            if (it.animatedValue == 1.0f) {
-//                loveLottie.visibility = View.GONE
-//                if (loveLottie.visibility == View.GONE) binding.recycleView.swipe()
-//            }
-//        }
-//    }
+
+    private fun showLoveIcon() {
+        binding.apply {
+            loveLottie.visibility = View.VISIBLE
+            loveLottie.addAnimatorUpdateListener {
+                if (it.animatedValue == 1.0f) {
+                    loveLottie.visibility = View.GONE
+                    if (loveLottie.visibility == View.GONE) {
+                        binding.recycleView.swipe()
+                    }
+                }
+            }
+        }
+    }
 
     private fun showTutorialBottomSheet() {
         val tutorialBottomSheet = TutorialBottomSheet()
