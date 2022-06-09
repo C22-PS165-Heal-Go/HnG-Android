@@ -141,7 +141,7 @@
     <string name="detail_screen_button">Book now</string>
     <string name="detail_screen_header">Detail</string>
     <string name="about_destination">About Destination</string>
-    <string name="maps_button">maps button</string>
+    <string name="maps_button" translatable="false">maps button</string>
     <string name="loading_subtitle">Looking for destination...</string>
 
 </resources>

@@ -92,7 +92,7 @@
     <string name="questionnaire_question_5">⏱ Berapa banyak waktu yang ingin Anda habiskan selama Anda healing?</string>
     <string name="questionnaire_question_8">💰 Berapa anggaran yang bisa Anda alokasikan?</string>
     <string name="btn_back">Kembali</string>
-    <string name="btn_next">Selanjutnya</string>
+    <string name="btn_next">Berikutnya</string>
     <string name="btn_finish">Selesai</string>
     <string name="questionnaire_question_counter">Pertanyaan 1 / 8</string>
     <string name="tutorial_heading_one">" Pilih Tujuan"</string>
@@ -117,4 +117,8 @@
     <string name="questionnaire_info_warning_dialog_back" translatable="false">Apakah Anda benar-benar ingin melakukan ini? Hanya pengingat jawaban Anda akan hilang jika Anda kembali!</string>
     <string name="proceed" translatable="false">Lanjutkan</string>
     <string name="tutorial_content_two">Jika Anda tidak tertarik dengan destinasi yang ada di layar Anda, Anda cukup menggeser kartu ke kiri atau kanan.</string>
+    <string name="detail_screen_button">Pesan sekarang</string>
+    <string name="detail_screen_header">Detail</string>
+    <string name="about_destination">Tentang Destination</string>
+    <string name="loading_subtitle">Mencari destinasi...</string>
 </resources>
