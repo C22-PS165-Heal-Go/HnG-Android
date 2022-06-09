@@ -51,4 +51,70 @@
     <string name="all_contents_rewinded">Seluruh konten telah dimuat ulang!</string>
     <string name="email_already_used">Email ini telah terdaftar di aplikasi ini!</string>
     <string name="check_account_again">Cek kembali email dan kata sandi anda!</string>
+    <string name="questionnaire" translatable="false">Daftar pertanyaan</string>
+    <string name="questionnaire_option_gender_1" translatable="false">Perempuan</string>
+    <string name="questionnaire_option_gender_2">Laki - Laki</string>
+    <string name="questionnaire_option_age_1">Anak – anak (0–13)</string>
+    <string name="questionnaire_option_age_2">Remaja (14–20)</string>
+    <string name="questionnaire_option_age_3">Dewasa (21–45)</string>
+    <string name="questionnaire_option_age_4">Paruh Baya (46–64)</string>
+    <string name="questionnaire_option_age_5"><![CDATA[Dewasa Senior (> 64)]]></string>
+    <string name="questionnaire_option_activity_1" translatable="false">Mengunjungi museum/kebun binatang/tempat bersejarah</string>
+    <string name="questionnaire_option_activity_2" translatable="false">Pergi ke tur petualangan</string>
+    <string name="questionnaire_option_activity_3">Melihat pemandangan</string>
+    <string name="questionnaire_option_activity_4">Berfoto atau selfie</string>
+    <string name="questionnaire_option_activity_5">" Pergi ke festival/taman hiburan"</string>
+    <string name="questionnaire_option_activity_6">Fotografi</string>
+    <string name="questionnaire_option_activity_7">" Jalan santai"</string>
+    <string name="questionnaire_option_activity_8">Berbelanja</string>
+    <string name="questionnaire_option_month_1">Maret - Mei</string>
+    <string name="questionnaire_option_month_2">Juni - Agustus</string>
+    <string name="questionnaire_option_month_3">September - November</string>
+    <string name="questionnaire_option_month_4">Desember - Februari</string>
+    <string name="questionnaire_option_companion_1">Bepergian Sendirian</string>
+    <string name="questionnaire_option_companion_2">Pasangan</string>
+    <string name="questionnaire_option_companion_3">Keluarga Dengan Anak-anak</string>
+    <string name="questionnaire_option_companion_4">Keluarga Tanpa Anak</string>
+    <string name="questionnaire_option_companion_5">Sekelompok Teman</string>
+    <string name="questionnaire_option_sport_1">Tidak Ada Olahraga</string>
+    <string name="questionnaire_option_sport_2">Olahraga Tradisional (Renang, Hiking, Golf)</string>
+    <string name="questionnaire_option_stay_time_1">Kurang dari sehari</string>
+    <string name="questionnaire_option_stay_time_2">" 1–3 Hari"</string>
+    <string name="questionnaire_option_stay_time_3">" 1 minggu"</string>
+    <string name="questionnaire_option_stay_time_4">2 minggu</string>
+    <string name="questionnaire_option_stay_time_5">Lebih dari 3 minggu</string>
+    <string name="questionnaire_question_7">♀♂️ Manakah dari berikut ini yang paling tepat menggambarkan Anda?</string>
+    <string name="questionnaire_question_2">👪 berapa perbedaan usia antara peserta?</string>
+    <string name="questionnaire_question_3">📸  Kegiatan seperti apa yang ingin Anda lakukan?</string>
+    <string name="questionnaire_question_6">🗓️ Kapan Anda berencana untuk pergi?</string>
+    <string name="questionnaire_question_1">🔥 Jika Anda ingin melakukan healing, dengan siapa Anda ingin melakukannya?</string>
+    <string name="questionnaire_question_4">🏊 Apakah Anda akan melakukan olahraga juga selama Anda healing?</string>
+    <string name="questionnaire_question_5">⏱ Berapa banyak waktu yang ingin Anda habiskan selama Anda healing?</string>
+    <string name="questionnaire_question_8">💰 Berapa anggaran yang bisa Anda alokasikan?</string>
+    <string name="btn_back">Kembali</string>
+    <string name="btn_next">Selanjutnya</string>
+    <string name="btn_finish">Selesai</string>
+    <string name="questionnaire_question_counter">Pertanyaan 1 / 8</string>
+    <string name="tutorial_heading_one">" Pilih Tujuan"</string>
+    <string name="tutorial_content_one" translatable="false">Jika Anda tertarik dengan destinasi yang ada di layar Anda, Anda dapat mengetuk kartu dua kali.</string>
+    <string name="tutorial_heading_two">Destinasi tidak menarik</string>
+    <string name="tutorial_heading_three">Menyesali pilihan destinasi-mu</string>
+    <string name="tutorial_content_three">Anda dapat mempertimbangkan kembali pilihan destinasi Anda dengan mengetuk tombol mundur.</string>
+    <string name="tutorial_heading_four">Detail Destinasi</string>
+    <string name="tutorial_content_four">Anda dapat melihat detail destinasi dengan menekan dan menahan kartu.</string>
+    <string name="tutorial_button">Saya mengerti</string>
+    <string name="discover_header">Ayo pergi</string>
+    <string name="auth_dialog_title">Judul</string>
+    <string name="destination_for_you">Pilihan Destinasi Teratas Untuk Anda</string>
+    <string name="profile">Profil</string>
+    <string name="profile_info_title" translatable="false">Informasi</string>
+    <string name="rate_us" translatable="false">Nilai Kami</string>
+    <string name="profile_preference" translatable="false">Preferensi</string>
+    <string name="logout">Keluar</string>
+    <string name="questionnaire_submit_info_dialog" translatable="false">Jika Anda yakin dengan pilihan hidup Anda, Anda dapat mengklik tombol kirim di bawah ini 😊</string>
+    <string name="cancel">Batalkan</string>
+    <string name="submit" translatable="false">Kirim</string>
+    <string name="questionnaire_info_warning_dialog_back" translatable="false">Apakah Anda benar-benar ingin melakukan ini? Hanya pengingat jawaban Anda akan hilang jika Anda kembali!</string>
+    <string name="proceed" translatable="false">Lanjutkan</string>
+    <string name="tutorial_content_two">Jika Anda tidak tertarik dengan destinasi yang ada di layar Anda, Anda cukup menggeser kartu ke kiri atau kanan.</string>
 </resources>
