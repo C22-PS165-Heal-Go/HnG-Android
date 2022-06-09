@@ -1,5 +1,6 @@
 package com.example.heal_go.ui.dashboard.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DiscoverItem
-import com.example.heal_go.databinding.DestinationCardLayoutBinding
+import com.example.heal_go.data.network.response.HomeOrDiscoverDestinationData
+import com.example.heal_go.databinding.DestinationCardLayoutDiscoverBinding
+import com.example.heal_go.ui.detail.DestinationDetailActivity
 
 class DiscoverAdapter :
     PagingDataAdapter<DiscoverItem, DiscoverAdapter.CardViewHolder>(DIFF_CALLBACK) {
@@ -19,7 +22,7 @@ class DiscoverAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view =
-            DestinationCardLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            DestinationCardLayoutDiscoverBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         circularProgressDrawable = CircularProgressDrawable(parent.context)
         return CardViewHolder(view)
     }
@@ -29,7 +32,7 @@ class DiscoverAdapter :
         if (data != null) holder.bind(data)
     }
 
-    inner class CardViewHolder(private val binding: DestinationCardLayoutBinding) :
+    inner class CardViewHolder(private val binding: DestinationCardLayoutDiscoverBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DiscoverItem) {
             with(binding) {
@@ -37,8 +40,8 @@ class DiscoverAdapter :
                 params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
                 itemView.layoutParams = params
 
-                circularProgressDrawable.strokeWidth = 8f
-                circularProgressDrawable.centerRadius = 40f
+                circularProgressDrawable.strokeWidth = 6f
+                circularProgressDrawable.centerRadius = 20f
                 circularProgressDrawable.setColorSchemeColors(R.color.primary_500)
                 circularProgressDrawable.start()
 
@@ -52,6 +55,15 @@ class DiscoverAdapter :
 
                 txtDestinationName.text = data.name
                 txtLocation.text = data.location
+
+                itemView.setOnClickListener {
+
+                    val intent = Intent(itemView.context, DestinationDetailActivity::class.java)
+                    intent.putExtra(DestinationAdapter.DESTINATION_DETAIL, HomeOrDiscoverDestinationData(data, null))
+
+                    itemView.context.startActivity(intent)
+
+                }
             }
         }
     }

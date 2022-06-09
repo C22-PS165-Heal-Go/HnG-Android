@@ -11,12 +11,12 @@
         android:id="@+id/txtRecommendationBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/recommendation"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,40 +25,62 @@
         android:id="@+id/tutorial_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_help_outline"
-        android:background="@android:color/transparent"
-        android:padding="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/helper_icon"
+        android:padding="10dp"
+        android:src="@drawable/ic_help_outline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/helper_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_success"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_gravity="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:alpha="0"
-        android:layout_gravity="center"
         android:scaleType="centerCrop"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/check"
-        app:lottie_loop="true"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtRecommendationBar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/check" />
 
-    <com.yuyakaido.android.cardstackview.CardStackView
-        android:id="@+id/recycle_view"
-        android:alpha="0"
-        android:layout_marginTop="50dp"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/card_item"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:alpha="0"
+            tools:listitem="@layout/card_item" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/love_lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-100dp"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/love" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/action_layout"
@@ -66,44 +88,43 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:alpha="0"
-        android:orientation="horizontal"
-        tools:alpha="1"
-        android:gravity="center"
         android:layout_marginBottom="24dp"
+        android:alpha="0"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        tools:alpha="1">
 
         <LinearLayout
             android:id="@+id/not_interested_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginEnd="10dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/not_interested_btn"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginBottom="20dp"
-                android:scaleType="fitXY"
-                android:padding="16dp"
-                android:elevation="5dp"
                 android:background="@drawable/image_button_background"
                 android:contentDescription="@string/not_interested"
+                android:elevation="5dp"
                 android:gravity="center"
+                android:padding="16dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_not_interested" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/not_interested"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="11sp"
-                android:textColor="@color/white" />
+                android:text="@string/not_interested"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
 
         </LinearLayout>
 
@@ -112,31 +133,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/rewind_btn"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="16dp"
-                android:elevation="5dp"
-                android:src="@drawable/ic_rewind"
-                android:background="@drawable/image_button_background"
                 android:layout_marginBottom="20dp"
-                android:contentDescription="@string/rewind"/>
+                android:background="@drawable/image_button_background"
+                android:contentDescription="@string/rewind"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_rewind" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rewind"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="11sp"
-                android:textColor="@color/white"/>
+                android:text="@string/rewind"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
 
         </LinearLayout>
 
@@ -145,30 +166,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:orientation="vertical"
+            android:layout_marginStart="30dp"
             android:gravity="center"
-            android:layout_marginStart="30dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/interested_btn"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:scaleType="fitXY"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/image_button_background"
+                android:contentDescription="@string/interested"
+                android:elevation="5dp"
                 android:gravity="center"
                 android:padding="16dp"
-                android:elevation="5dp"
-                android:src="@drawable/ic_interested"
-                android:background="@drawable/image_button_background"
-                android:layout_marginBottom="20dp"
-                android:contentDescription="@string/interested"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_interested" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/interested"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="11sp"
-                android:textColor="@color/white"/>
+                android:text="@string/interested"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
 
         </LinearLayout>
 

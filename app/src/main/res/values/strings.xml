@@ -62,7 +62,7 @@
     <string name="questionnaire_option_month_1">March - May</string>
     <string name="questionnaire_option_month_2">June - August</string>
     <string name="questionnaire_option_month_3">September - November</string>
-    <string name="questionnaire_option_month_4">December - February</string>
+    <string name="questionnaire_option_month_4">Desember - February</string>
     <string name="questionnaire_option_companion_1">Travels Alone</string>
     <string name="questionnaire_option_companion_2">A Couple</string>
     <string name="questionnaire_option_companion_3">Family With Children</string>
@@ -71,7 +71,7 @@
     <string name="questionnaire_option_sport_1">No Sports</string>
     <string name="questionnaire_option_sport_2">Traditional sports (Swimming, Hiking, Golf)</string>
     <string name="questionnaire_option_stay_time_1">Less than a day</string>
-    <string name="questionnaire_option_stay_time_2">1–3 Days</string>
+    <string name="questionnaire_option_stay_time_2">1-3 Days</string>
     <string name="questionnaire_option_stay_time_3">1 week</string>
     <string name="questionnaire_option_stay_time_4">2 weeks</string>
     <string name="questionnaire_option_stay_time_5">More than 3 weeks</string>
@@ -138,5 +138,10 @@
     <string name="all_contents_rewinded">All contents has been rewinded!</string>
     <string name="email_already_used">This email already registered to this application!</string>
     <string name="check_account_again">Check your email or password again!</string>
+    <string name="detail_screen_button">Book now</string>
+    <string name="detail_screen_header">Detail</string>
+    <string name="about_destination">About Destination</string>
+    <string name="maps_button">maps button</string>
+    <string name="loading_subtitle">Looking for destination...</string>
 
 </resources>

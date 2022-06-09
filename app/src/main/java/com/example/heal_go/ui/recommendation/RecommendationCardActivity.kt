@@ -13,19 +13,25 @@ import android.view.WindowManager
 import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationDetail
 import com.example.heal_go.data.network.response.RecommendationDataItem
 import com.example.heal_go.data.network.response.RecommendationResponse
-import com.example.heal_go.data.network.response.SwipeRequest
+import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.ActivityRecommendationCardBinding
 import com.example.heal_go.ui.ViewModelFactory
 import com.example.heal_go.ui.dashboard.DashboardActivity
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
+import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
 import com.example.heal_go.ui.questionnaire.QuestionnaireActivity
 import com.example.heal_go.ui.recommendation.adapter.CardAdapter
 import com.example.heal_go.ui.recommendation.viewmodel.RecommendationViewModel
+import com.example.heal_go.util.LoadingDialog
+import com.example.heal_go.util.Status
 import com.yuyakaido.android.cardstackview.*
+import org.json.JSONObject
 
 class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActionClickListener,
     TutorialBottomSheet.OnActionClickListener {
@@ -44,8 +50,15 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         )
     }
 
-    private var swipeHistory = ArrayList<SwipeRequest>()
+    private val onBoardingViewModel by viewModels<OnboardingViewModel> {
+        OnboardingViewModelFactory(OnboardingRepository(this))
+    }
+
+    private var swipeHistory = ArrayList<JSONObject>()
     private var isClicked = false
+
+    private lateinit var loadingDialogBuilder: LoadingDialog
+    private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +78,14 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     override fun onActionClicked(actions: Int) {
         when (actions) {
             1 -> {
+                swipeCard(true)
+                showLoveIcon()
                 Toast.makeText(
                     this@RecommendationCardActivity,
                     getString(R.string.interested),
                     Toast.LENGTH_SHORT
                 )
                     .show()
-                swipeCard(true)
             }
             2 -> {
                 Toast.makeText(
@@ -82,9 +96,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                     .show()
                 isClicked = true
                 swipeCard(false)
+                binding.recycleView.swipe()
             }
         }
-        binding.recycleView.swipe()
     }
 
     override fun onUnderstandBtnClickListener() {
@@ -104,11 +118,61 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         manager.setSwipeAnimationSetting(setting)
 
         /*add swipe result into array*/
-        swipeHistory.add(SwipeRequest(destinationData?.data?.get(swipeHistory.size)?.id!!, interested))
+        val jsonObject = JSONObject()
+        jsonObject.put("id", destinationData?.data?.get(swipeHistory.size)?.id!!)
+        jsonObject.put("like", interested)
+        swipeHistory.add(jsonObject)
 
+        /*add data into server*/
         if (swipeHistory.size >= destinationData?.data?.size!!) {
-            recommendationViewModel.sendSwipeRecommendation(swipeHistory)
-            setAnimationsOut()
+            onBoardingViewModel.getOnboardingDatastore().observe(this) { session ->
+                if (session.sessions.data?.token != "" || session.sessions.data?.token != null) {
+                    session.sessions.data?.token?.let { token ->
+                        recommendationViewModel.sendSwipeRecommendation(token, swipeHistory)
+                    }
+                }
+            }
+
+            /*change state from viewmodel*/
+            recommendationViewModel.swipeResponse.observe(this) { result ->
+                when (result) {
+                    is Status.Loading -> {
+                        loadingDialog.show()
+                    }
+                    is Status.Success -> {
+                        loadingDialog.dismiss()
+                        if (result.data?.code != null) {
+                            Toast.makeText(
+                                this@RecommendationCardActivity,
+                                getString(R.string.request_failed),
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            resetCard()
+                        } else {
+                            if (result.data?.data?.status != null) {
+                                setAnimationsOut()
+                            }
+                        }
+                    }
+                    is Status.Error -> {
+                        loadingDialog.dismiss()
+                        Toast.makeText(
+                            this@RecommendationCardActivity,
+                            result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        resetCard()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun resetCard() {
+        for (i in destinationData?.data?.indices!!) {
+            binding.recycleView.rewind()
         }
     }
 
@@ -191,7 +255,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 )
                     .show()
                 swipeCard(true)
-                recycleView.swipe()
+                showLoveIcon()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
@@ -215,10 +279,9 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                         this@RecommendationCardActivity,
                         getString(R.string.interested),
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                     swipeCard(true)
-                    binding.recycleView.swipe()
+                    showLoveIcon()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -243,6 +306,20 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         }
     }
 
+    private fun showLoveIcon() {
+        binding.apply {
+            loveLottie.visibility = View.VISIBLE
+            loveLottie.addAnimatorUpdateListener {
+                if (it.animatedValue == 1.0f) {
+                    loveLottie.visibility = View.GONE
+                    if (loveLottie.visibility == View.GONE) {
+                        binding.recycleView.swipe()
+                    }
+                }
+            }
+        }
+    }
+
     private fun showTutorialBottomSheet() {
         val tutorialBottomSheet = TutorialBottomSheet()
         tutorialBottomSheet.isCancelable = false
@@ -256,6 +333,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             CardStackLayoutManager(this@RecommendationCardActivity, object : CardStackListener {
                 override fun onCardDragging(direction: Direction?, ratio: Float) {}
                 override fun onCardSwiped(direction: Direction?) {
+                    binding.loveLottie.visibility = View.GONE
                     if (direction != Direction.Bottom) {
                         if (!isClicked) {
                             Toast.makeText(
@@ -265,8 +343,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                             )
                                 .show()
                             swipeCard(false)
-                        }
-                        else isClicked = false
+                        } else isClicked = false
                     }
                 }
 
@@ -293,6 +370,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     }
 
     private fun setupView() {
+        buildLoadingDialog()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             this.window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -306,7 +384,8 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
         destinationData = intent.getParcelableExtra(QuestionnaireActivity.DESTINATION_DATA)
     }
 
-    companion object {
-
+    private fun buildLoadingDialog() {
+        loadingDialogBuilder = LoadingDialog(this@RecommendationCardActivity)
+        loadingDialog = loadingDialogBuilder.buildLoadingDialog()
     }
 }

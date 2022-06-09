@@ -3,19 +3,16 @@ package com.example.heal_go.ui.discover
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.heal_go.R
-import com.example.heal_go.data.network.response.DiscoverItem
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.FragmentDiscoverBinding
 import com.example.heal_go.ui.ViewModelFactory
@@ -24,8 +21,8 @@ import com.example.heal_go.ui.dashboard.adapter.LoadingStateAdapter
 import com.example.heal_go.ui.dashboard.viewmodel.DashboardViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DiscoverFragment : Fragment() {
 
@@ -41,7 +38,7 @@ class DiscoverFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var searchDestination = ""
-    private var category : String? = null
+    private var category: String? = null
 
     private lateinit var adapter: DiscoverAdapter
 
@@ -116,15 +113,53 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        val linearLayoutManager = LinearLayoutManager(requireContext())
-        binding.rvDestination.layoutManager = linearLayoutManager
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvDestination.layoutManager = gridLayoutManager
 
         adapter = DiscoverAdapter()
-        binding.rvDestination.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
-            }
+
+        val footerAdapter = LoadingStateAdapter {
+            adapter.retry()
+        }
+
+        val concatAdapter = adapter.withLoadStateFooter(
+            footer = footerAdapter
         )
+
+        binding.rvDestination.adapter = concatAdapter
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return  if (position == concatAdapter.itemCount - 1 && footerAdapter.itemCount > 0){
+                    2
+                } else {
+                    1
+                }
+            }
+
+        }
+
+//        Loading state
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest { loadState ->
+                when(loadState.refresh) {
+                    is LoadState.Loading -> {
+                        binding.apply {
+                            loadingBar.visibility = View.VISIBLE
+                            rvDestination.visibility = View.INVISIBLE
+                            loadingSubtitle.visibility = View.VISIBLE
+                        }
+                    }
+                    else -> {
+                        binding.apply {
+                            loadingBar.visibility = View.GONE
+                            rvDestination.visibility = View.VISIBLE
+                            loadingSubtitle.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     private fun Context.hideKeyboard(view: View) {
