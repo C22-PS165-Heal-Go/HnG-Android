@@ -176,12 +176,16 @@ class LoginFragment : Fragment() {
             title.text = requireContext().getString(R.string.auth_failed_title)
 
             if (message != null) {
-                subtitle.text = requireContext().getString(R.string.auth_failed_info, "login", message)
+                subtitle.text = requireContext().getString(
+                    R.string.auth_failed_info,
+                    requireContext().getString(R.string.login),
+                    message
+                )
             } else {
                 subtitle.text = requireContext().getString(
                     R.string.auth_failed_info,
-                    "login",
-                    "Check your email or password again!"
+                    requireContext().getString(R.string.login),
+                    requireContext().getString(R.string.check_account_again)
                 )
             }
 

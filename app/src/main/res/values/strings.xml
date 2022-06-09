@@ -40,16 +40,16 @@
     <string name="category_icon">category_icon</string>
 
     <string name="questionnaire">Questionnaire</string>
-    <string name="questionnaire_option_budget_1"><![CDATA[< 500rb]]></string>
-    <string name="questionnaire_option_budget_2">500rb - 3jt</string>
-    <string name="questionnaire_option_budget_3">4jt - 7.5jt</string>
-    <string name="questionnaire_option_budget_4"><![CDATA[> 7.5jt]]></string>
+    <string name="questionnaire_option_budget_1" translatable="false"><![CDATA[< 500rb]]></string>
+    <string name="questionnaire_option_budget_2" translatable="false">500rb - 3jt</string>
+    <string name="questionnaire_option_budget_3" translatable="false">4jt - 7.5jt</string>
+    <string name="questionnaire_option_budget_4" translatable="false"><![CDATA[> 7.5jt]]></string>
     <string name="questionnaire_option_gender_1">Female</string>
     <string name="questionnaire_option_gender_2">Male</string>
-    <string name="questionnaire_option_age_1">Children (0-13)</string>
-    <string name="questionnaire_option_age_2">Adolscent (14-20)</string>
-    <string name="questionnaire_option_age_3">Adult (21-45)</string>
-    <string name="questionnaire_option_age_4">Middle Age (46-64)</string>
+    <string name="questionnaire_option_age_1">Children (0–13)</string>
+    <string name="questionnaire_option_age_2">Adolscent (14–20)</string>
+    <string name="questionnaire_option_age_3">Adult (21–45)</string>
+    <string name="questionnaire_option_age_4">Middle Age (46–64)</string>
     <string name="questionnaire_option_age_5"><![CDATA[Senior Adult (> 64)]]></string>
     <string name="questionnaire_option_activity_1">Visit museum/zoo/historical place</string>
     <string name="questionnaire_option_activity_2">Go on Adventure tour</string>
@@ -88,8 +88,8 @@
     <string name="btn_finish">Finish</string>
     <string name="questionnaire_question_counter">Question 1 / 8</string>
 
-    <string name="tutorial_dialog_header">Tutorial</string>
-    <string name="helper_icon">Helper icon</string>
+    <string name="tutorial_dialog_header" translatable="false">Tutorial</string>
+    <string name="helper_icon" translatable="false">Helper icon</string>
     <string name="tutorial_heading_one">Choose a Destination</string>
     <string name="tutorial_content_one">If you interested at the destination that present on your screen you can double tap the card.</string>
     <string name="tutorial_heading_two">Destination not Interested</string>
@@ -99,27 +99,27 @@
     <string name="tutorial_heading_four">Destination Detail</string>
     <string name="tutorial_content_four">You can see the destination detail by press and hold on the card.</string>
     <string name="tutorial_button">I Understand</string>
-    <string name="drag_icon">Drag icon</string>
+    <string name="drag_icon" translatable="false">Drag icon</string>
     <string name="discover_header">Let\'s Go</string>
     <string name="auth_dialog_title">Title</string>
     <string name="destination_for_you">Top Pick Destination For You</string>
-    <string name="submit_subtitle">This is subtitle</string>
-    <string name="auth_dialog_text_button">Okay</string>
-    <string name="destination_name">Diamond Beach</string>
-    <string name="destination_place">Bali, Indonesia</string>
+    <string name="submit_subtitle" translatable="false">This is subtitle</string>
+    <string name="auth_dialog_text_button" translatable="false">Okay</string>
+    <string name="destination_name" translatable="false">Diamond Beach</string>
+    <string name="destination_place" translatable="false">Bali, Indonesia</string>
     <string name="profile">Profile</string>
-    <string name="profile_name">I Wayan Pande Putra Yudha</string>
+    <string name="profile_name" translatable="false">I Wayan Pande Putra Yudha</string>
     <string name="profile_info_title">Information</string>
-    <string name="faq">FAQ</string>
+    <string name="faq" translatable="false">FAQ</string>
     <string name="rate_us">Rate Us</string>
     <string name="profile_preference">Preference</string>
-    <string name="profile_language">English</string>
+    <string name="profile_language" translatable="false">English</string>
     <string name="logout">Logout</string>
-    <string name="questionnaire_dialog_warning_title_submit">Whoa! Take it easy</string>
+    <string name="questionnaire_dialog_warning_title_submit" translatable="false">Whoa! Take it easy</string>
     <string name="questionnaire_submit_info_dialog">If you are sure for your life choices, you can click the submit button below 😊</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
-    <string name="questionnaire_title_warning_dialog_back">Hey! Stop right there</string>
+    <string name="questionnaire_title_warning_dialog_back" translatable="false">Hey! Stop right there</string>
     <string name="questionnaire_info_warning_dialog_back">Do you really want to do this? Just a reminder your answer will be lost if you go back!</string>
     <string name="proceed">Proceed</string>
 
@@ -136,10 +136,12 @@
     <string name="unavailable_feature">Sorry but this feature currently not available yet 😔</string>
     <string name="number_of_questions">Question %d / 8</string>
     <string name="all_contents_rewinded">All contents has been rewinded!</string>
+    <string name="email_already_used">This email already registered to this application!</string>
+    <string name="check_account_again">Check your email or password again!</string>
     <string name="detail_screen_button">Book now</string>
     <string name="detail_screen_header">Detail</string>
     <string name="about_destination">About Destination</string>
-    <string name="maps_button">maps button</string>
+    <string name="maps_button" translatable="false">maps button</string>
     <string name="loading_subtitle">Looking for destination...</string>
 
 </resources>

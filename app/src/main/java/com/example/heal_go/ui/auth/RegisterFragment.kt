@@ -128,7 +128,10 @@ class RegisterFragment : Fragment() {
 
         if (success) {
             animationView.setAnimation(R.raw.success)
-            title.text = requireContext().getString(R.string.auth_success_info, "Register")
+            title.text = requireContext().getString(
+                R.string.auth_success_info,
+                requireContext().getString(R.string.register)
+            )
 
             subtitle.visibility = View.GONE
             closeBtn.visibility = View.GONE
@@ -143,12 +146,16 @@ class RegisterFragment : Fragment() {
             title.text = requireContext().getString(R.string.auth_failed_title)
             if (message != null) {
                 subtitle.text =
-                    requireContext().getString(R.string.auth_failed_info, "register", message)
+                    requireContext().getString(
+                        R.string.auth_failed_info,
+                        requireContext().getString(R.string.register),
+                        message
+                    )
             } else {
                 subtitle.text = requireContext().getString(
                     R.string.auth_failed_info,
-                    "register",
-                    "This email already registered to this application!"
+                    requireContext().getString(R.string.register),
+                    requireContext().getString(R.string.email_already_used)
                 )
             }
 
