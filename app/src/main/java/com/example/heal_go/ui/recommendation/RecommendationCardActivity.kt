@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -64,13 +63,16 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
     */
     override fun onActionClicked(actions: Int) {
         when (actions) {
-            1 -> swipeCard(true)
+            1 -> {
+                swipeCard(true)
+                showLoveIcon()
+            }
             2 -> {
                 isClicked = true
                 swipeCard(false)
+                binding.recycleView.swipe()
             }
         }
-        binding.recycleView.swipe()
     }
 
     override fun onUnderstandBtnClickListener() {
@@ -94,7 +96,18 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
 
         if (swipeHistory.size >= 5) {
             recommendationViewModel.sendSwipeRecommendation(swipeHistory)
-            setAnimationsOut()
+
+            binding.apply {
+                loveLottie.addAnimatorUpdateListener {
+                    if (it.animatedValue == 1.0f) {
+                        loveLottie.visibility = View.GONE
+                        if (loveLottie.visibility == View.GONE) {
+                            setAnimationsOut()
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -171,7 +184,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
             /*when interested button is clicked, current card will be swiped to bottom*/
             this.interestedBtn.setOnClickListener {
                 swipeCard(true)
-                recycleView.swipe()
+                showLoveIcon()
             }
 
             /*when interested button is clicked, current card will be swiped to left*/
@@ -186,7 +199,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 /*when double click action, current card will be marked as interested*/
                 override fun onItemClicked(data: RecommendationDataItem) {
                     swipeCard(true)
-//                    showLoveIcon()
+                    showLoveIcon()
                 }
 
                 /*when card on hold with user, page will load bottom sheet dialog to show recommendation detail*/
@@ -210,16 +223,20 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 }
         }
     }
-//
-//    private fun ActivityRecommendationCardBinding.showLoveIcon() {
-//        loveLottie.visibility = View.VISIBLE
-//        loveLottie.addAnimatorUpdateListener {
-//            if (it.animatedValue == 1.0f) {
-//                loveLottie.visibility = View.GONE
-//                if (loveLottie.visibility == View.GONE) binding.recycleView.swipe()
-//            }
-//        }
-//    }
+
+    private fun showLoveIcon() {
+        binding.apply {
+            loveLottie.visibility = View.VISIBLE
+            loveLottie.addAnimatorUpdateListener {
+                if (it.animatedValue == 1.0f) {
+                    loveLottie.visibility = View.GONE
+                    if (loveLottie.visibility == View.GONE) {
+                        binding.recycleView.swipe()
+                    }
+                }
+            }
+        }
+    }
 
     private fun showTutorialBottomSheet() {
         val tutorialBottomSheet = TutorialBottomSheet()
