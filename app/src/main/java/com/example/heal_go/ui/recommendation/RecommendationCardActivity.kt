@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.heal_go.R
 import com.example.heal_go.data.network.response.DestinationDetail
 import com.example.heal_go.data.network.response.RecommendationDataItem
@@ -260,7 +261,7 @@ class RecommendationCardActivity : AppCompatActivity(), DetailBottomSheet.OnActi
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         supportActionBar?.hide()
         destinationData = intent.getParcelableExtra(QuestionnaireActivity.DESTINATION_DATA)
     }
