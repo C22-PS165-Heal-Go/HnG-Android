@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -41,7 +42,7 @@ class DestinationDetailActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         destinationData = intent.getParcelableExtra(DestinationAdapter.DESTINATION_DETAIL)
     }
 

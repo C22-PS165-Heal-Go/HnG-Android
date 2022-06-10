@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -14,14 +13,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.example.heal_go.R
-import com.example.heal_go.data.network.response.UserSession
 import com.example.heal_go.data.repository.OnboardingRepository
 import com.example.heal_go.databinding.ActivityQuestionnaireBinding
 import com.example.heal_go.ui.ViewModelFactory
-import com.example.heal_go.ui.dashboard.DashboardActivity
 import com.example.heal_go.ui.onboarding.adapter.OnboardingPagerAdapter
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModel
 import com.example.heal_go.ui.onboarding.viewmodel.OnboardingViewModelFactory
@@ -271,6 +268,7 @@ class QuestionnaireActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         supportActionBar?.hide()
         dialogBuilder =
             AlertDialog.Builder(this@QuestionnaireActivity, R.style.WrapContentDialog)
