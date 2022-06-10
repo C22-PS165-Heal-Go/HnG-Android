@@ -42,4 +42,10 @@ interface ApiService {
         @Field("destination") destination: String?,
         @Field("category") category: String?
     ) : DiscoverResponse
+
+    @POST("feedback")
+    suspend fun sendSwipeRecommendation(
+        @Header("Authorization") token: String,
+        @Body requestBody: RequestBody
+    ) : SwipeResponse
 }

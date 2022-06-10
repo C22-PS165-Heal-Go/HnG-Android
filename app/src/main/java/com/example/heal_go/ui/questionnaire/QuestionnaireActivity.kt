@@ -227,7 +227,7 @@ class QuestionnaireActivity : AppCompatActivity() {
         val btnClose = dialog.findViewById<ImageButton>(R.id.close_btn)
 
         btnProceed?.setOnClickListener {
-            if (btnProceed.text == "Submit") {
+            if (btnProceed.text == resources.getString(R.string.submit)) {
                 sendQuestionnaire()
                 dialog.dismiss()
             }else {
