@@ -52,3 +52,7 @@ This repository contains the Mobile Development part of the Heal&Go App
 
 ### Recommendation
 ![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/recommendation.gif)
+
+## Contributors ✨
+| [<img src="https://github.com/WayanPande.png" width="75px;"/><br /><sub>Wayan Pande</sub>](https://github.com/WayanPande)<br />💯 🔥 | [<img src="https://github.com/aldisaepurahman.png" width="75px;"/><br /><sub>Aldi Saepurahman</sub>](https://github.com/aldisaepurahman)<br />💯 🔥 | 
+| :---: | :---: | 
