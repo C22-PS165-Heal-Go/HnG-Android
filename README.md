@@ -37,7 +37,18 @@ This repository contains the Mobile Development part of the Heal&Go App
     https://github.com/C22-PS165-Heal-Go/HnG-Android.git
     ```
 ## Demo
-| Onboarding  | Dashboard   | Questionnaire | Recommendation |
-| ----------- | ----------- | ------------- | -------------- |
-| ![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/onboarding.gif)      | ![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/dashboard.gif)       | ![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/questionnaire.gif)       | ![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/recommendation.gif)          |
 
+### Onboarding  
+![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/onboarding.gif)
+
+
+### Dashboard
+![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/dashboard.gif) 
+
+
+### Questionnaire
+![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/questionnaire.gif)
+
+
+### Recommendation
+![](https://github.com/C22-PS165-Heal-Go/HnG-Android/blob/main/readme-assets/recommendation.gif)
